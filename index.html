@@ -472,7 +472,7 @@
                 }
 
             } catch (error) {
-                console.error("Error cargando horarios:", error);
+                console.error("Error horarios:", error);
                 contenedor.innerHTML = '<p class="col-span-full text-sm text-red-400">Error al conectar con la base de datos.</p>';
             }
         }
@@ -537,8 +537,19 @@
 
             const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
             
-            // Redirección directa y segura a WhatsApp (funciona perfecto en PC y celulares)
-            window.location.href = urlWhatsApp;
+            // Simulación de clic nativo optimizada para abrir WhatsApp en Android y iPhone sin bloqueadores
+            const linkTemporal = document.createElement('a');
+            linkTemporal.href = urlWhatsApp;
+            linkTemporal.target = '_blank';
+            document.body.appendChild(linkTemporal);
+            linkTemporal.click();
+            document.body.removeChild(linkTemporal);
+
+            alert("¡Cita reservada con éxito!");
+            document.getElementById('formReserva').reset();
+            document.getElementById('fechaCita').value = fecha;
+            horaElegida = "";
+            cargarHorariosDisponibles();
         }
     </script>
 </body>
