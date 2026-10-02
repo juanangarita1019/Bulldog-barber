@@ -16,8 +16,8 @@
                             dark: '#AA8C2C',
                             light: '#F3E5AB'
                         },
-                        darkBg: '#121212',
-                        cardBg: '#1E1E1E'
+                        darkBg: '#0A0A0A',
+                        cardBg: '#141414'
                     }
                 }
             }
@@ -29,7 +29,7 @@
 <body class="bg-darkBg text-gray-100 font-sans antialiased selection:bg-gold selection:text-darkBg">
 
     <!-- Header / Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-darkBg/95 backdrop-blur-md border-b border-gray-800">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-darkBg/90 backdrop-blur-md border-b border-gray-900">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <a href="#" class="text-xl md:text-2xl font-black tracking-wider text-gold flex items-center gap-2">
                 <i class="fa-solid fa-dog"></i> BULLDOG BARBER
@@ -40,32 +40,37 @@
                 <a href="#barberos" class="hover:text-gold transition">Barberos</a>
                 <a href="#reserva" class="hover:text-gold transition">Reservar Cita</a>
             </nav>
-            <a href="#reserva" class="bg-gold text-darkBg px-5 py-2 rounded-full font-bold text-sm hover:bg-gold-light transition shadow-lg shadow-gold/20">
+            <a href="#reserva" class="bg-gold text-darkBg px-5 py-2 rounded-full font-bold text-sm hover:bg-gold-light transition shadow-lg shadow-gold/10">
                 Reservar Ahora
             </a>
         </div>
     </header>
 
-    <!-- Hero Section con Estilo Premium -->
-    <section class="relative pt-36 pb-24 md:pt-48 md:pb-36 flex items-center justify-center bg-gradient-to-b from-black via-darkBg to-darkBg border-b border-gray-800 overflow-hidden">
-        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:20px_20px]"></div>
-        <div class="absolute -top-40 -right-40 w-96 h-96 bg-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+    <!-- Hero Section con Efecto Visual Exclusivo -->
+    <section class="relative pt-40 pb-28 md:pt-52 md:pb-36 flex items-center justify-center bg-darkBg border-b border-gray-900 overflow-hidden">
+        <!-- Elementos de luz y fondo sofisticados -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-900 via-darkBg to-black opacity-80"></div>
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gold/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:24px_24px]"></div>
         
         <div class="relative max-w-4xl mx-auto px-4 text-center z-10">
-            <span class="text-gold font-semibold tracking-widest uppercase text-xs md:text-sm bg-gold/10 px-4 py-1.5 rounded-full border border-gold/30 inline-block mb-6 shadow-sm">
+            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center shadow-xl shadow-gold/5">
+                <i class="fa-solid fa-scissors text-gold text-3xl"></i>
+            </div>
+            <span class="text-gold font-semibold tracking-widest uppercase text-xs md:text-sm bg-gold/10 px-4 py-1.5 rounded-full border border-gold/20 inline-block mb-6 shadow-sm">
                 Estilo, Precisión y Tradición
             </span>
             <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight mb-6 text-white leading-tight">
                 BULLDOG <span class="text-gold">BARBER</span>
             </h1>
-            <p class="text-gray-400 text-base md:text-xl max-w-2xl mx-auto mb-10">
+            <p class="text-gray-400 text-base md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
                 El corte perfecto te espera con los mejores profesionales. Agenda tu espacio de 45 minutos y vive una experiencia de alta gama.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="#reserva" class="bg-gold text-darkBg px-8 py-4 rounded-xl font-bold hover:bg-gold-light transition shadow-xl shadow-gold/20 flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
                     <i class="fa-solid fa-calendar-check"></i> Agendar Mi Cita
                 </a>
-                <a href="#servicios" class="border border-gray-700 hover:border-gold px-8 py-4 rounded-xl font-bold transition flex items-center justify-center gap-2">
+                <a href="#servicios" class="border border-gray-800 hover:border-gold px-8 py-4 rounded-xl font-bold transition flex items-center justify-center gap-2 bg-cardBg/50 backdrop-blur-sm">
                     Ver Precios
                 </a>
             </div>
@@ -81,7 +86,7 @@
 
         <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <!-- Servicio 1 -->
-            <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group">
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-2xl font-bold text-white group-hover:text-gold transition">Corte de Cabello</h3>
@@ -93,7 +98,7 @@
                         <li class="flex items-center gap-2"><i class="fa-solid fa-clock text-gold"></i> Duración: 45 minutos</li>
                     </ul>
                 </div>
-                <a href="#reserva" onclick="seleccionarServicio('Corte de Cabello')" class="block text-center bg-gray-800/80 hover:bg-gold hover:text-darkBg py-3.5 rounded-xl font-bold transition shadow-sm">
+                <a href="#reserva" onclick="seleccionarServicio('Corte de Cabello')" class="block text-center bg-zinc-900 hover:bg-gold hover:text-darkBg py-3.5 rounded-xl font-bold transition shadow-sm">
                     Seleccionar este servicio
                 </a>
             </div>
@@ -123,31 +128,39 @@
     </section>
 
     <!-- Galería de Estilos / Trabajos -->
-    <section id="galeria" class="py-20 bg-black/30 border-y border-gray-800">
+    <section id="galeria" class="py-20 bg-zinc-950 border-y border-gray-900">
         <div class="max-w-6xl mx-auto px-4 text-center">
             <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTRO <span class="text-gold">TRABAJO</span></h2>
             <p class="text-gray-400 mb-12">Precisión y estilo en cada corte</p>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition">
-                    <i class="fa-solid fa-scissors text-gold text-3xl mb-3"></i>
-                    <h4 class="font-bold text-white">Desvanecidos</h4>
-                    <p class="text-xs text-gray-400 mt-1">Degradados limpios y definidos</p>
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-scissors text-gold text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-white mb-1">Desvanecidos</h4>
+                    <p class="text-xs text-gray-400">Degradados limpios y definidos</p>
                 </div>
-                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition">
-                    <i class="fa-solid fa-spray-can-sparkles text-gold text-3xl mb-3"></i>
-                    <h4 class="font-bold text-white">Barba Clásica</h4>
-                    <p class="text-xs text-gray-400 mt-1">Toalla caliente y perfilado</p>
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-spray-can-sparkles text-gold text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-white mb-1">Barba Clásica</h4>
+                    <p class="text-xs text-gray-400">Toalla caliente y perfilado</p>
                 </div>
-                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition">
-                    <i class="fa-solid fa-wand-magic-sparkles text-gold text-3xl mb-3"></i>
-                    <h4 class="font-bold text-white">Diseño de Cejas</h4>
-                    <p class="text-xs text-gray-400 mt-1">Simetría perfecta</p>
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-wand-magic-sparkles text-gold text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-white mb-1">Diseño de Cejas</h4>
+                    <p class="text-xs text-gray-400">Simetría perfecta</p>
                 </div>
-                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition">
-                    <i class="fa-solid fa-crown text-gold text-3xl mb-3"></i>
-                    <h4 class="font-bold text-white">Estilo Moderno</h4>
-                    <p class="text-xs text-gray-400 mt-1">Tendencias actuales</p>
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-crown text-gold text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-white mb-1">Estilo Moderno</h4>
+                    <p class="text-xs text-gray-400">Tendencias actuales</p>
                 </div>
             </div>
         </div>
@@ -162,27 +175,27 @@
 
         <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             <!-- Barbero 1: Juan Angarita -->
-            <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition">
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition">
                 <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
                     <img src="Angaritafoto.jpeg" alt="Juan Angarita" class="w-full h-full object-cover">
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-1">Juan Angarita</h3>
                 <p class="text-gold text-sm font-semibold mb-4">Barbero Profesional</p>
                 <p class="text-gray-400 text-sm mb-6">Especialista en cortes modernos, clásicos y cuidado capilar integral.</p>
-                <button onclick="seleccionarBarberoYReservar('Juan Angarita')" class="w-full bg-gray-800 hover:bg-gold hover:text-darkJob text-sm font-bold py-3 rounded-xl transition text-white">
+                <button onclick="seleccionarBarberoYReservar('Juan Angarita')" class="w-full bg-zinc-900 hover:bg-gold hover:text-darkBg text-sm font-bold py-3.5 rounded-xl transition text-white border border-gray-800">
                     Reservar con Juan Angarita
                 </button>
             </div>
 
             <!-- Barbero 2: Juan Beltran -->
-            <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition">
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition">
                 <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
                     <img src="belltranfoto.jpeg" alt="Juan Beltran" class="w-full h-full object-cover">
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-1">Juan Beltran</h3>
                 <p class="text-gold text-sm font-semibold mb-4">Barbero Profesional</p>
                 <p class="text-gray-400 text-sm mb-6">Especialista en cortes modernos, clásicos y cuidado capilar integral.</p>
-                <button onclick="seleccionarBarberoYReservar('Juan Beltran')" class="w-full bg-gray-800 hover:bg-gold hover:text-darkJob text-sm font-bold py-3 rounded-xl transition text-white">
+                <button onclick="seleccionarBarberoYReservar('Juan Beltran')" class="w-full bg-zinc-900 hover:bg-gold hover:text-darkBg text-sm font-bold py-3.5 rounded-xl transition text-white border border-gray-800">
                     Reservar con Juan Beltran
                 </button>
             </div>
@@ -191,7 +204,7 @@
 
     <!-- Sistema de Reservas con Botones Interactivos -->
     <section id="reserva" class="py-24 max-w-3xl mx-auto px-4">
-        <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 md:p-12 shadow-2xl relative">
+        <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative">
             <div class="text-center mb-10">
                 <h2 class="text-2xl md:text-4xl font-black text-white mb-2">RESERVA TU <span class="text-gold">CITA</span></h2>
                 <p class="text-gray-400 text-sm">Horario de atención: 11:00 AM - 8:00 PM (Bloques de 45 min)</p>
@@ -201,19 +214,19 @@
                 <!-- Nombre cliente -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Tu Nombre Completo</label>
-                    <input type="text" id="nombreCliente" required placeholder="Ej: Carlos Pérez" class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
+                    <input type="text" id="nombreCliente" required placeholder="Ej: Carlos Pérez" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
                 </div>
 
                 <!-- Teléfono -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Tu Teléfono / Celular</label>
-                    <input type="tel" id="telefonoCliente" required placeholder="Ej: 3001234567" class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
+                    <input type="tel" id="telefonoCliente" required placeholder="Ej: 3001234567" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
                 </div>
 
                 <!-- Selección de Servicio -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona el Servicio</label>
-                    <select id="servicioSelect" required class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
+                    <select id="servicioSelect" required class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
                         <option value="Corte de Cabello - $25.000">Corte de Cabello ($25.000)</option>
                         <option value="Corte + Barba - $30.000">Corte + Barba ($30.000)</option>
                     </select>
@@ -222,7 +235,7 @@
                 <!-- Selección de Barbero -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona tu Barbero</label>
-                    <select id="barberoSelect" required onchange="cargarHorariosDisponibles()" class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
+                    <select id="barberoSelect" required onchange="cargarHorariosDisponibles()" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
                         <option value="Juan Angarita">Juan Angarita</option>
                         <option value="Juan Beltran">Juan Beltran</option>
                     </select>
@@ -231,7 +244,7 @@
                 <!-- Fecha -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Fecha de la Cita</label>
-                    <input type="date" id="fechaCita" required onchange="cargarHorariosDisponibles()" class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
+                    <input type="date" id="fechaCita" required onchange="cargarHorariosDisponibles()" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
                 </div>
 
                 <!-- Selector de Horas en Botones Pastilla -->
@@ -245,12 +258,12 @@
 
                 <!-- Checkbox Cejas Opcionales -->
                 <div class="flex items-center gap-3 pt-2">
-                    <input type="checkbox" id="cejasCheck" class="w-5 h-5 accent-gold rounded bg-darkBg border-gray-700">
+                    <input type="checkbox" id="cejasCheck" class="w-5 h-5 accent-gold rounded bg-darkBg border-gray-800">
                     <label for="cejasCheck" class="text-sm text-gray-300 cursor-pointer">Incluir diseño de cejas (Opcional - Sin costo adicional)</label>
                 </div>
 
                 <!-- Botón Enviar a WhatsApp y Guardar -->
-                <button type="button" onclick="realizarReserva()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-emerald-900/30 flex items-center justify-center gap-2 text-lg transform hover:-translate-y-0.5">
+                <button type="button" onclick="realizarReserva()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-emerald-950/50 flex items-center justify-center gap-2 text-lg transform hover:-translate-y-0.5">
                     <i class="fa-brands fa-whatsapp text-2xl"></i> Reservar, Bloquear Horario y Enviar
                 </button>
             </form>
@@ -258,7 +271,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-gray-800 py-12 text-center text-gray-500 text-sm">
+    <footer class="bg-black border-t border-gray-900 py-12 text-center text-gray-500 text-sm">
         <p class="text-white font-bold mb-2 tracking-wider text-base">BULLDOG BARBER</p>
         <p>Atención de Lunes a Domingo • 11:00 AM a 8:00 PM</p>
         <p class="mt-4 text-xs text-gray-600">© 2026 BullDog Barber. Todos los derechos reservados.</p>
@@ -323,7 +336,6 @@
             window.location.href = "#reserva";
         }
 
-        // Cargar horarios en botones interactivos estilo pastilla
         window.cargarHorariosDisponibles = async function() {
             const fecha = document.getElementById('fechaCita').value;
             const barbero = document.getElementById('barberoSelect').value;
@@ -356,21 +368,17 @@
                     btn.textContent = bloque;
                     
                     if (horasOcupadas.includes(bloque)) {
-                        // Horario ocupado / bloqueado por Firebase
-                        btn.className = 'bg-gray-800/40 text-gray-600 border border-gray-800 rounded-xl py-2.5 text-xs font-bold cursor-not-allowed line-through';
+                        btn.className = 'bg-zinc-900/50 text-zinc-600 border border-zinc-800 rounded-xl py-2.5 text-xs font-bold cursor-not-allowed line-through';
                         btn.disabled = true;
                     } else {
-                        // Horario disponible
                         disponiblesCount++;
-                        btn.className = 'bg-darkBg text-gray-300 border border-gray-700 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200 hover:scale-[1.02]';
+                        btn.className = 'bg-darkBg text-gray-300 border border-zinc-800 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200 hover:scale-[1.02]';
                         btn.onclick = () => {
-                            // Quitar selección previa de todos los botones
                             document.querySelectorAll('#contenedorHorarios button').forEach(b => {
                                 if(!b.disabled) {
-                                    b.className = 'bg-darkBg text-gray-300 border border-gray-700 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200';
+                                    b.className = 'bg-darkBg text-gray-300 border border-zinc-800 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200';
                                 }
                             });
-                            // Marcar este como seleccionado
                             btn.className = 'bg-gold text-darkBg border border-gold rounded-xl py-2.5 text-xs font-black shadow-md shadow-gold/25 scale-[1.03]';
                             horaElegida = bloque;
                             document.getElementById('horaSeleccionada').value = bloque;
@@ -389,7 +397,6 @@
             }
         }
 
-        // Guardar cita y bloquear en Firebase con validación estricta
         window.realizarReserva = async function() {
             const nombre = document.getElementById('nombreCliente').value.trim();
             const telefono = document.getElementById('telefonoCliente').value.trim();
@@ -405,7 +412,6 @@
             }
 
             try {
-                // Doble validación en tiempo real para evitar conflictos
                 const q = query(
                     collection(db, "citas"), 
                     where("barbero", "==", barbero), 
@@ -420,7 +426,6 @@
                     return;
                 }
 
-                // Guardar en Firestore (Bloqueo automático)
                 await addDoc(collection(db, "citas"), {
                     nombre,
                     telefono,
@@ -438,7 +443,6 @@
                 return;
             }
 
-            // Asignar número de WhatsApp correspondiente
             let numeroWhatsApp = (barbero === "Juan Angarita") ? "573150536300" : "573170479271";
 
             const mensaje = `*NUEVA RESERVA - BULLDOG BARBER*\n\n` +
