@@ -225,7 +225,7 @@
         </div>
     </section>
 
-    <!-- Sección de Ubicación y Horarios (MAPA EXACTO ACTUALIZADO) -->
+    <!-- Sección de Ubicación y Horarios (MAPA FORZADO CON PUNTO ROJO EXACTO) -->
     <section id="ubicacion" class="py-24 bg-zinc-950 border-t border-gray-900 px-4">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <!-- Detalles y Horarios -->
@@ -257,16 +257,16 @@
                         </div>
                     </div>
 
-                    <!-- Botón conectado directamente a tu enlace de Google Maps -->
+                    <!-- Botón conectado directamente a Google Maps -->
                     <a href="https://maps.app.goo.gl/zhjr5UtrYGmcrdpYA" target="_blank" class="block w-full text-center bg-gold text-darkBg hover:bg-gold-light font-bold py-4 rounded-xl transition shadow-md shadow-gold/20 mt-6">
                         <i class="fa-solid fa-map-marked-alt mr-2"></i> 📍 Abrir en Google Maps
                     </a>
                 </div>
             </div>
 
-            <!-- Mapa Incrustado con el enlace correcto -->
+            <!-- Mapa Incrustado con Coordenadas Exactas y Pin Forzado -->
             <div class="w-full h-[300px] md:h-full map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.8804975005877!2d-76.5435602!3d3.4475518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a70055555555%3A0x0!2sCarrera+13+%231-04+Oeste%2C+Cali%2C+Valle+del+Cauca!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco" class="map-iframe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://maps.google.com/maps?q=3.4475518,-76.5435602&z=17&output=embed" class="map-iframe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
