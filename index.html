@@ -491,38 +491,6 @@
                 return;
             }
 
-            try {
-                const q = query(
-                    collection(db, "citas"), 
-                    where("barbero", "==", barbero), 
-                    where("fecha", "==", fecha),
-                    where("hora", "==", hora)
-                );
-                const querySnapshot = await getDocs(q);
-                
-                if (!querySnapshot.empty) {
-                    alert("¡Lo sentimos! Este horario acaba de ser reservado por otro cliente. Elige otro bloque.");
-                    cargarHorariosDisponibles();
-                    return;
-                }
-
-                await addDoc(collection(db, "citas"), {
-                    nombre,
-                    telefono,
-                    servicio,
-                    barbero,
-                    fecha,
-                    hora,
-                    cejas,
-                    timestamp: new Date()
-                });
-
-            } catch (e) {
-                console.error("Error al guardar en base de datos: ", e);
-                alert("Hubo un error al guardar la cita. Inténtalo de nuevo.");
-                return;
-            }
-
             let numeroWhatsApp = (barbero === "Juan Angarita") ? "573150536300" : "573170479271";
 
             const mensaje = `*NUEVA RESERVA - BULLDOG BARBER*\n\n` +
@@ -535,17 +503,26 @@
                             `- Cejas opcionales: ${cejas}\n\n` +
                             `Quedo atento a la confirmación de la cita.`;
 
-            // Usamos la API universal de WhatsApp optimizada para abrir la app nativa en Android y iPhone sin bloqueadores
-            const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensaje)}`;
-            
-            // Limpiamos el formulario de inmediato
-            document.getElementById('formReserva').reset();
-            document.getElementById('fechaCita').value = fecha;
-            horaElegida = "";
-            cargarHorariosDisponibles();
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
 
-            // Abrimos WhatsApp de forma directa
+            // 1. Abrimos WhatsApp AL INSTANTE en el celular antes de que Firebase responda (evita que el navegador bloquee la app)
             window.location.href = urlWhatsApp;
+
+            // 2. Guardamos la cita en Firestore en segundo plano de forma totalmente silenciosa
+            try {
+                await addDoc(collection(db, "citas"), {
+                    nombre,
+                    telefono,
+                    servicio,
+                    barbero,
+                    fecha,
+                    hora,
+                    cejas,
+                    timestamp: new Date()
+                });
+            } catch (e) {
+                console.error("Error al guardar en base de datos: ", e);
+            }
         }
     </script>
 </body>
