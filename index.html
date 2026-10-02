@@ -25,7 +25,7 @@
     </script>
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Estilos personalizados para el mapa y animaciones al hacer scroll -->
+    <!-- Estilos personalizados para el mapa y animaciones fluidas -->
     <style>
         .map-responsive iframe{
             position: absolute;
@@ -35,14 +35,14 @@
             height: 100%;
             border: 0;
         }
-        /* Estado inicial de los elementos antes de animarse */
-        .reveal {
+        /* Elementos listos para animarse al hacer scroll */
+        .reveal-item {
             opacity: 0;
             transform: translateY(50px);
-            transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        /* Estado cuando el elemento entra en la pantalla */
-        .reveal.active {
+        /* Elementos cuando entran en pantalla */
+        .reveal-item.active {
             opacity: 1;
             transform: translateY(0);
         }
@@ -81,7 +81,7 @@
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30"></div>
         </div>
         
-        <div class="relative max-w-5xl mx-auto px-4 text-center z-10 pt-16 reveal active">
+        <div class="relative max-w-5xl mx-auto px-4 text-center z-10 pt-16 reveal-item active">
             <h1 class="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight mb-8 text-white uppercase leading-tight drop-shadow-lg">
                 ¡No eres feo, simplemente <br class="hidden sm:inline">tienes un <span class="text-gold">mal corte!</span>
             </h1>
@@ -99,14 +99,14 @@
 
     <!-- Servicios -->
     <section id="servicios" class="py-24 max-w-6xl mx-auto px-4">
-        <div class="text-center mb-16 reveal">
+        <div class="text-center mb-16 reveal-item">
             <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTROS <span class="text-gold">SERVICIOS</span></h2>
             <p class="text-gray-400">Calidad garantizada en cada detalle</p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto reveal">
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <!-- Servicio 1 -->
-            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group transform hover:-translate-y-1">
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group transform hover:-translate-y-1 reveal-item">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-2xl font-bold text-white group-hover:text-gold transition">Corte de Cabello</h3>
@@ -124,7 +124,7 @@
             </div>
 
             <!-- Servicio 2 -->
-            <div class="bg-cardBg border-2 border-gold/40 rounded-3xl p-8 hover:border-gold transition-all duration-300 flex flex-col justify-between shadow-2xl relative overflow-hidden group transform hover:-translate-y-1">
+            <div class="bg-cardBg border-2 border-gold/40 rounded-3xl p-8 hover:border-gold transition-all duration-300 flex flex-col justify-between shadow-2xl relative overflow-hidden group transform hover:-translate-y-1 reveal-item">
                 <div class="absolute top-0 right-0 bg-gold text-darkBg text-xs font-black px-4 py-1.5 rounded-bl-2xl uppercase tracking-wider">
                     Más Popular
                 </div>
@@ -149,33 +149,33 @@
 
     <!-- Galería de Estilos -->
     <section id="galeria" class="py-20 bg-zinc-950 border-y border-gray-900">
-        <div class="max-w-6xl mx-auto px-4 text-center reveal">
+        <div class="max-w-6xl mx-auto px-4 text-center reveal-item">
             <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTRO <span class="text-gold">TRABAJO</span></h2>
             <p class="text-gray-400 mb-12">Precisión y estilo en cada corte</p>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300">
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300 reveal-item">
                     <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
                         <i class="fa-solid fa-scissors text-gold text-xl"></i>
                     </div>
                     <h4 class="font-bold text-white mb-1">Desvanecidos</h4>
                     <p class="text-xs text-gray-400">Degradados limpios y definidos</p>
                 </div>
-                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300">
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300 reveal-item">
                     <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
                         <i class="fa-solid fa-spray-can-sparkles text-gold text-xl"></i>
                     </div>
                     <h4 class="font-bold text-white mb-1">Barba Clásica</h4>
                     <p class="text-xs text-gray-400">Toalla caliente y perfilado</p>
                 </div>
-                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300">
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300 reveal-item">
                     <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
                         <i class="fa-solid fa-wand-magic-sparkles text-gold text-xl"></i>
                     </div>
                     <h4 class="font-bold text-white mb-1">Diseño de Cejas</h4>
                     <p class="text-xs text-gray-400">Simetría perfecta</p>
                 </div>
-                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300">
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300 reveal-item">
                     <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
                         <i class="fa-solid fa-crown text-gold text-xl"></i>
                     </div>
@@ -188,14 +188,14 @@
 
     <!-- Barberos -->
     <section id="barberos" class="py-24 max-w-6xl mx-auto px-4">
-        <div class="text-center mb-16 reveal">
+        <div class="text-center mb-16 reveal-item">
             <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTRO <span class="text-gold">EQUIPO</span></h2>
             <p class="text-gray-400">Profesionales listos para transformar tu imagen</p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto reveal">
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             <!-- Barbero 1: Juan Angarita -->
-            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition transform hover:-translate-y-1 duration-300">
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition transform hover:-translate-y-1 duration-300 reveal-item">
                 <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
                     <img src="Angaritafoto.jpeg" alt="Juan Angarita" class="w-full h-full object-cover">
                 </div>
@@ -208,7 +208,7 @@
             </div>
 
             <!-- Barbero 2: Juan Beltran -->
-            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition transform hover:-translate-y-1 duration-300">
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition transform hover:-translate-y-1 duration-300 reveal-item">
                 <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
                     <img src="belltranfoto.jpeg" alt="Juan Beltran" class="w-full h-full object-cover">
                 </div>
@@ -224,9 +224,9 @@
 
     <!-- Sección de Ubicación y Horarios -->
     <section id="ubicacion" class="py-24 bg-zinc-950 border-t border-gray-900 px-4">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center reveal">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <!-- Detalles y Horarios -->
-            <div class="space-y-8">
+            <div class="space-y-8 reveal-item">
                 <div class="space-y-3">
                     <h2 class="text-3xl md:text-4xl font-black text-white">UBICACIÓN Y <span class="text-gold">HORARIOS</span></h2>
                     <p class="text-gray-400">Encuéntranos en el corazón de Cali. ¡Visítanos hoy!</p>
@@ -261,7 +261,7 @@
             </div>
 
             <!-- Mapa -->
-            <div class="aspect-video w-full h-full rounded-3xl overflow-hidden border-4 border-gray-800 shadow-2xl relative map-responsive">
+            <div class="aspect-video w-full h-full rounded-3xl overflow-hidden border-4 border-gray-800 shadow-2xl relative map-responsive reveal-item">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.8967038681294!2d-76.5413713!3d3.4446046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a70046996161%3A0xbbc9f48e8f0313cc!2sBullDog%20Barber%20Shop!5e0!3m2!1ses-419!2sco!4v1727910635466!5m2!1ses-419!2sco" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
@@ -269,7 +269,7 @@
 
     <!-- Sistema de Reservas con Aviso Visual -->
     <section id="reserva" class="py-24 max-w-3xl mx-auto px-4">
-        <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative reveal">
+        <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative reveal-item">
             <div class="text-center mb-10">
                 <h2 class="text-2xl md:text-4xl font-black text-white mb-2">RESERVA TU <span class="text-gold">CITA</span></h2>
                 <p class="text-gray-400 text-sm">Horario de atención: Lunes a Sábado • 11:00 AM - 8:00 PM (Bloques de 45 min)</p>
@@ -339,16 +339,16 @@
         <p class="mt-4 text-xs text-gray-600">© 2026 BullDog Barber. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Script para activar las animaciones al hacer scroll -->
+    <!-- Script de Animaciones al Hacer Scroll -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const reveals = document.querySelectorAll(".reveal");
+            const reveals = document.querySelectorAll(".reveal-item");
 
-            function revealOnScroll() {
+            function checkReveal() {
                 reveals.forEach(element => {
                     const windowHeight = window.innerHeight;
                     const elementTop = element.getBoundingClientRect().top;
-                    const elementVisible = 150; // Margen para activar la animación
+                    const elementVisible = 100; // Margen para activar la animación
 
                     if (elementTop < windowHeight - elementVisible) {
                         element.classList.add("active");
@@ -356,8 +356,8 @@
                 });
             }
 
-            window.addEventListener("scroll", revealOnScroll);
-            revealOnScroll(); // Ejecutar al cargar por si hay elementos visibles
+            window.addEventListener("scroll", checkReveal);
+            checkReveal(); // Ejecutar al cargar la página
         });
     </script>
 
