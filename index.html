@@ -54,6 +54,7 @@
                 <a href="#servicios" class="hover:text-gold transition">Servicios</a>
                 <a href="#galeria" class="hover:text-gold transition">Galería</a>
                 <a href="#barberos" class="hover:text-gold transition">Barberos</a>
+                <a href="#ubicacion" class="hover:text-gold transition">Ubicación</a>
                 <a href="#reserva" class="hover:text-gold transition">Reservar</a>
             </nav>
             <a href="#reserva" class="bg-gold text-darkBg px-5 py-2 rounded-full font-extrabold text-xs uppercase tracking-wider hover:bg-gold-light transition shadow-lg shadow-gold/20">
@@ -238,12 +239,10 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-white mb-1">Horario de Atención</h4>
-                            <p class="text-sm text-gray-300">Lunes a Domingo • 11:00 AM - 8:00 PM</p>
-                            <p class="text-xs text-gray-500 mt-1">Abiertos en días festivos</p>
+                            <p class="text-sm text-gray-300">Lunes a Sábado • 11:00 AM - 8:00 PM</p>
                         </div>
                     </div>
 
-                    <!-- Botón que abre Google Maps en el celular -->
                     <a href="https://maps.app.goo.gl/6Rz25WJzS3XjZ6Wb9" target="_blank" class="block w-full text-center bg-gold text-darkBg hover:bg-gold-light font-bold py-4 rounded-xl transition shadow-md shadow-gold/20 mt-6">
                         <i class="fa-solid fa-map-marked-alt mr-2"></i> 📍 Abrir en Google Maps
                     </a>
@@ -320,7 +319,7 @@
     <!-- Footer -->
     <footer class="bg-black border-t border-gray-900 py-12 text-center text-gray-500 text-sm">
         <p class="text-white font-bold mb-2 tracking-wider text-base">BULLDOG BARBER</p>
-        <p>Atención de Lunes a Domingo • 11:00 AM a 8:00 PM</p>
+        <p>Atención de Lunes a Sábado • 11:00 AM a 8:00 PM</p>
         <p class="mt-4 text-xs text-gray-600">© 2026 BullDog Barber. Todos los derechos reservados.</p>
     </footer>
 
@@ -473,17 +472,4 @@
                     return;
                 }
 
-                await addDoc(collection(db, "citas"), {
-                    nombre,
-                    telefono,
-                    servicio,
-                    barbero,
-                    fecha,
-                    hora,
-                    cejas,
-                    timestamp: new Date()
-                });
-
-            } catch (e) {
-                console.error("Error al guardar en base de datos: ", e);
-                alert("Hubo un error al guardar la cita
+                await addDoc(collection(db, "c
