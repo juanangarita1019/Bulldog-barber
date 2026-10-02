@@ -535,21 +535,17 @@
                             `- Cejas opcionales: ${cejas}\n\n` +
                             `Quedo atento a la confirmación de la cita.`;
 
-            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+            // Usamos la API universal de WhatsApp optimizada para abrir la app nativa en Android y iPhone sin bloqueadores
+            const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensaje)}`;
             
-            // Simulación de clic nativo optimizada para abrir WhatsApp en Android y iPhone sin bloqueadores
-            const linkTemporal = document.createElement('a');
-            linkTemporal.href = urlWhatsApp;
-            linkTemporal.target = '_blank';
-            document.body.appendChild(linkTemporal);
-            linkTemporal.click();
-            document.body.removeChild(linkTemporal);
-
-            alert("¡Cita reservada con éxito!");
+            // Limpiamos el formulario de inmediato
             document.getElementById('formReserva').reset();
             document.getElementById('fechaCita').value = fecha;
             horaElegida = "";
             cargarHorariosDisponibles();
+
+            // Abrimos WhatsApp de forma directa
+            window.location.href = urlWhatsApp;
         }
     </script>
 </body>
