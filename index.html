@@ -28,49 +28,44 @@
 </head>
 <body class="bg-darkBg text-gray-100 font-sans antialiased selection:bg-gold selection:text-darkBg">
 
-    <!-- Header / Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-darkBg/90 backdrop-blur-md border-b border-gray-900">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl md:text-2xl font-black tracking-wider text-gold flex items-center gap-2">
-                <i class="fa-solid fa-dog"></i> BULLDOG BARBER
+    <!-- Header / Navbar estilo minimalista superior -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/85 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-lg md:text-xl font-black tracking-widest text-white flex items-center gap-2">
+                <i class="fa-solid fa-dog text-gold"></i> BULLDOG BARBER
             </a>
-            <nav class="hidden md:flex gap-8 text-sm font-medium">
+            <nav class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-gray-300">
                 <a href="#servicios" class="hover:text-gold transition">Servicios</a>
                 <a href="#galeria" class="hover:text-gold transition">Galería</a>
                 <a href="#barberos" class="hover:text-gold transition">Barberos</a>
-                <a href="#reserva" class="hover:text-gold transition">Reservar Cita</a>
+                <a href="#reserva" class="hover:text-gold transition">Reservar</a>
             </nav>
-            <a href="#reserva" class="bg-gold text-darkBg px-5 py-2 rounded-full font-bold text-sm hover:bg-gold-light transition shadow-lg shadow-gold/10">
-                Reservar Ahora
+            <a href="#reserva" class="bg-gold text-darkBg px-5 py-2 rounded-full font-extrabold text-xs uppercase tracking-wider hover:bg-gold-light transition shadow-lg shadow-gold/20">
+                Reservar Cita
             </a>
         </div>
     </header>
 
-    <!-- Hero Section con Fondo Fotográfico Profesional y Overlay Oscuro -->
-    <section class="relative pt-44 pb-32 md:pt-60 md:pb-44 flex items-center justify-center bg-black border-b border-gray-900 overflow-hidden">
-        <!-- Imagen de fondo de barbería de alta calidad -->
+    <!-- Hero Section con Fotografía Real en Primer Plano y Frase Impactante -->
+    <section class="relative h-screen min-h-[600px] flex items-center justify-center bg-black overflow-hidden">
+        <!-- Imagen de fondo real en primer plano (estilo referencia) -->
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1920&q=80" alt="Fondo Barbería" class="w-full h-full object-cover opacity-40 scale-105 transform hover:scale-100 transition duration-1000">
-            <!-- Capa oscura degradada para que el texto resalte con elegancia -->
-            <div class="absolute inset-0 bg-gradient-to-t from-darkBg via-black/70 to-black/80"></div>
+            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1920&q=80" alt="Corte de cabello profesional" class="w-full h-full object-cover opacity-50 scale-105">
+            <!-- Capa oscura elegante para resaltar las letras blancas y doradas -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/70"></div>
         </div>
         
-        <div class="relative max-w-4xl mx-auto px-4 text-center z-10">
-            <span class="text-gold font-bold tracking-widest uppercase text-xs md:text-sm bg-gold/10 px-4 py-2 rounded-full border border-gold/40 inline-block mb-6 shadow-lg backdrop-blur-sm">
-                Estilo, Precisión y Tradición
-            </span>
-            <h1 class="text-4xl md:text-7xl font-black tracking-tight mb-6 text-white leading-tight drop-shadow-md">
-                BULLDOG <span class="text-gold">BARBER</span>
+        <div class="relative max-w-5xl mx-auto px-4 text-center z-10 pt-16">
+            <h1 class="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight mb-8 text-white uppercase leading-tight drop-shadow-2xl">
+                ¡No eres feo, simplemente <br class="hidden sm:inline">tienes un <span class="text-gold">mal corte!</span>
             </h1>
-            <p class="text-gray-300 text-base md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium drop-shadow">
-                El corte perfecto te espera con los mejores profesionales. Agenda tu espacio de 45 minutos y vive una experiencia de alta gama.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#reserva" class="bg-gold text-darkBg px-8 py-4 rounded-xl font-black hover:bg-gold-light transition shadow-2xl shadow-gold/30 flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
-                    <i class="fa-solid fa-calendar-check"></i> Agendar Mi Cita
+            
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                <a href="#reserva" class="border border-white/40 hover:border-gold hover:bg-gold hover:text-darkBg px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest transition duration-300 backdrop-blur-sm text-white">
+                    Reservar Cita
                 </a>
-                <a href="#servicios" class="border border-gold/40 hover:border-gold px-8 py-4 rounded-xl font-bold transition flex items-center justify-center gap-2 bg-black/40 backdrop-blur-md text-white">
-                    Ver Precios
+                <a href="#servicios" class="border border-white/40 hover:border-gold hover:bg-white/10 px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest transition duration-300 backdrop-blur-sm text-white">
+                    Ver Servicios >
                 </a>
             </div>
         </div>
