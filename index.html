@@ -25,26 +25,32 @@
     </script>
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Estilo para asegurar que el mapa mantenga la forma correcta -->
+    <!-- Estilos personalizados para el mapa -->
     <style>
-        .map-responsive{
+        /* Contenedor responsivo para mantener la forma del mapa */
+        .map-container {
             position: relative;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
-            border-radius: 1.5rem; /* equivalente a rounded-3xl */
-            border: 4px solid #1f2937; /* equivalente to border-gray-800 */
-            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); /* equivalente to shadow-2xl */
+            border-radius: 1.5rem; /* rounded-3xl */
+            border: 4px solid #1f2937; /* border-gray-800 */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
         }
-        .map-responsive iframe{
+        /* Forzar relación de aspecto 16:9 para pantallas grandes */
+        @media (min-width: 768px) {
+            .map-container {
+                aspect-ratio: 16 / 9;
+            }
+        }
+        /* Asegurar que el iframe cubra el contenedor */
+        .map-iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             border: 0;
-        }
-        /* Forzar relación de aspecto 16:9 para el mapa */
-        .aspect-video-custom {
-            aspect-ratio: 16 / 9;
         }
     </style>
 </head>
@@ -55,6 +61,7 @@
         <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
             <a href="#" class="flex items-center gap-3 group">
                 <div class="w-11 h-11 rounded-full overflow-hidden border-2 border-gold ring-2 ring-gold/50 shadow-lg shadow-gold/30 bg-darkBg transform group-hover:scale-105 transition duration-300">
+                    <!-- Asegúrate de que el archivo logo_barberia.png esté en la misma carpeta -->
                     <img src="logo_barberia.png" alt="BullDog Barber Logo" class="w-full h-full object-cover filter contrast-110 brightness-105">
                 </div>
                 <span class="text-lg md:text-xl font-black tracking-widest text-white group-hover:text-gold transition">
@@ -197,6 +204,7 @@
             <!-- Barbero 1: Juan Angarita -->
             <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition">
                 <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
+                    <!-- Asegúrate de que la foto esté en la misma carpeta -->
                     <img src="Angaritafoto.jpeg" alt="Juan Angarita" class="w-full h-full object-cover">
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-1">Juan Angarita</h3>
@@ -210,6 +218,7 @@
             <!-- Barbero 2: Juan Beltran -->
             <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition">
                 <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
+                    <!-- Asegúrate de que la foto esté en la misma carpeta -->
                     <img src="belltranfoto.jpeg" alt="Juan Beltran" class="w-full h-full object-cover">
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-1">Juan Beltran</h3>
@@ -222,7 +231,7 @@
         </div>
     </section>
 
-    <!-- Sección de Ubicación y Horarios -->
+    <!-- Sección de Ubicación y Horarios (CORREGIDA) -->
     <section id="ubicacion" class="py-24 bg-zinc-950 border-t border-gray-900 px-4">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <!-- Detalles y Horarios (Columna Izquierda) -->
@@ -254,15 +263,16 @@
                         </div>
                     </div>
 
+                    <!-- Botón que abre Google Maps en el celular -->
                     <a href="https://maps.app.goo.gl/6Rz25WJzS3XjZ6Wb9" target="_blank" class="block w-full text-center bg-gold text-darkBg hover:bg-gold-light font-bold py-4 rounded-xl transition shadow-md shadow-gold/20 mt-6">
                         <i class="fa-solid fa-map-marked-alt mr-2"></i> 📍 Abrir en Google Maps
                     </a>
                 </div>
             </div>
 
-            <!-- Mapa de Google Incrustado (Columna Derecha) -->
-            <div class="w-full aspect-video-custom md:aspect-auto md:h-full map-responsive">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d796.574605170818!2d-76.55456572539337!3d3.4476358187593227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a60050228079%3A0x8d26727b1a51d0f5!2sBullDog%20Barber%20Shop!5e0!3m2!1ses-419!2sco!4v1727998594944!5m2!1ses-419!2sco" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <!-- Mapa de Google Incrustado (CORREGIDO CON MARCADOR EXACTO) -->
+            <div class="w-full h-[300px] md:h-full map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d995.718976832197!2d-76.55364153037788!3d3.447640848924532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a7612bfb29a7%3A0xa875530f5b8b1b17!2sCarrera%2013%20%231-04%20Oeste%2C%20Comuna%202%2C%20Cali%2C%20Valle%20del%20Cauca%2C%20Colombia!5e0!3m2!1ses-419!2sco!4v1728053116873!5m2!1ses-419!2sco" class="map-iframe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
@@ -334,11 +344,12 @@
         <p class="mt-4 text-xs text-gray-600">© 2026 BullDog Barber. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Firebase SDKs y Lógica -->
+    <!-- Firebase SDKs y Lógica de Reservas -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+        // CONFIGURA TUS CREDENCIALES DE FIREBASE AQUÍ
         const firebaseConfig = {
             apiKey: "AIzaSyAytWqDohqWPu5tQA4JpA7A-ZvADfbKLd8",
             authDomain: "bulldog-barber.firebaseapp.com",
@@ -405,11 +416,7 @@
             contenedor.innerHTML = '<p class="col-span-full text-sm text-gold animate-pulse">Cargando disponibilidad en tiempo real...</p>';
 
             try {
-                const q = query(
-                    collection(db, "citas"), 
-                    where("barbero", "==", barbero), 
-                    where("fecha", "==", fecha)
-                );
+                const q = query(collection(db, "citas"), where("barbero", "==", barbero), where("fecha", "==", fecha));
                 const querySnapshot = await getDocs(q);
                 const horasOcupadas = [];
                 querySnapshot.forEach((doc) => {
@@ -457,22 +464,4 @@
         window.realizarReserva = async function() {
             const nombre = document.getElementById('nombreCliente').value.trim();
             const telefono = document.getElementById('telefonoCliente').value.trim();
-            const servicio = document.getElementById('servicioSelect').value;
-            const barbero = document.getElementById('barberoSelect').value;
-            const fecha = document.getElementById('fechaCita').value;
-            const hora = horaElegida;
-            const cejas = document.getElementById('cejasCheck').checked ? "Sí" : "No";
-
-            if (!nombre || !telefono || !hora) {
-                alert("Por favor completa tu nombre, tu teléfono y selecciona un horario disponible.");
-                return;
-            }
-
-            try {
-                const q = query(
-                    collection(db, "citas"), 
-                    where("barbero", "==", barbero), 
-                    where("fecha", "==", fecha),
-                    where("hora", "==", hora)
-                );
-                const querySnapshot = await getDocs(q);
+            const servicio
