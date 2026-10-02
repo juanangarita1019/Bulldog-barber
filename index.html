@@ -25,8 +25,15 @@
     </script>
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Estilo para el mapa de Google -->
+    <!-- Estilo para asegurar que el mapa mantenga la forma correcta -->
     <style>
+        .map-responsive{
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem; /* equivalente a rounded-3xl */
+            border: 4px solid #1f2937; /* equivalente to border-gray-800 */
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); /* equivalente to shadow-2xl */
+        }
         .map-responsive iframe{
             position: absolute;
             top: 0;
@@ -34,6 +41,10 @@
             width: 100%;
             height: 100%;
             border: 0;
+        }
+        /* Forzar relación de aspecto 16:9 para el mapa */
+        .aspect-video-custom {
+            aspect-ratio: 16 / 9;
         }
     </style>
 </head>
@@ -214,7 +225,7 @@
     <!-- Sección de Ubicación y Horarios -->
     <section id="ubicacion" class="py-24 bg-zinc-950 border-t border-gray-900 px-4">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <!-- Detalles y Horarios -->
+            <!-- Detalles y Horarios (Columna Izquierda) -->
             <div class="space-y-8">
                 <div class="space-y-3">
                     <h2 class="text-3xl md:text-4xl font-black text-white">UBICACIÓN Y <span class="text-gold">HORARIOS</span></h2>
@@ -249,9 +260,9 @@
                 </div>
             </div>
 
-            <!-- Mapa de Google Incrustado -->
-            <div class="aspect-video w-full h-full rounded-3xl overflow-hidden border-4 border-gray-800 shadow-2xl relative map-responsive">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d995.718976832197!2d-76.55364153037788!3d3.447640848924532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a7612bfb29a7%3A0xa875530f5b8b1b17!2sCarrera%2013%20%231-04%20Oeste%2C%20Comuna%202%2C%20Cali%2C%20Valle%20del%20Cauca%2C%20Colombia!5e0!3m2!1ses-419!2sco!4v1727911651414!5m2!1ses-419!2sco" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <!-- Mapa de Google Incrustado (Columna Derecha) -->
+            <div class="w-full aspect-video-custom md:aspect-auto md:h-full map-responsive">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d796.574605170818!2d-76.55456572539337!3d3.4476358187593227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a60050228079%3A0x8d26727b1a51d0f5!2sBullDog%20Barber%20Shop!5e0!3m2!1ses-419!2sco!4v1727998594944!5m2!1ses-419!2sco" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
@@ -465,11 +476,3 @@
                     where("hora", "==", hora)
                 );
                 const querySnapshot = await getDocs(q);
-                
-                if (!querySnapshot.empty) {
-                    alert("¡Lo sentimos! Este horario acaba de ser reservado por otro cliente. Elige otro bloque.");
-                    cargarHorariosDisponibles();
-                    return;
-                }
-
-                await addDoc(collection(db, "c
