@@ -348,7 +348,7 @@
                 reveals.forEach(element => {
                     const windowHeight = window.innerHeight;
                     const elementTop = element.getBoundingClientRect().top;
-                    const elementVisible = 100; // Margen para activar la animación
+                    const elementVisible = 100;
 
                     if (elementTop < windowHeight - elementVisible) {
                         element.classList.add("active");
@@ -357,7 +357,7 @@
             }
 
             window.addEventListener("scroll", checkReveal);
-            checkReveal(); // Ejecutar al cargar la página
+            checkReveal();
         });
     </script>
 
@@ -536,13 +536,9 @@
                             `Quedo atento a la confirmación de la cita.`;
 
             const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-            window.open(urlWhatsApp, '_blank');
-
-            alert("¡Cita reservada con éxito!");
-            document.getElementById('formReserva').reset();
-            document.getElementById('fechaCita').value = fecha;
-            horaElegida = "";
-            cargarHorariosDisponibles();
+            
+            // Redirección directa y segura a WhatsApp (funciona perfecto en PC y celulares)
+            window.location.href = urlWhatsApp;
         }
     </script>
 </body>
