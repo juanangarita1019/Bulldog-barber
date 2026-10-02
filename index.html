@@ -25,23 +25,9 @@
     </script>
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Estilos personalizados para el mapa -->
+    <!-- Estilos personalizados para el mapa y animaciones -->
     <style>
-        .map-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            border-radius: 1.5rem; /* rounded-3xl */
-            border: 4px solid #1f2937; /* border-gray-800 */
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
-        }
-        @media (min-width: 768px) {
-            .map-container {
-                aspect-ratio: 16 / 9;
-            }
-        }
-        .map-iframe {
+        .map-responsive iframe{
             position: absolute;
             top: 0;
             left: 0;
@@ -49,12 +35,20 @@
             height: 100%;
             border: 0;
         }
+        /* Animaciones suaves */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
     </style>
 </head>
 <body class="bg-darkBg text-gray-100 font-sans antialiased selection:bg-gold selection:text-darkBg">
 
     <!-- Header / Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
             <a href="#" class="flex items-center gap-3 group">
                 <div class="w-11 h-11 rounded-full overflow-hidden border-2 border-gold ring-2 ring-gold/50 shadow-lg shadow-gold/30 bg-darkBg transform group-hover:scale-105 transition duration-300">
@@ -80,20 +74,20 @@
     <!-- Hero Section -->
     <section class="relative h-screen min-h-[600px] flex items-center justify-center bg-black overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1920&q=80" alt="Corte de cabello profesional" class="w-full h-full object-cover opacity-75 scale-100">
+            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1920&q=80" alt="Corte de cabello profesional" class="w-full h-full object-cover opacity-75 scale-105 transition-transform duration-1000">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30"></div>
         </div>
         
-        <div class="relative max-w-5xl mx-auto px-4 text-center z-10 pt-16">
+        <div class="relative max-w-5xl mx-auto px-4 text-center z-10 pt-16 animate-fade-in">
             <h1 class="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight mb-8 text-white uppercase leading-tight drop-shadow-lg">
                 ¡No eres feo, simplemente <br class="hidden sm:inline">tienes un <span class="text-gold">mal corte!</span>
             </h1>
             
             <div class="flex flex-wrap justify-center gap-4 mt-8">
-                <a href="#reserva" class="bg-gold text-darkBg hover:bg-gold-light px-8 py-3.5 rounded-full font-extrabold text-xs uppercase tracking-widest transition duration-300 shadow-xl">
+                <a href="#reserva" class="bg-gold text-darkBg hover:bg-gold-light px-8 py-3.5 rounded-full font-extrabold text-xs uppercase tracking-widest transition duration-300 shadow-xl transform hover:-translate-y-1">
                     Reservar Cita
                 </a>
-                <a href="#servicios" class="border-2 border-white/80 hover:border-gold hover:bg-white/20 px-8 py-3.5 rounded-full font-extrabold text-xs uppercase tracking-widest transition duration-300 backdrop-blur-sm text-white">
+                <a href="#servicios" class="border-2 border-white/80 hover:border-gold hover:bg-white/20 px-8 py-3.5 rounded-full font-extrabold text-xs uppercase tracking-widest transition duration-300 backdrop-blur-sm text-white transform hover:-translate-y-1">
                     Ver Servicios >
                 </a>
             </div>
@@ -102,14 +96,14 @@
 
     <!-- Servicios -->
     <section id="servicios" class="py-24 max-w-6xl mx-auto px-4">
-        <div class="text-center mb-16">
+        <div class="text-center mb-16 animate-fade-in">
             <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTROS <span class="text-gold">SERVICIOS</span></h2>
             <p class="text-gray-400">Calidad garantizada en cada detalle</p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <!-- Servicio 1 -->
-            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group">
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group transform hover:-translate-y-1">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-2xl font-bold text-white group-hover:text-gold transition">Corte de Cabello</h3>
@@ -127,7 +121,7 @@
             </div>
 
             <!-- Servicio 2 -->
-            <div class="bg-cardBg border-2 border-gold/40 rounded-3xl p-8 hover:border-gold transition-all duration-300 flex flex-col justify-between shadow-2xl relative overflow-hidden group">
+            <div class="bg-cardBg border-2 border-gold/40 rounded-3xl p-8 hover:border-gold transition-all duration-300 flex flex-col justify-between shadow-2xl relative overflow-hidden group transform hover:-translate-y-1">
                 <div class="absolute top-0 right-0 bg-gold text-darkBg text-xs font-black px-4 py-1.5 rounded-bl-2xl uppercase tracking-wider">
                     Más Popular
                 </div>
@@ -157,29 +151,29 @@
             <p class="text-gray-400 mb-12">Precisión y estilo en cada corte</p>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition group">
-                    <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
                         <i class="fa-solid fa-scissors text-gold text-xl"></i>
                     </div>
                     <h4 class="font-bold text-white mb-1">Desvanecidos</h4>
                     <p class="text-xs text-gray-400">Degradados limpios y definidos</p>
                 </div>
-                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition group">
-                    <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
                         <i class="fa-solid fa-spray-can-sparkles text-gold text-xl"></i>
                     </div>
                     <h4 class="font-bold text-white mb-1">Barba Clásica</h4>
                     <p class="text-xs text-gray-400">Toalla caliente y perfilado</p>
                 </div>
-                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition group">
-                    <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
                         <i class="fa-solid fa-wand-magic-sparkles text-gold text-xl"></i>
                     </div>
                     <h4 class="font-bold text-white mb-1">Diseño de Cejas</h4>
                     <p class="text-xs text-gray-400">Simetría perfecta</p>
                 </div>
-                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition group">
-                    <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
                         <i class="fa-solid fa-crown text-gold text-xl"></i>
                     </div>
                     <h4 class="font-bold text-white mb-1">Estilo Moderno</h4>
@@ -198,7 +192,7 @@
 
         <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             <!-- Barbero 1: Juan Angarita -->
-            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition">
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition transform hover:-translate-y-1 duration-300">
                 <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
                     <img src="Angaritafoto.jpeg" alt="Juan Angarita" class="w-full h-full object-cover">
                 </div>
@@ -211,7 +205,7 @@
             </div>
 
             <!-- Barbero 2: Juan Beltran -->
-            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition">
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition transform hover:-translate-y-1 duration-300">
                 <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
                     <img src="belltranfoto.jpeg" alt="Juan Beltran" class="w-full h-full object-cover">
                 </div>
@@ -225,7 +219,7 @@
         </div>
     </section>
 
-    <!-- Sección de Ubicación y Horarios (MAPA CORREGIDO CON COORDENADAS EXACTAS Y PIN FIJO) -->
+    <!-- Sección de Ubicación y Horarios -->
     <section id="ubicacion" class="py-24 bg-zinc-950 border-t border-gray-900 px-4">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <!-- Detalles y Horarios -->
@@ -257,26 +251,30 @@
                         </div>
                     </div>
 
-                    <!-- Botón de Google Maps -->
                     <a href="https://maps.app.goo.gl/zhjr5UtrYGmcrdpYA" target="_blank" class="block w-full text-center bg-gold text-darkBg hover:bg-gold-light font-bold py-4 rounded-xl transition shadow-md shadow-gold/20 mt-6">
                         <i class="fa-solid fa-map-marked-alt mr-2"></i> 📍 Abrir en Google Maps
                     </a>
                 </div>
             </div>
 
-            <!-- Mapa Incrustado con las coordenadas reales extraídas de tu enlace -->
-            <div class="w-full h-[300px] md:h-full map-container">
-                <iframe src="https://maps.google.com/maps?q=3.444700,-76.541400&z=18&output=embed" class="map-iframe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <!-- Mapa del primer código que funcionaba perfecto -->
+            <div class="aspect-video w-full h-full rounded-3xl overflow-hidden border-4 border-gray-800 shadow-2xl relative map-responsive">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.8967038681294!2d-76.5413713!3d3.4446046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a70046996161%3A0xbbc9f48e8f0313cc!2sBullDog%20Barber%20Shop!5e0!3m2!1ses-419!2sco!4v1727910635466!5m2!1ses-419!2sco" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
 
-    <!-- Sistema de Reservas -->
+    <!-- Sistema de Reservas con Aviso Visual -->
     <section id="reserva" class="py-24 max-w-3xl mx-auto px-4">
         <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative">
             <div class="text-center mb-10">
                 <h2 class="text-2xl md:text-4xl font-black text-white mb-2">RESERVA TU <span class="text-gold">CITA</span></h2>
                 <p class="text-gray-400 text-sm">Horario de atención: Lunes a Sábado • 11:00 AM - 8:00 PM (Bloques de 45 min)</p>
+                <!-- Aviso visual destacado -->
+                <div class="mt-4 bg-gold/10 border border-gold/30 rounded-2xl p-4 text-xs text-gold flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-circle-info text-base"></i>
+                    <span>Al reservar, tu horario se bloqueará automáticamente en el sistema y se abrirá WhatsApp para confirmar.</span>
+                </div>
             </div>
 
             <form id="formReserva" class="space-y-6">
