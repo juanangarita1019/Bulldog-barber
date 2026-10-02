@@ -26,16 +26,17 @@
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-darkBg text-gray-100 font-sans antialiased">
+<body class="bg-darkBg text-gray-100 font-sans antialiased selection:bg-gold selection:text-darkBg">
 
     <!-- Header / Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-darkBg/90 backdrop-blur-md border-b border-gray-800">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-darkBg/95 backdrop-blur-md border-b border-gray-800">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-black tracking-wider text-gold flex items-center gap-2">
+            <a href="#" class="text-xl md:text-2xl font-black tracking-wider text-gold flex items-center gap-2">
                 <i class="fa-solid fa-dog"></i> BULLDOG BARBER
             </a>
             <nav class="hidden md:flex gap-8 text-sm font-medium">
                 <a href="#servicios" class="hover:text-gold transition">Servicios</a>
+                <a href="#galeria" class="hover:text-gold transition">Galería</a>
                 <a href="#barberos" class="hover:text-gold transition">Barberos</a>
                 <a href="#reserva" class="hover:text-gold transition">Reservar Cita</a>
             </nav>
@@ -45,21 +46,23 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 flex items-center justify-center bg-gradient-to-b from-black via-darkBg to-darkBg border-b border-gray-800">
-        <div class="absolute inset-0 opacity-25 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        <div class="relative max-w-4xl mx-auto px-4 text-center">
-            <span class="text-gold font-semibold tracking-widest uppercase text-xs md:text-sm bg-gold/10 px-4 py-1.5 rounded-full border border-gold/30 inline-block mb-6">
+    <!-- Hero Section con Estilo Premium -->
+    <section class="relative pt-36 pb-24 md:pt-48 md:pb-36 flex items-center justify-center bg-gradient-to-b from-black via-darkBg to-darkBg border-b border-gray-800 overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:20px_20px]"></div>
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="relative max-w-4xl mx-auto px-4 text-center z-10">
+            <span class="text-gold font-semibold tracking-widest uppercase text-xs md:text-sm bg-gold/10 px-4 py-1.5 rounded-full border border-gold/30 inline-block mb-6 shadow-sm">
                 Estilo, Precisión y Tradición
             </span>
-            <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight mb-6 text-white">
+            <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight mb-6 text-white leading-tight">
                 BULLDOG <span class="text-gold">BARBER</span>
             </h1>
             <p class="text-gray-400 text-base md:text-xl max-w-2xl mx-auto mb-10">
-                El corte perfecto te espera con los mejores profesionales. Agenda tu espacio de 45 minutos y vive la experiencia clásica renovada.
+                El corte perfecto te espera con los mejores profesionales. Agenda tu espacio de 45 minutos y vive una experiencia de alta gama.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#reserva" class="bg-gold text-darkBg px-8 py-4 rounded-xl font-bold hover:bg-gold-light transition shadow-xl shadow-gold/20 flex items-center justify-center gap-2">
+                <a href="#reserva" class="bg-gold text-darkBg px-8 py-4 rounded-xl font-bold hover:bg-gold-light transition shadow-xl shadow-gold/20 flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
                     <i class="fa-solid fa-calendar-check"></i> Agendar Mi Cita
                 </a>
                 <a href="#servicios" class="border border-gray-700 hover:border-gold px-8 py-4 rounded-xl font-bold transition flex items-center justify-center gap-2">
@@ -70,7 +73,7 @@
     </section>
 
     <!-- Servicios -->
-    <section id="servicios" class="py-20 max-w-6xl mx-auto px-4">
+    <section id="servicios" class="py-24 max-w-6xl mx-auto px-4">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTROS <span class="text-gold">SERVICIOS</span></h2>
             <p class="text-gray-400">Calidad garantizada en cada detalle</p>
@@ -78,83 +81,119 @@
 
         <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <!-- Servicio 1 -->
-            <div class="bg-cardBg border border-gray-800 rounded-2xl p-8 hover:border-gold/50 transition flex flex-col justify-between shadow-xl">
+            <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group">
                 <div>
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold text-white">Corte de Cabello</h3>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-gold transition">Corte de Cabello</h3>
                         <span class="text-2xl font-black text-gold">$25.000</span>
                     </div>
-                    <ul class="text-gray-400 space-y-2 mb-6 text-sm">
-                        <li><i class="fa-solid fa-check text-gold mr-2"></i> Incluye lavado de cabeza</li>
-                        <li><i class="fa-solid fa-check text-gold mr-2"></i> Diseño de cejas (Opcional)</li>
-                        <li><i class="fa-solid fa-clock text-gold mr-2"></i> Duración: 45 minutos</li>
+                    <ul class="text-gray-400 space-y-3 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Incluye lavado de cabeza</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Diseño de cejas (Opcional)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-clock text-gold"></i> Duración: 45 minutos</li>
                     </ul>
                 </div>
-                <a href="#reserva" onclick="seleccionarServicio('Corte de Cabello')" class="block text-center bg-gray-800 hover:bg-gold hover:text-darkBg py-3 rounded-xl font-bold transition">
-                    Seleccionar
+                <a href="#reserva" onclick="seleccionarServicio('Corte de Cabello')" class="block text-center bg-gray-800/80 hover:bg-gold hover:text-darkBg py-3.5 rounded-xl font-bold transition shadow-sm">
+                    Seleccionar este servicio
                 </a>
             </div>
 
             <!-- Servicio 2 -->
-            <div class="bg-cardBg border border-gray-800 rounded-2xl p-8 hover:border-gold/50 transition flex flex-col justify-between shadow-xl">
+            <div class="bg-cardBg border-2 border-gold/40 rounded-3xl p-8 hover:border-gold transition-all duration-300 flex flex-col justify-between shadow-2xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 bg-gold text-darkBg text-xs font-black px-4 py-1.5 rounded-bl-2xl uppercase tracking-wider">
+                    Más Popular
+                </div>
                 <div>
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold text-white">Corte + Barba</h3>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-gold transition">Corte + Barba</h3>
                         <span class="text-2xl font-black text-gold">$30.000</span>
                     </div>
-                    <ul class="text-gray-400 space-y-2 mb-6 text-sm">
-                        <li><i class="fa-solid fa-check text-gold mr-2"></i> Incluye lavado de cabeza</li>
-                        <li><i class="fa-solid fa-check text-gold mr-2"></i> Diseño de cejas (Opcional)</li>
-                        <li><i class="fa-solid fa-check text-gold mr-2"></i> Perfilado y arreglo de barba</li>
-                        <li><i class="fa-solid fa-clock text-gold mr-2"></i> Duración: 45 minutos</li>
+                    <ul class="text-gray-400 space-y-3 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Incluye lavado de cabeza</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Diseño de cejas (Opcional)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Perfilado y arreglo de barba</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-clock text-gold"></i> Duración: 45 minutos</li>
                     </ul>
                 </div>
-                <a href="#reserva" onclick="seleccionarServicio('Corte + Barba')" class="block text-center bg-gray-800 hover:bg-gold hover:text-darkBg py-3 rounded-xl font-bold transition">
-                    Seleccionar
+                <a href="#reserva" onclick="seleccionarServicio('Corte + Barba')" class="block text-center bg-gold text-darkBg hover:bg-gold-light py-3.5 rounded-xl font-bold transition shadow-md shadow-gold/20">
+                    Seleccionar este servicio
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería de Estilos / Trabajos -->
+    <section id="galeria" class="py-20 bg-black/30 border-y border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTRO <span class="text-gold">TRABAJO</span></h2>
+            <p class="text-gray-400 mb-12">Precisión y estilo en cada corte</p>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition">
+                    <i class="fa-solid fa-scissors text-gold text-3xl mb-3"></i>
+                    <h4 class="font-bold text-white">Desvanecidos</h4>
+                    <p class="text-xs text-gray-400 mt-1">Degradados limpios y definidos</p>
+                </div>
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition">
+                    <i class="fa-solid fa-spray-can-sparkles text-gold text-3xl mb-3"></i>
+                    <h4 class="font-bold text-white">Barba Clásica</h4>
+                    <p class="text-xs text-gray-400 mt-1">Toalla caliente y perfilado</p>
+                </div>
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition">
+                    <i class="fa-solid fa-wand-magic-sparkles text-gold text-3xl mb-3"></i>
+                    <h4 class="font-bold text-white">Diseño de Cejas</h4>
+                    <p class="text-xs text-gray-400 mt-1">Simetría perfecta</p>
+                </div>
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition">
+                    <i class="fa-solid fa-crown text-gold text-3xl mb-3"></i>
+                    <h4 class="font-bold text-white">Estilo Moderno</h4>
+                    <p class="text-xs text-gray-400 mt-1">Tendencias actuales</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Barberos con Fotos -->
-    <section id="barberos" class="py-20 bg-black/40 border-y border-gray-800">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTRO <span class="text-gold">EQUIPO</span></h2>
-                <p class="text-gray-400">Profesionales listos para transformar tu imagen</p>
+    <section id="barberos" class="py-24 max-w-6xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTRO <span class="text-gold">EQUIPO</span></h2>
+            <p class="text-gray-400">Profesionales listos para transformar tu imagen</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <!-- Barbero 1: Juan Angarita -->
+            <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition">
+                <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
+                    <img src="Angaritafoto.jpeg" alt="Juan Angarita" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-1">Juan Angarita</h3>
+                <p class="text-gold text-sm font-semibold mb-4">Barbero Profesional</p>
+                <p class="text-gray-400 text-sm mb-6">Especialista en cortes modernos, clásicos y cuidado capilar integral.</p>
+                <button onclick="seleccionarBarberoYReservar('Juan Angarita')" class="w-full bg-gray-800 hover:bg-gold hover:text-darkJob text-sm font-bold py-3 rounded-xl transition text-white">
+                    Reservar con Juan Angarita
+                </button>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-                <!-- Barbero 1: Juan Angarita -->
-                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 text-center shadow-xl">
-                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-2 border-gold shadow-md bg-darkBg">
-                        <img src="Angaritafoto.jpeg" alt="Juan Angarita" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-1">Juan Angarita</h3>
-                    <p class="text-gold text-sm font-semibold mb-3">Barbero Profesional</p>
-                    <p class="text-gray-400 text-sm mb-4">Especialista en cortes modernos, clásicos y cuidado capilar integral.</p>
-                    <a href="#reserva" onclick="seleccionarBarbero('Juan Angarita')" class="inline-block bg-gray-800 hover:bg-gold hover:text-darkBg text-xs font-bold px-4 py-2 rounded-lg transition">Reservar con Juan Angarita</a>
+            <!-- Barbero 2: Juan Beltran -->
+            <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition">
+                <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
+                    <img src="belltranfoto.jpeg" alt="Juan Beltran" class="w-full h-full object-cover">
                 </div>
-
-                <!-- Barbero 2: Juan Beltran -->
-                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 text-center shadow-xl">
-                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-2 border-gold shadow-md bg-darkBg">
-                        <img src="belltranfoto.jpeg" alt="Juan Beltran" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-1">Juan Beltran</h3>
-                    <p class="text-gold text-sm font-semibold mb-3">Barbero Profesional</p>
-                    <p class="text-gray-400 text-sm mb-4">Especialista en cortes modernos, clásicos y cuidado capilar integral.</p>
-                    <a href="#reserva" onclick="seleccionarBarbero('Juan Beltran')" class="inline-block bg-gray-800 hover:bg-gold hover:text-darkBg text-xs font-bold px-4 py-2 rounded-lg transition">Reservar con Juan Beltran</a>
-                </div>
+                <h3 class="text-2xl font-bold text-white mb-1">Juan Beltran</h3>
+                <p class="text-gold text-sm font-semibold mb-4">Barbero Profesional</p>
+                <p class="text-gray-400 text-sm mb-6">Especialista en cortes modernos, clásicos y cuidado capilar integral.</p>
+                <button onclick="seleccionarBarberoYReservar('Juan Beltran')" class="w-full bg-gray-800 hover:bg-gold hover:text-darkJob text-sm font-bold py-3 rounded-xl transition text-white">
+                    Reservar con Juan Beltran
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Sistema de Reservas con Base de Datos -->
-    <section id="reserva" class="py-20 max-w-3xl mx-auto px-4">
-        <div class="bg-cardBg border border-gray-800 rounded-3xl p-6 md:p-10 shadow-2xl">
+    <!-- Sistema de Reservas con Botones Interactivos -->
+    <section id="reserva" class="py-24 max-w-3xl mx-auto px-4">
+        <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 md:p-12 shadow-2xl relative">
             <div class="text-center mb-10">
-                <h2 class="text-2xl md:text-3xl font-black text-white mb-2">RESERVA TU <span class="text-gold">CITA</span></h2>
+                <h2 class="text-2xl md:text-4xl font-black text-white mb-2">RESERVA TU <span class="text-gold">CITA</span></h2>
                 <p class="text-gray-400 text-sm">Horario de atención: 11:00 AM - 8:00 PM (Bloques de 45 min)</p>
             </div>
 
@@ -162,19 +201,19 @@
                 <!-- Nombre cliente -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Tu Nombre Completo</label>
-                    <input type="text" id="nombreCliente" required placeholder="Ej: Carlos Pérez" class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                    <input type="text" id="nombreCliente" required placeholder="Ej: Carlos Pérez" class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
                 </div>
 
                 <!-- Teléfono -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Tu Teléfono / Celular</label>
-                    <input type="tel" id="telefonoCliente" required placeholder="Ej: 3001234567" class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                    <input type="tel" id="telefonoCliente" required placeholder="Ej: 3001234567" class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
                 </div>
 
                 <!-- Selección de Servicio -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona el Servicio</label>
-                    <select id="servicioSelect" required class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                    <select id="servicioSelect" required class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
                         <option value="Corte de Cabello - $25.000">Corte de Cabello ($25.000)</option>
                         <option value="Corte + Barba - $30.000">Corte + Barba ($30.000)</option>
                     </select>
@@ -183,34 +222,35 @@
                 <!-- Selección de Barbero -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona tu Barbero</label>
-                    <select id="barberoSelect" required onchange="cargarHorariosDisponibles()" class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                    <select id="barberoSelect" required onchange="cargarHorariosDisponibles()" class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
                         <option value="Juan Angarita">Juan Angarita</option>
                         <option value="Juan Beltran">Juan Beltran</option>
                     </select>
                 </div>
 
-                <!-- Fecha y Hora -->
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-bold text-gray-300 mb-2">Fecha</label>
-                        <input type="date" id="fechaCita" required onchange="cargarHorariosDisponibles()" class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                <!-- Fecha -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-300 mb-2">Fecha de la Cita</label>
+                    <input type="date" id="fechaCita" required onchange="cargarHorariosDisponibles()" class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
+                </div>
+
+                <!-- Selector de Horas en Botones Pastilla -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona la Hora (Bloques de 45 min)</label>
+                    <div id="contenedorHorarios" class="grid grid-cols-3 sm:grid-cols-4 gap-2.5 pt-1">
+                        <p class="col-span-full text-sm text-gray-500 italic">Selecciona fecha y barbero para ver horas disponibles...</p>
                     </div>
-                    <div>
-                        <label class="block text-sm font-bold text-gray-300 mb-2">Hora disponible (Bloques de 45 min)</label>
-                        <select id="horaCita" required class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
-                            <option value="">Selecciona fecha y barbero primero</option>
-                        </select>
-                    </div>
+                    <input type="hidden" id="horaSeleccionada" required>
                 </div>
 
                 <!-- Checkbox Cejas Opcionales -->
                 <div class="flex items-center gap-3 pt-2">
                     <input type="checkbox" id="cejasCheck" class="w-5 h-5 accent-gold rounded bg-darkBg border-gray-700">
-                    <label for="cejasCheck" class="text-sm text-gray-300">Incluir diseño de cejas (Opcional - Sin costo adicional)</label>
+                    <label for="cejasCheck" class="text-sm text-gray-300 cursor-pointer">Incluir diseño de cejas (Opcional - Sin costo adicional)</label>
                 </div>
 
                 <!-- Botón Enviar a WhatsApp y Guardar -->
-                <button type="button" onclick="realizarReserva()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-emerald-900/30 flex items-center justify-center gap-2 text-lg">
+                <button type="button" onclick="realizarReserva()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-emerald-900/30 flex items-center justify-center gap-2 text-lg transform hover:-translate-y-0.5">
                     <i class="fa-brands fa-whatsapp text-2xl"></i> Reservar, Bloquear Horario y Enviar
                 </button>
             </form>
@@ -218,8 +258,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-gray-800 py-10 text-center text-gray-500 text-sm">
-        <p class="text-white font-bold mb-2">BULLDOG BARBER</p>
+    <footer class="bg-black border-t border-gray-800 py-12 text-center text-gray-500 text-sm">
+        <p class="text-white font-bold mb-2 tracking-wider text-base">BULLDOG BARBER</p>
         <p>Atención de Lunes a Domingo • 11:00 AM a 8:00 PM</p>
         <p class="mt-4 text-xs text-gray-600">© 2026 BullDog Barber. Todos los derechos reservados.</p>
     </footer>
@@ -242,12 +282,13 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Horarios base de la barbería (Bloques de 45 min de 11am a 8pm)
         const bloquesBase = [
             "11:00 AM", "11:45 AM", "12:30 PM", "01:15 PM", 
             "02:00 PM", "02:45 PM", "03:30 PM", "04:15 PM", 
             "05:00 PM", "05:45 PM", "06:30 PM", "07:15 PM"
         ];
+
+        let horaElegida = "";
 
         document.addEventListener('DOMContentLoaded', () => {
             const today = new Date().toISOString().split('T')[0];
@@ -277,15 +318,22 @@
             cargarHorariosDisponibles();
         }
 
-        // Consultar Firebase para ocultar horas ya ocupadas
+        window.seleccionarBarberoYReservar = function(nombreBarbero) {
+            seleccionarBarbero(nombreBarbero);
+            window.location.href = "#reserva";
+        }
+
+        // Cargar horarios en botones interactivos estilo pastilla
         window.cargarHorariosDisponibles = async function() {
             const fecha = document.getElementById('fechaCita').value;
             const barbero = document.getElementById('barberoSelect').value;
-            const selectHora = document.getElementById('horaCita');
+            const contenedor = document.getElementById('contenedorHorarios');
+            horaElegida = "";
+            document.getElementById('horaSeleccionada').value = "";
 
             if (!fecha || !barbero) return;
 
-            selectHora.innerHTML = '<option value="">Cargando horarios...</option>';
+            contenedor.innerHTML = '<p class="col-span-full text-sm text-gold animate-pulse">Cargando disponibilidad en tiempo real...</p>';
 
             try {
                 const q = query(
@@ -299,52 +347,65 @@
                     horasOcupadas.push(doc.data().hora);
                 });
 
-                selectHora.innerHTML = '<option value="">Selecciona una hora disponible</option>';
+                contenedor.innerHTML = '';
                 let disponiblesCount = 0;
 
                 bloquesBase.forEach(bloque => {
-                    if (!horasOcupadas.includes(bloque)) {
-                        const option = document.createElement('option');
-                        option.value = bloque;
-                        option.textContent = bloque;
-                        selectHora.appendChild(option);
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.textContent = bloque;
+                    
+                    if (horasOcupadas.includes(bloque)) {
+                        // Horario ocupado / bloqueado por Firebase
+                        btn.className = 'bg-gray-800/40 text-gray-600 border border-gray-800 rounded-xl py-2.5 text-xs font-bold cursor-not-allowed line-through';
+                        btn.disabled = true;
+                    } else {
+                        // Horario disponible
                         disponiblesCount++;
+                        btn.className = 'bg-darkBg text-gray-300 border border-gray-700 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200 hover:scale-[1.02]';
+                        btn.onclick = () => {
+                            // Quitar selección previa de todos los botones
+                            document.querySelectorAll('#contenedorHorarios button').forEach(b => {
+                                if(!b.disabled) {
+                                    b.className = 'bg-darkBg text-gray-300 border border-gray-700 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200';
+                                }
+                            });
+                            // Marcar este como seleccionado
+                            btn.className = 'bg-gold text-darkBg border border-gold rounded-xl py-2.5 text-xs font-black shadow-md shadow-gold/25 scale-[1.03]';
+                            horaElegida = bloque;
+                            document.getElementById('horaSeleccionada').value = bloque;
+                        };
                     }
+                    contenedor.appendChild(btn);
                 });
 
                 if (disponiblesCount === 0) {
-                    selectHora.innerHTML = '<option value="">No hay horarios disponibles para este día</option>';
+                    contenedor.innerHTML = '<p class="col-span-full text-sm text-red-400 font-semibold">No hay horarios disponibles para este día. ¡Intenta con otra fecha!</p>';
                 }
 
             } catch (error) {
-                console.error("Error cargando horarios: ", error);
-                selectHora.innerHTML = '<option value="">Selecciona una hora</option>';
-                bloquesBase.forEach(bloque => {
-                    const option = document.createElement('option');
-                    option.value = bloque;
-                    option.textContent = bloque;
-                    selectHora.appendChild(option);
-                });
+                console.error("Error cargando horarios:", error);
+                contenedor.innerHTML = '<p class="col-span-full text-sm text-red-400">Error al conectar con la base de datos.</p>';
             }
         }
 
-        // Guardar cita y bloquear en Firebase
+        // Guardar cita y bloquear en Firebase con validación estricta
         window.realizarReserva = async function() {
             const nombre = document.getElementById('nombreCliente').value.trim();
             const telefono = document.getElementById('telefonoCliente').value.trim();
             const servicio = document.getElementById('servicioSelect').value;
             const barbero = document.getElementById('barberoSelect').value;
             const fecha = document.getElementById('fechaCita').value;
-            const hora = document.getElementById('horaCita').value;
+            const hora = horaElegida;
             const cejas = document.getElementById('cejasCheck').checked ? "Sí" : "No";
 
             if (!nombre || !telefono || !hora) {
-                alert("Por favor completa tu nombre, teléfono y selecciona una hora válida.");
+                alert("Por favor completa tu nombre, tu teléfono y selecciona un horario disponible.");
                 return;
             }
 
             try {
-                // Doble validación en tiempo real para evitar que dos elijan la misma hora
+                // Doble validación en tiempo real para evitar conflictos
                 const q = query(
                     collection(db, "citas"), 
                     where("barbero", "==", barbero), 
@@ -352,13 +413,14 @@
                     where("hora", "==", hora)
                 );
                 const querySnapshot = await getDocs(q);
+                
                 if (!querySnapshot.empty) {
-                    alert("¡Lo sentimos! Este horario acaba de ser reservado por otro cliente. Por favor elige otro.");
+                    alert("¡Lo sentimos! Este horario acaba de ser reservado por otro cliente. Elige otro bloque.");
                     cargarHorariosDisponibles();
                     return;
                 }
 
-                // Guardar en la base de datos Firestore
+                // Guardar en Firestore (Bloqueo automático)
                 await addDoc(collection(db, "citas"), {
                     nombre,
                     telefono,
@@ -372,6 +434,8 @@
 
             } catch (e) {
                 console.error("Error al guardar en base de datos: ", e);
+                alert("Hubo un error al guardar la cita. Inténtalo de nuevo.");
+                return;
             }
 
             // Asignar número de WhatsApp correspondiente
@@ -393,6 +457,7 @@
             alert("¡Cita reservada y horario bloqueado con éxito!");
             document.getElementById('formReserva').reset();
             document.getElementById('fechaCita').value = fecha;
+            horaElegida = "";
             cargarHorariosDisponibles();
         }
     </script>
