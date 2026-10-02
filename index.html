@@ -25,7 +25,7 @@
     </script>
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Estilos personalizados para el mapa y animaciones lentas -->
+    <!-- Estilos personalizados para el mapa y animaciones al hacer scroll -->
     <style>
         .map-responsive iframe{
             position: absolute;
@@ -35,13 +35,16 @@
             height: 100%;
             border: 0;
         }
-        /* Animaciones lentas y sumamente visibles */
-        @keyframes fadeInVerySlow {
-            from { opacity: 0; transform: translateY(60px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Estado inicial de los elementos antes de animarse */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .animate-fade-in {
-            animation: fadeInVerySlow 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        /* Estado cuando el elemento entra en la pantalla */
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -78,7 +81,7 @@
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30"></div>
         </div>
         
-        <div class="relative max-w-5xl mx-auto px-4 text-center z-10 pt-16 animate-fade-in">
+        <div class="relative max-w-5xl mx-auto px-4 text-center z-10 pt-16 reveal active">
             <h1 class="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight mb-8 text-white uppercase leading-tight drop-shadow-lg">
                 ¡No eres feo, simplemente <br class="hidden sm:inline">tienes un <span class="text-gold">mal corte!</span>
             </h1>
@@ -96,12 +99,12 @@
 
     <!-- Servicios -->
     <section id="servicios" class="py-24 max-w-6xl mx-auto px-4">
-        <div class="text-center mb-16 animate-fade-in">
+        <div class="text-center mb-16 reveal">
             <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTROS <span class="text-gold">SERVICIOS</span></h2>
             <p class="text-gray-400">Calidad garantizada en cada detalle</p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-fade-in">
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto reveal">
             <!-- Servicio 1 -->
             <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group transform hover:-translate-y-1">
                 <div>
@@ -146,7 +149,7 @@
 
     <!-- Galería de Estilos -->
     <section id="galeria" class="py-20 bg-zinc-950 border-y border-gray-900">
-        <div class="max-w-6xl mx-auto px-4 text-center animate-fade-in">
+        <div class="max-w-6xl mx-auto px-4 text-center reveal">
             <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTRO <span class="text-gold">TRABAJO</span></h2>
             <p class="text-gray-400 mb-12">Precisión y estilo en cada corte</p>
 
@@ -185,12 +188,12 @@
 
     <!-- Barberos -->
     <section id="barberos" class="py-24 max-w-6xl mx-auto px-4">
-        <div class="text-center mb-16 animate-fade-in">
+        <div class="text-center mb-16 reveal">
             <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTRO <span class="text-gold">EQUIPO</span></h2>
             <p class="text-gray-400">Profesionales listos para transformar tu imagen</p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto animate-fade-in">
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto reveal">
             <!-- Barbero 1: Juan Angarita -->
             <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition transform hover:-translate-y-1 duration-300">
                 <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
@@ -221,7 +224,7 @@
 
     <!-- Sección de Ubicación y Horarios -->
     <section id="ubicacion" class="py-24 bg-zinc-950 border-t border-gray-900 px-4">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center animate-fade-in">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center reveal">
             <!-- Detalles y Horarios -->
             <div class="space-y-8">
                 <div class="space-y-3">
@@ -266,7 +269,7 @@
 
     <!-- Sistema de Reservas con Aviso Visual -->
     <section id="reserva" class="py-24 max-w-3xl mx-auto px-4">
-        <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative animate-fade-in">
+        <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative reveal">
             <div class="text-center mb-10">
                 <h2 class="text-2xl md:text-4xl font-black text-white mb-2">RESERVA TU <span class="text-gold">CITA</span></h2>
                 <p class="text-gray-400 text-sm">Horario de atención: Lunes a Sábado • 11:00 AM - 8:00 PM (Bloques de 45 min)</p>
@@ -335,6 +338,28 @@
         <p>Atención de Lunes a Sábado • 11:00 AM a 8:00 PM</p>
         <p class="mt-4 text-xs text-gray-600">© 2026 BullDog Barber. Todos los derechos reservados.</p>
     </footer>
+
+    <!-- Script para activar las animaciones al hacer scroll -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const reveals = document.querySelectorAll(".reveal");
+
+            function revealOnScroll() {
+                reveals.forEach(element => {
+                    const windowHeight = window.innerHeight;
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150; // Margen para activar la animación
+
+                    if (elementTop < windowHeight - elementVisible) {
+                        element.classList.add("active");
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", revealOnScroll);
+            revealOnScroll(); // Ejecutar al cargar por si hay elementos visibles
+        });
+    </script>
 
     <!-- Firebase SDKs y Lógica de Reservas -->
     <script type="module">
