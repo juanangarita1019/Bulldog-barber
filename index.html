@@ -46,12 +46,10 @@
         </div>
     </header>
 
-    <!-- Hero Section con Fondo Mucho Más Claro y Luminoso -->
+    <!-- Hero Section -->
     <section class="relative h-screen min-h-[600px] flex items-center justify-center bg-black overflow-hidden">
-        <!-- Imagen de fondo real más visible y clara -->
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1920&q=80" alt="Corte de cabello profesional" class="w-full h-full object-cover opacity-75 scale-100">
-            <!-- Sombra muy suave solo para mantener legibilidad en el texto -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30"></div>
         </div>
         
@@ -79,7 +77,6 @@
         </div>
 
         <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <!-- Servicio 1 -->
             <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group">
                 <div>
                     <div class="flex justify-between items-start mb-4">
@@ -97,7 +94,6 @@
                 </a>
             </div>
 
-            <!-- Servicio 2 -->
             <div class="bg-cardBg border-2 border-gold/40 rounded-3xl p-8 hover:border-gold transition-all duration-300 flex flex-col justify-between shadow-2xl relative overflow-hidden group">
                 <div class="absolute top-0 right-0 bg-gold text-darkBg text-xs font-black px-4 py-1.5 rounded-bl-2xl uppercase tracking-wider">
                     Más Popular
@@ -121,7 +117,7 @@
         </div>
     </section>
 
-    <!-- Galería de Estilos / Trabajos -->
+    <!-- Galería -->
     <section id="galeria" class="py-20 bg-zinc-950 border-y border-gray-900">
         <div class="max-w-6xl mx-auto px-4 text-center">
             <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTRO <span class="text-gold">TRABAJO</span></h2>
@@ -168,10 +164,9 @@
         </div>
 
         <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-            <!-- Barbero 1: Juan Angarita -->
             <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition">
-                <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
-                    <img src="Angaritafoto.jpeg" alt="Juan Angarita" class="w-full h-full object-cover">
+                <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg flex items-center justify-center text-gold text-4xl font-bold">
+                    JA
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-1">Juan Angarita</h3>
                 <p class="text-gold text-sm font-semibold mb-4">Barbero Profesional</p>
@@ -181,10 +176,9 @@
                 </button>
             </div>
 
-            <!-- Barbero 2: Juan Beltran -->
             <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition">
-                <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
-                    <img src="belltranfoto.jpeg" alt="Juan Beltran" class="w-full h-full object-cover">
+                <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg flex items-center justify-center text-gold text-4xl font-bold">
+                    JB
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-1">Juan Beltran</h3>
                 <p class="text-gold text-sm font-semibold mb-4">Barbero Profesional</p>
@@ -196,7 +190,7 @@
         </div>
     </section>
 
-    <!-- Sistema de Reservas con Botones Interactivos -->
+    <!-- Sistema de Reservas -->
     <section id="reserva" class="py-24 max-w-3xl mx-auto px-4">
         <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative">
             <div class="text-center mb-10">
@@ -205,19 +199,16 @@
             </div>
 
             <form id="formReserva" class="space-y-6">
-                <!-- Nombre cliente -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Tu Nombre Completo</label>
                     <input type="text" id="nombreCliente" required placeholder="Ej: Carlos Pérez" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
                 </div>
 
-                <!-- Teléfono -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Tu Teléfono / Celular</label>
                     <input type="tel" id="telefonoCliente" required placeholder="Ej: 3001234567" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
                 </div>
 
-                <!-- Selección de Servicio -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona el Servicio</label>
                     <select id="servicioSelect" required class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
@@ -226,7 +217,6 @@
                     </select>
                 </div>
 
-                <!-- Selección de Barbero -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona tu Barbero</label>
                     <select id="barberoSelect" required onchange="cargarHorariosDisponibles()" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
@@ -235,29 +225,32 @@
                     </select>
                 </div>
 
-                <!-- Fecha -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Fecha de la Cita</label>
                     <input type="date" id="fechaCita" required onchange="cargarHorariosDisponibles()" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
                 </div>
 
-                <!-- Selector de Horas en Botones Pastilla -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona la Hora (Bloques de 45 min)</label>
                     <div id="contenedorHorarios" class="grid grid-cols-3 sm:grid-cols-4 gap-2.5 pt-1">
-                        <p class="col-span-full text-sm text-gray-500 italic">Selecciona fecha y barbero para ver horas disponibles...</p>
+                        <button type="button" onclick="elegirHora('11:00 AM', this)" class="bg-darkBg text-gray-300 border border-zinc-800 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200">11:00 AM</button>
+                        <button type="button" onclick="elegirHora('11:45 AM', this)" class="bg-darkBg text-gray-300 border border-zinc-800 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200">11:45 AM</button>
+                        <button type="button" onclick="elegirHora('12:30 PM', this)" class="bg-darkBg text-gray-300 border border-zinc-800 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200">12:30 PM</button>
+                        <button type="button" onclick="elegirHora('01:15 PM', this)" class="bg-darkBg text-gray-300 border border-zinc-800 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200">01:15 PM</button>
+                        <button type="button" onclick="elegirHora('02:00 PM', this)" class="bg-darkBg text-gray-300 border border-zinc-800 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200">02:00 PM</button>
+                        <button type="button" onclick="elegirHora('02:45 PM', this)" class="bg-darkBg text-gray-300 border border-zinc-800 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200">02:45 PM</button>
+                        <button type="button" onclick="elegirHora('03:30 PM', this)" class="bg-darkBg text-gray-300 border border-zinc-800 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200">03:30 PM</button>
+                        <button type="button" onclick="elegirHora('04:15 PM', this)" class="bg-darkBg text-gray-300 border border-zinc-800 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200">04:15 PM</button>
                     </div>
                     <input type="hidden" id="horaSeleccionada" required>
                 </div>
 
-                <!-- Checkbox Cejas Opcionales -->
                 <div class="flex items-center gap-3 pt-2">
                     <input type="checkbox" id="cejasCheck" class="w-5 h-5 accent-gold rounded bg-darkBg border-gray-800">
                     <label for="cejasCheck" class="text-sm text-gray-300 cursor-pointer">Incluir diseño de cejas (Opcional - Sin costo adicional)</label>
                 </div>
 
-                <!-- Botón Enviar a WhatsApp y Guardar -->
-                <button type="button" onclick="realizarReserva()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-emerald-950/50 flex items-center justify-center gap-2 text-lg transform hover:-translate-y-0.5">
+                <button type="button" onclick="probarReserva()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-emerald-950/50 flex items-center justify-center gap-2 text-lg transform hover:-translate-y-0.5">
                     <i class="fa-brands fa-whatsapp text-2xl"></i> Reservar, Bloquear Horario y Enviar
                 </button>
             </form>
@@ -271,39 +264,8 @@
         <p class="mt-4 text-xs text-gray-600">© 2026 BullDog Barber. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Firebase SDKs y Lógica -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyAytWqDohqWPu5tQA4JpA7A-ZvADfbKLd8",
-            authDomain: "bulldog-barber.firebaseapp.com",
-            projectId: "bulldog-barber",
-            storageBucket: "bulldog-barber.firebasestorage.app",
-            messagingSenderId: "761421540806",
-            appId: "1:761421540806:web:3d9ce62dad2c9a9b2fd6c7",
-            measurementId: "G-0EN1G9JPJ9"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        const bloquesBase = [
-            "11:00 AM", "11:45 AM", "12:30 PM", "01:15 PM", 
-            "02:00 PM", "02:45 PM", "03:30 PM", "04:15 PM", 
-            "05:00 PM", "05:45 PM", "06:30 PM", "07:15 PM"
-        ];
-
+    <script>
         let horaElegida = "";
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('fechaCita').min = today;
-            document.getElementById('fechaCita').value = today;
-            cargarHorariosDisponibles();
-        });
-
         window.seleccionarServicio = function(nombreServicio) {
             const select = document.getElementById('servicioSelect');
             for(let i = 0; i < select.options.length; i++) {
@@ -313,7 +275,6 @@
                 }
             }
         }
-
         window.seleccionarBarbero = function(nombreBarbero) {
             const select = document.getElementById('barberoSelect');
             for(let i = 0; i < select.options.length; i++) {
@@ -322,141 +283,31 @@
                     break;
                 }
             }
-            cargarHorariosDisponibles();
         }
-
         window.seleccionarBarberoYReservar = function(nombreBarbero) {
             seleccionarBarbero(nombreBarbero);
             window.location.href = "#reserva";
         }
-
-        window.cargarHorariosDisponibles = async function() {
-            const fecha = document.getElementById('fechaCita').value;
-            const barbero = document.getElementById('barberoSelect').value;
-            const contenedor = document.getElementById('contenedorHorarios');
-            horaElegida = "";
-            document.getElementById('horaSeleccionada').value = "";
-
-            if (!fecha || !barbero) return;
-
-            contenedor.innerHTML = '<p class="col-span-full text-sm text-gold animate-pulse">Cargando disponibilidad en tiempo real...</p>';
-
-            try {
-                const q = query(
-                    collection(db, "citas"), 
-                    where("barbero", "==", barbero), 
-                    where("fecha", "==", fecha)
-                );
-                const querySnapshot = await getDocs(q);
-                const horasOcupadas = [];
-                querySnapshot.forEach((doc) => {
-                    horasOcupadas.push(doc.data().hora);
-                });
-
-                contenedor.innerHTML = '';
-                let disponiblesCount = 0;
-
-                bloquesBase.forEach(bloque => {
-                    const btn = document.createElement('button');
-                    btn.type = 'button';
-                    btn.textContent = bloque;
-                    
-                    if (horasOcupadas.includes(bloque)) {
-                        btn.className = 'bg-zinc-900/50 text-zinc-600 border border-zinc-800 rounded-xl py-2.5 text-xs font-bold cursor-not-allowed line-through';
-                        btn.disabled = true;
-                    } else {
-                        disponiblesCount++;
-                        btn.className = 'bg-darkBg text-gray-300 border border-zinc-800 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200 hover:scale-[1.02]';
-                        btn.onclick = () => {
-                            document.querySelectorAll('#contenedorHorarios button').forEach(b => {
-                                if(!b.disabled) {
-                                    b.className = 'bg-darkBg text-gray-300 border border-zinc-800 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200';
-                                }
-                            });
-                            btn.className = 'bg-gold text-darkBg border border-gold rounded-xl py-2.5 text-xs font-black shadow-md shadow-gold/25 scale-[1.03]';
-                            horaElegida = bloque;
-                            document.getElementById('horaSeleccionada').value = bloque;
-                        };
-                    }
-                    contenedor.appendChild(btn);
-                });
-
-                if (disponiblesCount === 0) {
-                    contenedor.innerHTML = '<p class="col-span-full text-sm text-red-400 font-semibold">No hay horarios disponibles para este día. ¡Intenta con otra fecha!</p>';
-                }
-
-            } catch (error) {
-                console.error("Error cargando horarios:", error);
-                contenedor.innerHTML = '<p class="col-span-full text-sm text-red-400">Error al conectar con la base de datos.</p>';
-            }
+        window.elegirHora = function(hora, btn) {
+            document.querySelectorAll('#contenedorHorarios button').forEach(b => {
+                b.className = 'bg-darkBg text-gray-300 border border-zinc-800 hover:border-gold rounded-xl py-2.5 text-xs font-bold transition-all duration-200';
+            });
+            btn.className = 'bg-gold text-darkBg border border-gold rounded-xl py-2.5 text-xs font-black shadow-md shadow-gold/25 scale-[1.03]';
+            horaElegida = hora;
+            document.getElementById('horaSeleccionada').value = hora;
         }
-
-        window.realizarReserva = async function() {
+        window.probarReserva = function() {
             const nombre = document.getElementById('nombreCliente').value.trim();
             const telefono = document.getElementById('telefonoCliente').value.trim();
             const servicio = document.getElementById('servicioSelect').value;
             const barbero = document.getElementById('barberoSelect').value;
-            const fecha = document.getElementById('fechaCita').value;
             const hora = horaElegida;
-            const cejas = document.getElementById('cejasCheck').checked ? "Sí" : "No";
 
             if (!nombre || !telefono || !hora) {
-                alert("Por favor completa tu nombre, tu teléfono y selecciona un horario disponible.");
+                alert("Por favor completa tu nombre, tu teléfono y selecciona una hora en los botones dorados.");
                 return;
             }
-
-            try {
-                const q = query(
-                    collection(db, "citas"), 
-                    where("barbero", "==", barbero), 
-                    where("fecha", "==", fecha),
-                    where("hora", "==", hora)
-                );
-                const querySnapshot = await getDocs(q);
-                
-                if (!querySnapshot.empty) {
-                    alert("¡Lo sentimos! Este horario acaba de ser reservado por otro cliente. Elige otro bloque.");
-                    cargarHorariosDisponibles();
-                    return;
-                }
-
-                await addDoc(collection(db, "citas"), {
-                    nombre,
-                    telefono,
-                    servicio,
-                    barbero,
-                    fecha,
-                    hora,
-                    cejas,
-                    timestamp: new Date()
-                });
-
-            } catch (e) {
-                console.error("Error al guardar en base de datos: ", e);
-                alert("Hubo un error al guardar la cita. Inténtalo de nuevo.");
-                return;
-            }
-
-            let numeroWhatsApp = (barbero === "Juan Angarita") ? "573150536300" : "573170479271";
-
-            const mensaje = `*NUEVA RESERVA - BULLDOG BARBER*\n\n` +
-                            `- Cliente: ${nombre}\n` +
-                            `- Telefono: ${telefono}\n` +
-                            `- Servicio: ${servicio}\n` +
-                            `- Barbero Asignado: ${barbero}\n` +
-                            `- Fecha: ${fecha}\n` +
-                            `- Hora: ${hora}\n` +
-                            `- Cejas opcionales: ${cejas}\n\n` +
-                            `Quedo atento a la confirmación de la cita.`;
-
-            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-            window.open(urlWhatsApp, '_blank');
-
-            alert("¡Cita reservada y horario bloqueado con éxito!");
-            document.getElementById('formReserva').reset();
-            document.getElementById('fechaCita').value = fecha;
-            horaElegida = "";
-            cargarHorariosDisponibles();
+            alert(`¡Vista previa exitosa!\n\nCliente: ${nombre}\nBarbero: ${barbero}\nServicio: ${servicio}\nHora: ${hora}\n\nEn tu GitHub con Firebase, esto se guarda automáticamente en la base de datos y abre tu WhatsApp.`);
         }
     </script>
 </body>
