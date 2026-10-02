@@ -27,7 +27,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Estilos personalizados para el mapa -->
     <style>
-        /* Contenedor responsivo para mantener la forma del mapa */
         .map-container {
             position: relative;
             width: 100%;
@@ -37,13 +36,11 @@
             border: 4px solid #1f2937; /* border-gray-800 */
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
         }
-        /* Forzar relación de aspecto 16:9 para pantallas grandes */
         @media (min-width: 768px) {
             .map-container {
                 aspect-ratio: 16 / 9;
             }
         }
-        /* Asegurar que el iframe cubra el contenedor */
         .map-iframe {
             position: absolute;
             top: 0;
@@ -61,7 +58,6 @@
         <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
             <a href="#" class="flex items-center gap-3 group">
                 <div class="w-11 h-11 rounded-full overflow-hidden border-2 border-gold ring-2 ring-gold/50 shadow-lg shadow-gold/30 bg-darkBg transform group-hover:scale-105 transition duration-300">
-                    <!-- Asegúrate de que el archivo logo_barberia.png esté en la misma carpeta -->
                     <img src="logo_barberia.png" alt="BullDog Barber Logo" class="w-full h-full object-cover filter contrast-110 brightness-105">
                 </div>
                 <span class="text-lg md:text-xl font-black tracking-widest text-white group-hover:text-gold transition">
@@ -204,7 +200,6 @@
             <!-- Barbero 1: Juan Angarita -->
             <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition">
                 <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
-                    <!-- Asegúrate de que la foto esté en la misma carpeta -->
                     <img src="Angaritafoto.jpeg" alt="Juan Angarita" class="w-full h-full object-cover">
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-1">Juan Angarita</h3>
@@ -218,7 +213,6 @@
             <!-- Barbero 2: Juan Beltran -->
             <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition">
                 <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
-                    <!-- Asegúrate de que la foto esté en la misma carpeta -->
                     <img src="belltranfoto.jpeg" alt="Juan Beltran" class="w-full h-full object-cover">
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-1">Juan Beltran</h3>
@@ -231,10 +225,10 @@
         </div>
     </section>
 
-    <!-- Sección de Ubicación y Horarios (CORREGIDA) -->
+    <!-- Sección de Ubicación y Horarios (MAPA EXACTO ACTUALIZADO) -->
     <section id="ubicacion" class="py-24 bg-zinc-950 border-t border-gray-900 px-4">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <!-- Detalles y Horarios (Columna Izquierda) -->
+            <!-- Detalles y Horarios -->
             <div class="space-y-8">
                 <div class="space-y-3">
                     <h2 class="text-3xl md:text-4xl font-black text-white">UBICACIÓN Y <span class="text-gold">HORARIOS</span></h2>
@@ -263,16 +257,16 @@
                         </div>
                     </div>
 
-                    <!-- Botón que abre Google Maps en el celular -->
-                    <a href="https://maps.app.goo.gl/6Rz25WJzS3XjZ6Wb9" target="_blank" class="block w-full text-center bg-gold text-darkBg hover:bg-gold-light font-bold py-4 rounded-xl transition shadow-md shadow-gold/20 mt-6">
+                    <!-- Botón conectado directamente a tu enlace de Google Maps -->
+                    <a href="https://maps.app.goo.gl/zhjr5UtrYGmcrdpYA" target="_blank" class="block w-full text-center bg-gold text-darkBg hover:bg-gold-light font-bold py-4 rounded-xl transition shadow-md shadow-gold/20 mt-6">
                         <i class="fa-solid fa-map-marked-alt mr-2"></i> 📍 Abrir en Google Maps
                     </a>
                 </div>
             </div>
 
-            <!-- Mapa de Google Incrustado (CORREGIDO CON MARCADOR EXACTO) -->
+            <!-- Mapa Incrustado con el enlace correcto -->
             <div class="w-full h-[300px] md:h-full map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d995.718976832197!2d-76.55364153037788!3d3.447640848924532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a7612bfb29a7%3A0xa875530f5b8b1b17!2sCarrera%2013%20%231-04%20Oeste%2C%20Comuna%202%2C%20Cali%2C%20Valle%20del%20Cauca%2C%20Colombia!5e0!3m2!1ses-419!2sco!4v1728053116873!5m2!1ses-419!2sco" class="map-iframe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.8804975005877!2d-76.5435602!3d3.4475518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a70055555555%3A0x0!2sCarrera+13+%231-04+Oeste%2C+Cali%2C+Valle+del+Cauca!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco" class="map-iframe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
@@ -282,7 +276,7 @@
         <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative">
             <div class="text-center mb-10">
                 <h2 class="text-2xl md:text-4xl font-black text-white mb-2">RESERVA TU <span class="text-gold">CITA</span></h2>
-                <p class="text-gray-400 text-sm">Horario de atención: 11:00 AM - 8:00 PM (Bloques de 45 min)</p>
+                <p class="text-gray-400 text-sm">Horario de atención: Lunes a Sábado • 11:00 AM - 8:00 PM (Bloques de 45 min)</p>
             </div>
 
             <form id="formReserva" class="space-y-6">
@@ -349,7 +343,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // CONFIGURA TUS CREDENCIALES DE FIREBASE AQUÍ
         const firebaseConfig = {
             apiKey: "AIzaSyAytWqDohqWPu5tQA4JpA7A-ZvADfbKLd8",
             authDomain: "bulldog-barber.firebaseapp.com",
@@ -464,4 +457,70 @@
         window.realizarReserva = async function() {
             const nombre = document.getElementById('nombreCliente').value.trim();
             const telefono = document.getElementById('telefonoCliente').value.trim();
-            const servicio
+            const servicio = document.getElementById('servicioSelect').value;
+            const barbero = document.getElementById('barberoSelect').value;
+            const fecha = document.getElementById('fechaCita').value;
+            const hora = horaElegida;
+            const cejas = document.getElementById('cejasCheck').checked ? "Sí" : "No";
+
+            if (!nombre || !telefono || !hora) {
+                alert("Por favor completa tu nombre, tu teléfono y selecciona un horario disponible.");
+                return;
+            }
+
+            try {
+                const q = query(
+                    collection(db, "citas"), 
+                    where("barbero", "==", barbero), 
+                    where("fecha", "==", fecha),
+                    where("hora", "==", hora)
+                );
+                const querySnapshot = await getDocs(q);
+                
+                if (!querySnapshot.empty) {
+                    alert("¡Lo sentimos! Este horario acaba de ser reservado por otro cliente. Elige otro bloque.");
+                    cargarHorariosDisponibles();
+                    return;
+                }
+
+                await addDoc(collection(db, "citas"), {
+                    nombre,
+                    telefono,
+                    servicio,
+                    barbero,
+                    fecha,
+                    hora,
+                    cejas,
+                    timestamp: new Date()
+                });
+
+            } catch (e) {
+                console.error("Error al guardar en base de datos: ", e);
+                alert("Hubo un error al guardar la cita. Inténtalo de nuevo.");
+                return;
+            }
+
+            let numeroWhatsApp = (barbero === "Juan Angarita") ? "573150536300" : "573170479271";
+
+            const mensaje = `*NUEVA RESERVA - BULLDOG BARBER*\n\n` +
+                            `- Cliente: ${nombre}\n` +
+                            `- Teléfono: ${telefono}\n` +
+                            `- Servicio: ${servicio}\n` +
+                            `- Barbero Asignado: ${barbero}\n` +
+                            `- Fecha: ${fecha}\n` +
+                            `- Hora: ${hora}\n` +
+                            `- Cejas opcionales: ${cejas}\n\n` +
+                            `Quedo atento a la confirmación de la cita.`;
+
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+            window.open(urlWhatsApp, '_blank');
+
+            alert("¡Cita reservada y horario bloqueado con éxito!");
+            document.getElementById('formReserva').reset();
+            document.getElementById('fechaCita').value = fecha;
+            horaElegida = "";
+            cargarHorariosDisponibles();
+        }
+    </script>
+</body>
+</html>
