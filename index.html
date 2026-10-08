@@ -267,7 +267,7 @@
         </div>
     </section>
 
-    <!-- Sistema de Reservas con Botón de WhatsApp y Google Calendar -->
+    <!-- Sistema de Reservas con Botones de Acción Directos -->
     <section id="reserva" class="py-24 max-w-3xl mx-auto px-4">
         <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative reveal-item">
             <div class="text-center mb-10">
@@ -276,7 +276,7 @@
                 <!-- Aviso visual destacado -->
                 <div class="mt-4 bg-gold/10 border border-gold/30 rounded-2xl p-4 text-xs text-gold flex items-center justify-center gap-2">
                     <i class="fa-solid fa-circle-info text-base"></i>
-                    <span>Al reservar, tu horario se valida en el sistema y aparecerán los botones para WhatsApp y Google Calendar.</span>
+                    <span>Al reservar, tu horario se valida en el sistema y aparecerán los botones directos para WhatsApp y Google Calendar.</span>
                 </div>
             </div>
 
@@ -325,12 +325,12 @@
                     <label for="cejasCheck" class="text-sm text-gray-300 cursor-pointer">Incluir diseño de cejas (Opcional - Sin costo adicional)</label>
                 </div>
 
-                <!-- Botón principal que valida en Firebase -->
+                <!-- Botón principal que valida en Firebase y genera los enlaces directos estáticos -->
                 <button type="button" id="btnReservar" onclick="realizarReserva()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-emerald-950/50 flex items-center justify-center gap-2 text-lg transform hover:-translate-y-0.5">
                     <i class="fa-solid fa-check-circle text-2xl"></i> Validar y Guardar Cita
                 </button>
 
-                <!-- Contenedor dinámico donde aparecen los botones de WhatsApp y Google Calendar -->
+                <!-- Contenedor dinámico con enlaces nativos 100% seguros para celulares -->
                 <div id="contenedorBotonesAccion" class="hidden space-y-3 pt-2"></div>
             </form>
         </div>
@@ -502,7 +502,7 @@
             btnReservar.innerHTML = '<i class="fa-solid fa-spinner animate-spin text-xl"></i> Verificando disponibilidad...';
 
             try {
-                // 1. Validamos estrictamente en Firebase que la hora siga libre
+                // 1. Validamos en Firebase
                 const q = query(
                     collection(db, "citas"), 
                     where("barbero", "==", barbero), 
@@ -519,7 +519,7 @@
                     return;
                 }
 
-                // 2. Guardamos la cita con éxito en Firestore
+                // 2. Guardamos la cita en Firestore
                 await addDoc(collection(db, "citas"), {
                     nombre,
                     telefono,
@@ -543,9 +543,10 @@
                                 `- Cejas opcionales: ${cejas}\n\n` +
                                 `Quedo atento a la confirmación de la cita.`;
 
+                // Usamos la API oficial universal para celulares y PC
                 const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensaje)}`;
 
-                // 3. Generamos el enlace limpio para Google Calendar
+                // 3. Generamos Google Calendar
                 let fechaLimpia = fecha.replace(/-/g, '');
                 let [tiempo, periodo] = hora.split(" ");
                 let [h, m] = tiempo.split(":");
@@ -556,7 +557,6 @@
                 
                 let fechaInicio = `${fechaLimpia}T${hStr}${m}00`;
                 
-                // Sumamos 45 min para la hora final
                 let fObj = new Date(`${fecha}T${hStr}:${m}:00`);
                 fObj.setMinutes(fObj.getMinutes() + 45);
                 let fFinH = String(fObj.getHours()).padStart(2, '0');
@@ -569,13 +569,13 @@
 
                 const urlCalendar = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${tituloCal}&dates=${fechaInicio}/${fechaFin}&details=${descCal}&location=${ubicacionCal}`;
 
-                // 4. Mostramos los botones interactivos sin bloqueadores en pantalla
+                // 4. Mostramos los botones con enlaces HTML puros (imposibles de bloquear por celulares)
                 const contenedorAcciones = document.getElementById('contenedorBotonesAccion');
                 contenedorAcciones.innerHTML = `
-                    <a href="${urlWhatsApp}" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 rounded-xl transition shadow-xl shadow-emerald-950/50 flex items-center justify-center gap-3 text-lg animate-bounce">
+                    <a href="${urlWhatsApp}" target="_blank" rel="noopener noreferrer" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 rounded-xl transition shadow-xl shadow-emerald-950/50 flex items-center justify-center gap-3 text-lg animate-bounce">
                         <i class="fa-brands fa-whatsapp text-3xl"></i> 1. Toca aquí para enviar a WhatsApp
                     </a>
-                    <a href="${urlCalendar}" target="_blank" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-base">
+                    <a href="${urlCalendar}" target="_blank" rel="noopener noreferrer" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-base">
                         <i class="fa-solid fa-calendar-plus text-xl"></i> 2. Agregar cita a Google Calendar
                     </a>
                 `;
@@ -583,7 +583,6 @@
 
                 btnReservar.innerHTML = '<i class="fa-solid fa-circle-check text-xl text-emerald-400"></i> ¡Cita Registrada con Éxito!';
                 
-                // Recargamos los horarios para bloquear el que acaba de ser tomado
                 cargarHorariosDisponibles();
 
             } catch (e) {
