@@ -267,7 +267,7 @@
         </div>
     </section>
 
-    <!-- Sistema de Reservas con Botón Estático Seguro -->
+    <!-- Sistema de Reservas -->
     <section id="reserva" class="py-24 max-w-3xl mx-auto px-4">
         <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative reveal-item">
             <div class="text-center mb-10">
@@ -330,11 +330,11 @@
                     <i class="fa-solid fa-check-circle text-2xl"></i> Validar y Guardar Cita
                 </button>
 
-                <!-- CONTENEDOR ESTÁTICO DE ACCIÓN (Los enlaces ya existen en el HTML nativo, por lo que ningún celular los bloqueará) -->
+                <!-- CONTENEDOR DE ACCIÓN CON BOTÓN DIRECTO DE JS -->
                 <div id="contenedorBotonesAccion" class="hidden space-y-3 pt-2">
-                    <a id="linkWhatsApp" href="#" target="_blank" rel="noopener noreferrer" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 rounded-xl transition shadow-xl shadow-emerald-950/50 flex items-center justify-center gap-3 text-lg animate-bounce">
+                    <button type="button" onclick="abrirWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 rounded-xl transition shadow-xl shadow-emerald-950/50 flex items-center justify-center gap-3 text-lg animate-bounce cursor-pointer">
                         <i class="fa-brands fa-whatsapp text-3xl"></i> 1. Toca aquí para enviar a WhatsApp
-                    </a>
+                    </button>
                     <a id="linkCalendar" href="#" target="_blank" rel="noopener noreferrer" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-base">
                         <i class="fa-solid fa-calendar-plus text-xl"></i> 2. Agregar cita a Google Calendar
                     </a>
@@ -349,6 +349,19 @@
         <p>Atención de Lunes a Sábado • 11:00 AM a 8:00 PM</p>
         <p class="mt-4 text-xs text-gray-600">© 2026 BullDog Barber. Todos los derechos reservados.</p>
     </footer>
+
+    <!-- Script Global para abrir WhatsApp -->
+    <script>
+        let urlWhatsAppGlobal = "";
+
+        function abrirWhatsApp() {
+            if (urlWhatsAppGlobal) {
+                window.open(urlWhatsAppGlobal, '_blank');
+            } else {
+                alert("Primero debes completar y validar tu reserva.");
+            }
+        }
+    </script>
 
     <!-- Script de Animaciones al Hacer Scroll -->
     <script>
@@ -550,7 +563,8 @@
                                 `- Cejas opcionales: ${cejas}\n\n` +
                                 `Quedo atento a la confirmación de la cita.`;
 
-                const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensaje)}`;
+                // Asignamos a la variable global para el botón de WhatsApp
+                window.urlWhatsAppGlobal = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
 
                 // 3. Generamos Google Calendar
                 let fechaLimpia = fecha.replace(/-/g, '');
@@ -570,13 +584,12 @@
                 let fechaFin = `${fechaLimpia}T${fFinH}${fFinM}00`;
 
                 const tituloCal = encodeURIComponent(`Cita ${servicio} - BullDog Barber`);
-                const descCal = encodeURIComponent(`Barbero: ${barbero}\\nCliente: ${nombre}\\nTel: ${telefono}`);
+                const descCal = encodeURIComponent(`Barbero: ${barbero}\nCliente: ${nombre}\nTel: ${telefono}`);
                 const ubicacionCal = encodeURIComponent("Carrera 13#1-04 oeste, Cali, Colombia");
 
                 const urlCalendar = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${tituloCal}&dates=${fechaInicio}/${fechaFin}&details=${descCal}&location=${ubicacionCal}`;
 
-                // 4. Asignamos los enlaces a los elementos estáticos (¡Cero bloqueos móviles!)
-                document.getElementById('linkWhatsApp').href = urlWhatsApp;
+                // 4. Mostramos los botones de acción
                 document.getElementById('linkCalendar').href = urlCalendar;
                 document.getElementById('contenedorBotonesAccion').classList.remove('hidden');
 
