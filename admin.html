@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración | BullDog Barber</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            DEFAULT: '#D4AF37',
+                            dark: '#AA8C2C',
+                            light: '#F3E5AB'
+                        },
+                        darkBg: '#0A0A0A',
+                        cardBg: '#141414'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-darkBg text-gray-100 font-sans antialiased selection:bg-gold selection:text-darkBg min-h-screen flex flex-col justify-between">
+
+    <!-- Header / Navbar Admin -->
+    <header class="bg-black/90 backdrop-blur-md border-b border-white/15 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-gold bg-darkBg">
+                    <img src="logo_barberia.png" alt="Logo" class="w-full h-full object-cover">
+                </div>
+                <span class="text-base md:text-lg font-black tracking-widest text-white group-hover:text-gold transition">
+                    BULLDOG BARBER <span class="text-gold text-xs block md:inline font-normal">PANEL ADMIN</span>
+                </span>
+            </a>
+            <a href="index.html" class="bg-zinc-900 hover:bg-zinc-800 text-gray-300 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition border border-gray-800">
+                <i class="fa-solid fa-arrow-left mr-1"></i> Ir a la Web
+            </a>
+        </div>
+    </header>
+
+    <!-- Contenido Principal del Panel -->
+    <main class="max-w-5xl mx-auto px-4 py-12 w-full flex-grow">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-black text-white mb-2">AGENDA DE <span class="text-gold">CITAS</span></h1>
+            <p class="text-gray-400 text-sm">Consulta y administra los turnos reservados en tiempo real</p>
+        </div>
+
+        <!-- Filtros de Búsqueda -->
+        <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 mb-8 shadow-xl grid md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Seleccionar Barbero</label>
+                <select id="adminBarbero" onchange="cargarCitasAdmin()" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition font-medium">
+                    <option value="Juan Angarita">Juan Angarita</option>
+                    <option value="Juan Beltran">Juan Beltran</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Fecha</label>
+                <input type="date" id="adminFecha" onchange="cargarCitasAdmin()" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition font-medium">
+            </div>
+        </div>
+
+        <!-- Tabla / Lista de Horarios del Día -->
+        <div class="bg-cardBg border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+            <div class="px-6 py-4 bg-zinc-900/80 border-b border-gray-800 flex justify-between items-center">
+                <h3 class="font-bold text-white text-sm md:text-base"><i class="fa-solid fa-calendar-day text-gold mr-2"></i> Bloques de Atención (45 min)</h3>
+                <span id="contadorCitas" class="text-xs font-semibold bg-gold/10 text-gold px-3 py-1 rounded-full border border-gold/30">Cargando...</span>
+            </div>
+
+            <div id="listaAgenda" class="divide-y divide-gray-900">
+                <!-- Los bloques se cargarán aquí automáticamente -->
+                <div class="p-8 text-center text-gray-500 text-sm italic">Selecciona barbero y fecha para ver la agenda...</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-900 py-8 text-center text-gray-500 text-xs">
+        <p class="text-white font-bold mb-1 tracking-wider">BULLDOG BARBER - SISTEMA INTERNO</p>
+        <p>© 2026 Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Lógica de Firebase para el Admin -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAytWqDohqWPu5tQA4JpA7A-ZvADfbKLd8",
+            authDomain: "bulldog-barber.firebaseapp.com",
+            projectId: "bulldog-barber",
+            storageBucket: "bulldog-barber.firebasestorage.app",
+            messagingSenderId: "761421540806",
+            appId: "1:761421540806:web:3d9ce62dad2c9a9b2fd6c7",
+            measurementId: "G-0EN1G9JPJ9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const bloquesBase = [
+            "11:00 AM", "11:45 AM", "12:30 PM", "01:15 PM", 
+            "02:00 PM", "02:45 PM", "03:30 PM", "04:15 PM", 
+            "05:00 PM", "05:45 PM", "06:30 PM", "07:15 PM"
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('adminFecha').value = today;
+            cargarCitasAdmin();
+        });
+
+        window.cargarCitasAdmin = async function() {
+            const fecha = document.getElementById('adminFecha').value;
+            const barbero = document.getElementById('adminBarbero').value;
+            const contenedor = document.getElementById('listaAgenda');
+            const contador = document.getElementById('contadorCitas');
+
+            if (!fecha || !barbero) return;
+
+            contenedor.innerHTML = '<div class="p-8 text-center text-gold text-sm animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Sincronizando agenda con Firebase...</div>';
+
+            try {
+                const q = query(collection(db, "citas"), where("barbero", "==", barbero), where("fecha", "==", fecha));
+                const querySnapshot = await getDocs(q);
+                
+                const citasMap = {};
+                querySnapshot.forEach((documento) => {
+                    citasMap[documento.data().hora] = {
+                        id: documento.id,
+                        ...documento.data()
+                    };
+                });
+
+                contenedor.innerHTML = '';
+                let totalReservadas = 0;
+
+                bloquesBase.forEach(bloque => {
+                    const cita = citasMap[bloque];
+                    const fila = document.createElement('div');
+                    fila.className = "p-4 md:px-6 md:py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 hover:bg-zinc-900/40 transition";
+
+                    if (cita) {
+                        totalReservadas++;
+                        fila.innerHTML = `
+                            <div class="flex items-center gap-4">
+                                <span class="bg-gold/10 text-gold font-black px-3 py-1.5 rounded-xl text-xs border border-gold/30 shrink-0">${bloque}</span>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm md:text-base">${cita.nombre}</h4>
+                                    <p class="text-xs text-gray-400">
+                                        <i class="fa-solid fa-scissors text-gold mr-1"></i> ${cita.servicio} 
+                                        ${cita.cejas === 'Sí' ? '• <span class="text-emerald-400">Con Cejas</span>' : ''}
+                                    </p>
+                                    <p class="text-xs text-gray-400 mt-0.5">
+                                        <i class="fa-solid fa-phone text-gold mr-1"></i> <a href="tel:${cita.telefono}" class="underline hover:text-white">${cita.telefono}</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <button onclick="eliminarCita('${cita.id}')" class="bg-red-500/10 hover:bg-red-600 text-red-400 hover:text-white px-3.5 py-2 rounded-xl text-xs font-bold transition border border-red-500/30 flex items-center gap-1.5 shrink-0">
+                                <i class="fa-solid fa-trash-can"></i> Liberar Horario
+                            </button>
+                        `;
+                    } else {
+                        fila.innerHTML = `
+                            <div class="flex items-center gap-4 opacity-50">
+                                <span class="bg-zinc-800 text-zinc-400 font-bold px-3 py-1.5 rounded-xl text-xs shrink-0">${bloque}</span>
+                                <span class="text-xs text-zinc-500 italic">-- Horario Disponible --</span>
+                            </div>
+                        `;
+                    }
+                    contenedor.appendChild(fila);
+                });
+
+                contador.textContent = `${totalReservadas} de ${bloquesBase.length} turnos ocupados`;
+
+            } catch (error) {
+                console.error("Error al cargar citas de admin:", error);
+                contenedor.innerHTML = '<div class="p-8 text-center text-red-400 text-sm">Error al conectar con la base de datos.</div>';
+            }
+        }
+
+        window.eliminarCita = async function(idCita) {
+            if (confirm("¿Estás seguro de liberar este horario? Esta acción eliminará la reserva de la base de datos.")) {
+                try {
+                    await deleteDoc(doc(db, "citas", idCita));
+                    alert("¡Horario liberado con éxito!");
+                    cargarCitasAdmin();
+                } catch (error) {
+                    console.error("Error al eliminar:", error);
+                    alert("Hubo un error al liberar el horario.");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
