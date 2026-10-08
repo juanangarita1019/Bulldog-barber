@@ -166,7 +166,7 @@
                         <i class="fa-solid fa-spray-can-sparkles text-gold text-xl"></i>
                     </div>
                     <h4 class="font-bold text-white mb-1">Barba Clásica</h4>
-                    <p class="text-xs text-gray-400">Afeitado y perfilado</p>
+                    <p class="text-xs text-gray-400">Toalla caliente y perfilado</p>
                 </div>
                 <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300 reveal-item">
                     <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
@@ -267,7 +267,7 @@
         </div>
     </section>
 
-    <!-- Sistema de Reservas con Aviso Visual -->
+    <!-- Sistema de Reservas con Botón de WhatsApp y Google Calendar -->
     <section id="reserva" class="py-24 max-w-3xl mx-auto px-4">
         <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative reveal-item">
             <div class="text-center mb-10">
@@ -276,7 +276,7 @@
                 <!-- Aviso visual destacado -->
                 <div class="mt-4 bg-gold/10 border border-gold/30 rounded-2xl p-4 text-xs text-gold flex items-center justify-center gap-2">
                     <i class="fa-solid fa-circle-info text-base"></i>
-                    <span>Al reservar, tu horario se registrará en el sistema y se abrirá WhatsApp para confirmar la cita.</span>
+                    <span>Al reservar, tu horario se valida en el sistema y aparecerán los botones para WhatsApp y Google Calendar.</span>
                 </div>
             </div>
 
@@ -325,9 +325,13 @@
                     <label for="cejasCheck" class="text-sm text-gray-300 cursor-pointer">Incluir diseño de cejas (Opcional - Sin costo adicional)</label>
                 </div>
 
-                <button type="button" onclick="realizarReserva()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-emerald-950/50 flex items-center justify-center gap-2 text-lg transform hover:-translate-y-0.5">
-                    <i class="fa-brands fa-whatsapp text-2xl"></i> Reservar y Enviar por WhatsApp
+                <!-- Botón principal que valida en Firebase -->
+                <button type="button" id="btnReservar" onclick="realizarReserva()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-emerald-950/50 flex items-center justify-center gap-2 text-lg transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-check-circle text-2xl"></i> Validar y Guardar Cita
                 </button>
+
+                <!-- Contenedor dinámico donde aparecen los botones de WhatsApp y Google Calendar -->
+                <div id="contenedorBotonesAccion" class="hidden space-y-3 pt-2"></div>
             </form>
         </div>
     </section>
@@ -424,6 +428,7 @@
             const fecha = document.getElementById('fechaCita').value;
             const barbero = document.getElementById('barberoSelect').value;
             const contenedor = document.getElementById('contenedorHorarios');
+            document.getElementById('contenedorBotonesAccion').classList.add('hidden');
             horaElegida = "";
             document.getElementById('horaSeleccionada').value = "";
 
@@ -462,6 +467,7 @@
                             btn.className = 'bg-gold text-darkBg border border-gold rounded-xl py-2.5 text-xs font-black shadow-md shadow-gold/25 scale-[1.03]';
                             horaElegida = bloque;
                             document.getElementById('horaSeleccionada').value = bloque;
+                            document.getElementById('contenedorBotonesAccion').classList.add('hidden');
                         };
                     }
                     contenedor.appendChild(btn);
@@ -475,6 +481,19 @@
                 console.error("Error horarios:", error);
                 contenedor.innerHTML = '<p class="col-span-full text-sm text-red-400">Error al conectar con la base de datos.</p>';
             }
+        }
+
+        // Función para convertir hora formato "11:00 AM" a formato de 24 horas para Google Calendar
+        function convertirHoraA24(horaStr) {
+            let [tiempo, periodo] = horaStr.split(" ");
+            let [horas, minutos] = tiempo.split(":");
+            horas = parseInt(horas);
+            if (periodo === "PM" && horas < 12) horas += 12;
+            if (periodo === "AM" && horas === 12) horas = 0;
+            return {
+                hora: String(horas).padStart(2, '0'),
+                minutos: minutos
+            };
         }
 
         window.realizarReserva = async function() {
@@ -491,25 +510,29 @@
                 return;
             }
 
-            let numeroWhatsApp = (barbero === "Juan Angarita") ? "573150536300" : "573170479271";
+            const btnReservar = document.getElementById('btnReservar');
+            btnReservar.disabled = true;
+            btnReservar.innerHTML = '<i class="fa-solid fa-spinner animate-spin text-xl"></i> Verificando disponibilidad...';
 
-            const mensaje = `*NUEVA RESERVA - BULLDOG BARBER*\n\n` +
-                            `- Cliente: ${nombre}\n` +
-                            `- Teléfono: ${telefono}\n` +
-                            `- Servicio: ${servicio}\n` +
-                            `- Barbero Asignado: ${barbero}\n` +
-                            `- Fecha: ${fecha}\n` +
-                            `- Hora: ${hora}\n` +
-                            `- Cejas opcionales: ${cejas}\n\n` +
-                            `Quedo atento a la confirmación de la cita.`;
-
-            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-
-            // 1. Abrimos WhatsApp AL INSTANTE en el celular antes de que Firebase responda (evita que el navegador bloquee la app)
-            window.location.href = urlWhatsApp;
-
-            // 2. Guardamos la cita en Firestore en segundo plano de forma totalmente silenciosa
             try {
+                // 1. Validamos estrictamente en Firebase que la hora siga libre
+                const q = query(
+                    collection(db, "citas"), 
+                    where("barbero", "==", barbero), 
+                    where("fecha", "==", fecha),
+                    where("hora", "==", hora)
+                );
+                const querySnapshot = await getDocs(q);
+                
+                if (!querySnapshot.empty) {
+                    alert("¡Lo sentimos! Este horario acaba de ser reservado por otro cliente. Elige otro bloque.");
+                    btnReservar.disabled = false;
+                    btnReservar.innerHTML = '<i class="fa-solid fa-check-circle text-2xl"></i> Validar y Guardar Cita';
+                    cargarHorariosDisponibles();
+                    return;
+                }
+
+                // 2. Guardamos la cita con éxito en Firestore
                 await addDoc(collection(db, "citas"), {
                     nombre,
                     telefono,
@@ -520,8 +543,60 @@
                     cejas,
                     timestamp: new Date()
                 });
+
+                let numeroWhatsApp = (barbero === "Juan Angarita") ? "573150536300" : "573170479271";
+
+                const mensaje = `*NUEVA RESERVA - BULLDOG BARBER*\n\n` +
+                                `- Cliente: ${nombre}\n` +
+                                `- Teléfono: ${telefono}\n` +
+                                `- Servicio: ${servicio}\n` +
+                                `- Barbero Asignado: ${barbero}\n` +
+                                `- Fecha: ${fecha}\n` +
+                                `- Hora: ${hora}\n` +
+                                `- Cejas opcionales: ${cejas}\n\n` +
+                                `Quedo atento a la confirmación de la cita.`;
+
+                const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+
+                // 3. Generamos el enlace para Google Calendar
+                let fechaLimpia = fecha.replace(/-/g, ''); // Formato AAAAMMDD
+                let hora24 = convertirHoraA24(hora);
+                let fechaInicio = `${fechaLimpia}T${hora24.hora}${hora24.minutos}00`;
+                // Calculamos 45 minutos después para la hora de fin
+                let fechaObj = new Date(`${fecha}T${hora24.hora}:${hora24.minutos}:00`);
+                fechaObj.setMinutes(fechaObj.getMinutes() + 45);
+                let horaFinH = String(fechaObj.getHours()).padStart(2, '0');
+                let horaFinM = String(fechaObj.getMinutes()).padStart(2, '0');
+                let fechaFin = `${fechaLimpia}T${horaFinH}${horaFinM}00`;
+
+                const tituloCal = encodeURIComponent(`Cita ${servicio} - BullDog Barber`);
+                const descCal = encodeURIComponent(`Barbero: ${barbero}\\nCliente: ${nombre}\\nTel: ${telefono}\\nDiseño de cejas: ${cejas}`);
+                const ubicacionCal = encodeURIComponent("Carrera 13#1-04 oeste, Cali, Colombia");
+
+                const urlCalendar = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${tituloCal}&dates=${fechaInicio}/${fechaFin}&details=${descCal}&location=${ubicacionCal}`;
+
+                // 4. Mostramos los botones interactivos en pantalla
+                const contenedorAcciones = document.getElementById('contenedorBotonesAccion');
+                contenedorAcciones.innerHTML = `
+                    <a href="${urlWhatsApp}" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 rounded-xl transition shadow-xl shadow-emerald-950/50 flex items-center justify-center gap-3 text-lg animate-bounce">
+                        <i class="fa-brands fa-whatsapp text-3xl"></i> 1. Enviar confirmación por WhatsApp
+                    </a>
+                    <a href="${urlCalendar}" target="_blank" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-base">
+                        <i class="fa-solid fa-calendar-plus text-xl"></i> 2. Agregar cita a Google Calendar
+                    </a>
+                `;
+                contenedorAcciones.classList.remove('hidden');
+
+                btnReservar.innerHTML = '<i class="fa-solid fa-circle-check text-xl text-emerald-400"></i> ¡Cita Registrada con Éxito!';
+                
+                // Recargamos los horarios para bloquear el que acaba de ser tomado
+                cargarHorariosDisponibles();
+
             } catch (e) {
-                console.error("Error al guardar en base de datos: ", e);
+                console.error("Error al guardar: ", e);
+                alert("Hubo un error al guardar la cita. Inténtalo de nuevo.");
+                btnReservar.disabled = false;
+                btnReservar.innerHTML = '<i class="fa-solid fa-check-circle text-2xl"></i> Validar y Guardar Cita';
             }
         }
     </script>
