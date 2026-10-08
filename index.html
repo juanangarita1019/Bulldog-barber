@@ -483,19 +483,6 @@
             }
         }
 
-        // Función para convertir hora formato "11:00 AM" a formato de 24 horas para Google Calendar
-        function convertirHoraA24(horaStr) {
-            let [tiempo, periodo] = horaStr.split(" ");
-            let [horas, minutos] = tiempo.split(":");
-            horas = parseInt(horas);
-            if (periodo === "PM" && horas < 12) horas += 12;
-            if (periodo === "AM" && horas === 12) horas = 0;
-            return {
-                hora: String(horas).padStart(2, '0'),
-                minutos: minutos
-            };
-        }
-
         window.realizarReserva = async function() {
             const nombre = document.getElementById('nombreCliente').value.trim();
             const telefono = document.getElementById('telefonoCliente').value.trim();
@@ -556,30 +543,37 @@
                                 `- Cejas opcionales: ${cejas}\n\n` +
                                 `Quedo atento a la confirmación de la cita.`;
 
-                const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+                const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensaje)}`;
 
-                // 3. Generamos el enlace para Google Calendar
-                let fechaLimpia = fecha.replace(/-/g, ''); // Formato AAAAMMDD
-                let hora24 = convertirHoraA24(hora);
-                let fechaInicio = `${fechaLimpia}T${hora24.hora}${hora24.minutos}00`;
-                // Calculamos 45 minutos después para la hora de fin
-                let fechaObj = new Date(`${fecha}T${hora24.hora}:${hora24.minutos}:00`);
-                fechaObj.setMinutes(fechaObj.getMinutes() + 45);
-                let horaFinH = String(fechaObj.getHours()).padStart(2, '0');
-                let horaFinM = String(fechaObj.getMinutes()).padStart(2, '0');
-                let fechaFin = `${fechaLimpia}T${horaFinH}${horaFinM}00`;
+                // 3. Generamos el enlace limpio para Google Calendar
+                let fechaLimpia = fecha.replace(/-/g, '');
+                let [tiempo, periodo] = hora.split(" ");
+                let [h, m] = tiempo.split(":");
+                h = parseInt(h);
+                if (periodo === "PM" && h < 12) h += 12;
+                if (periodo === "AM" && h === 12) h = 0;
+                let hStr = String(h).padStart(2, '0');
+                
+                let fechaInicio = `${fechaLimpia}T${hStr}${m}00`;
+                
+                // Sumamos 45 min para la hora final
+                let fObj = new Date(`${fecha}T${hStr}:${m}:00`);
+                fObj.setMinutes(fObj.getMinutes() + 45);
+                let fFinH = String(fObj.getHours()).padStart(2, '0');
+                let fFinM = String(fObj.getMinutes()).padStart(2, '0');
+                let fechaFin = `${fechaLimpia}T${fFinH}${fFinM}00`;
 
                 const tituloCal = encodeURIComponent(`Cita ${servicio} - BullDog Barber`);
-                const descCal = encodeURIComponent(`Barbero: ${barbero}\\nCliente: ${nombre}\\nTel: ${telefono}\\nDiseño de cejas: ${cejas}`);
+                const descCal = encodeURIComponent(`Barbero: ${barbero}\\nCliente: ${nombre}\\nTel: ${telefono}`);
                 const ubicacionCal = encodeURIComponent("Carrera 13#1-04 oeste, Cali, Colombia");
 
                 const urlCalendar = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${tituloCal}&dates=${fechaInicio}/${fechaFin}&details=${descCal}&location=${ubicacionCal}`;
 
-                // 4. Mostramos los botones interactivos en pantalla
+                // 4. Mostramos los botones interactivos sin bloqueadores en pantalla
                 const contenedorAcciones = document.getElementById('contenedorBotonesAccion');
                 contenedorAcciones.innerHTML = `
                     <a href="${urlWhatsApp}" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 rounded-xl transition shadow-xl shadow-emerald-950/50 flex items-center justify-center gap-3 text-lg animate-bounce">
-                        <i class="fa-brands fa-whatsapp text-3xl"></i> 1. Enviar confirmación por WhatsApp
+                        <i class="fa-brands fa-whatsapp text-3xl"></i> 1. Toca aquí para enviar a WhatsApp
                     </a>
                     <a href="${urlCalendar}" target="_blank" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-base">
                         <i class="fa-solid fa-calendar-plus text-xl"></i> 2. Agregar cita a Google Calendar
