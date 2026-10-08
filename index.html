@@ -267,7 +267,7 @@
         </div>
     </section>
 
-    <!-- Sistema de Reservas con Botones de Acción Directos -->
+    <!-- Sistema de Reservas con Botón Estático Seguro -->
     <section id="reserva" class="py-24 max-w-3xl mx-auto px-4">
         <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative reveal-item">
             <div class="text-center mb-10">
@@ -276,7 +276,7 @@
                 <!-- Aviso visual destacado -->
                 <div class="mt-4 bg-gold/10 border border-gold/30 rounded-2xl p-4 text-xs text-gold flex items-center justify-center gap-2">
                     <i class="fa-solid fa-circle-info text-base"></i>
-                    <span>Al reservar, tu horario se valida en el sistema y aparecerán los botones directos para WhatsApp y Google Calendar.</span>
+                    <span>Al reservar, tu horario se valida en el sistema y se activarán los botones oficiales.</span>
                 </div>
             </div>
 
@@ -325,13 +325,20 @@
                     <label for="cejasCheck" class="text-sm text-gray-300 cursor-pointer">Incluir diseño de cejas (Opcional - Sin costo adicional)</label>
                 </div>
 
-                <!-- Botón principal que valida en Firebase y genera los enlaces directos estáticos -->
+                <!-- Botón principal que valida en Firebase -->
                 <button type="button" id="btnReservar" onclick="realizarReserva()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-emerald-950/50 flex items-center justify-center gap-2 text-lg transform hover:-translate-y-0.5">
                     <i class="fa-solid fa-check-circle text-2xl"></i> Validar y Guardar Cita
                 </button>
 
-                <!-- Contenedor dinámico con enlaces nativos 100% seguros para celulares -->
-                <div id="contenedorBotonesAccion" class="hidden space-y-3 pt-2"></div>
+                <!-- CONTENEDOR ESTÁTICO DE ACCIÓN (Los enlaces ya existen en el HTML nativo, por lo que ningún celular los bloqueará) -->
+                <div id="contenedorBotonesAccion" class="hidden space-y-3 pt-2">
+                    <a id="linkWhatsApp" href="#" target="_blank" rel="noopener noreferrer" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 rounded-xl transition shadow-xl shadow-emerald-950/50 flex items-center justify-center gap-3 text-lg animate-bounce">
+                        <i class="fa-brands fa-whatsapp text-3xl"></i> 1. Toca aquí para enviar a WhatsApp
+                    </a>
+                    <a id="linkCalendar" href="#" target="_blank" rel="noopener noreferrer" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-base">
+                        <i class="fa-solid fa-calendar-plus text-xl"></i> 2. Agregar cita a Google Calendar
+                    </a>
+                </div>
             </form>
         </div>
     </section>
@@ -543,7 +550,6 @@
                                 `- Cejas opcionales: ${cejas}\n\n` +
                                 `Quedo atento a la confirmación de la cita.`;
 
-                // Usamos la API oficial universal para celulares y PC
                 const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensaje)}`;
 
                 // 3. Generamos Google Calendar
@@ -569,17 +575,10 @@
 
                 const urlCalendar = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${tituloCal}&dates=${fechaInicio}/${fechaFin}&details=${descCal}&location=${ubicacionCal}`;
 
-                // 4. Mostramos los botones con enlaces HTML puros (imposibles de bloquear por celulares)
-                const contenedorAcciones = document.getElementById('contenedorBotonesAccion');
-                contenedorAcciones.innerHTML = `
-                    <a href="${urlWhatsApp}" target="_blank" rel="noopener noreferrer" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 rounded-xl transition shadow-xl shadow-emerald-950/50 flex items-center justify-center gap-3 text-lg animate-bounce">
-                        <i class="fa-brands fa-whatsapp text-3xl"></i> 1. Toca aquí para enviar a WhatsApp
-                    </a>
-                    <a href="${urlCalendar}" target="_blank" rel="noopener noreferrer" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-base">
-                        <i class="fa-solid fa-calendar-plus text-xl"></i> 2. Agregar cita a Google Calendar
-                    </a>
-                `;
-                contenedorAcciones.classList.remove('hidden');
+                // 4. Asignamos los enlaces a los elementos estáticos (¡Cero bloqueos móviles!)
+                document.getElementById('linkWhatsApp').href = urlWhatsApp;
+                document.getElementById('linkCalendar').href = urlCalendar;
+                document.getElementById('contenedorBotonesAccion').classList.remove('hidden');
 
                 btnReservar.innerHTML = '<i class="fa-solid fa-circle-check text-xl text-emerald-400"></i> ¡Cita Registrada con Éxito!';
                 
