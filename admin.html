@@ -39,14 +39,19 @@
                     BULLDOG BARBER <span class="text-gold text-xs block md:inline font-normal">PANEL ADMIN</span>
                 </span>
             </a>
-            <a href="index.html" class="bg-zinc-900 hover:bg-zinc-800 text-gray-300 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition border border-gray-800">
-                <i class="fa-solid fa-arrow-left mr-1"></i> Ir a la Web
-            </a>
+            <div class="flex items-center gap-3">
+                <button onclick="cerrarSesion()" class="bg-zinc-900 hover:bg-red-950/50 text-red-400 px-3 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition border border-red-900/40">
+                    <i class="fa-solid fa-lock mr-1"></i> Salir
+                </button>
+                <a href="index.html" class="bg-zinc-900 hover:bg-zinc-800 text-gray-300 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition border border-gray-800">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Ir a la Web
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Contenido Principal del Panel -->
-    <main class="max-w-5xl mx-auto px-4 py-12 w-full flex-grow">
+    <!-- Contenido Principal del Panel (Oculto hasta autenticarse) -->
+    <main id="panelContenido" class="max-w-5xl mx-auto px-4 py-12 w-full flex-grow hidden">
         <div class="text-center mb-10">
             <h1 class="text-3xl md:text-4xl font-black text-white mb-2">AGENDA DE <span class="text-gold">CITAS</span></h1>
             <p class="text-gray-400 text-sm">Consulta y administra los turnos reservados en tiempo real</p>
@@ -81,13 +86,33 @@
         </div>
     </main>
 
+    <!-- Pantalla de Bloqueo / Autenticación -->
+    <div id="pantallaLogin" class="max-w-md mx-auto px-4 py-24 w-full flex-grow flex items-center justify-center">
+        <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 shadow-2xl w-full text-center space-y-6">
+            <div class="w-16 h-16 bg-gold/10 border border-gold/30 rounded-2xl mx-auto flex items-center justify-center text-gold text-2xl">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div>
+                <h2 class="text-2xl font-black text-white mb-1">ACCESO <span class="text-gold">RESTRINGIDO</span></h2>
+                <p class="text-xs text-gray-400">Ingresa la contraseña de administración para ver la agenda</p>
+            </div>
+            
+            <form onsubmit="verificarPassword(event)" class="space-y-4">
+                <input type="password" id="inputPassword" required placeholder="Contraseña secreta" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-center text-white tracking-widest focus:outline-none focus:border-gold transition text-lg">
+                <button type="submit" class="w-full bg-gold hover:bg-gold-light text-darkBg font-black py-3.5 rounded-xl transition shadow-lg shadow-gold/20 uppercase tracking-wider text-xs">
+                    Entrar al Panel
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-black border-t border-gray-900 py-8 text-center text-gray-500 text-xs">
         <p class="text-white font-bold mb-1 tracking-wider">BULLDOG BARBER - SISTEMA INTERNO</p>
         <p>© 2026 Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Lógica de Firebase para el Admin -->
+    <!-- Lógica de Autenticación y Firebase -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, getDocs, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -111,11 +136,42 @@
             "05:00 PM", "05:45 PM", "06:30 PM", "07:15 PM"
         ];
 
+        // CONTRASEÑA DE ACCESO (Puedes cambiar "bulldog420" por la que tú quieras)
+        const PASSWORD_ADMIN = "bulldog420";
+
         document.addEventListener('DOMContentLoaded', () => {
+            // Verificamos si ya inició sesión antes en esta pestaña
+            if (sessionStorage.getItem("adminLogueado") === "true") {
+                mostrarPanel();
+            }
+        });
+
+        window.verificarPassword = function(event) {
+            event.preventDefault();
+            const passIngresada = document.getElementById('inputPassword').value;
+
+            if (passIngresada === PASSWORD_ADMIN) {
+                sessionStorage.setItem("adminLogueado", "true");
+                mostrarPanel();
+            } else {
+                alert("❌ Contraseña incorrecta. Inténtalo de nuevo.");
+                document.getElementById('inputPassword').value = "";
+            }
+        }
+
+        window.mostrarPanel = function() {
+            document.getElementById('pantallaLogin').classList.add('hidden');
+            document.getElementById('panelContenido').classList.remove('hidden');
+            
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('adminFecha').value = today;
             cargarCitasAdmin();
-        });
+        }
+
+        window.cerrarSesion = function() {
+            sessionStorage.removeItem("adminLogueado");
+            location.reload();
+        }
 
         window.cargarCitasAdmin = async function() {
             const fecha = document.getElementById('adminFecha').value;
