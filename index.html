@@ -104,13 +104,13 @@
             <p class="text-gray-400">Calidad garantizada en cada detalle</p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <!-- Servicio 1 -->
             <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group transform hover:-translate-y-1 reveal-item">
                 <div>
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold text-white group-hover:text-gold transition">Corte de Cabello</h3>
-                        <span class="text-2xl font-black text-gold">$25.000</span>
+                        <h3 class="text-xl font-bold text-white group-hover:text-gold transition">Corte de Cabello</h3>
+                        <span class="text-xl font-black text-gold">$25.000</span>
                     </div>
                     <ul class="text-gray-400 space-y-3 mb-8 text-sm">
                         <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Incluye lavado de cabeza</li>
@@ -119,7 +119,7 @@
                     </ul>
                 </div>
                 <a href="#reserva" onclick="seleccionarServicio('Corte de Cabello')" class="block text-center bg-zinc-900 hover:bg-gold hover:text-darkBg py-3.5 rounded-xl font-bold transition shadow-sm">
-                    Seleccionar este servicio
+                    Seleccionar
                 </a>
             </div>
 
@@ -130,8 +130,8 @@
                 </div>
                 <div>
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold text-white group-hover:text-gold transition">Corte + Barba</h3>
-                        <span class="text-2xl font-black text-gold">$30.000</span>
+                        <h3 class="text-xl font-bold text-white group-hover:text-gold transition">Corte + Barba</h3>
+                        <span class="text-xl font-black text-gold">$30.000</span>
                     </div>
                     <ul class="text-gray-400 space-y-3 mb-8 text-sm">
                         <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Incluye lavado de cabeza</li>
@@ -141,7 +141,25 @@
                     </ul>
                 </div>
                 <a href="#reserva" onclick="seleccionarServicio('Corte + Barba')" class="block text-center bg-gold text-darkBg hover:bg-gold-light py-3.5 rounded-xl font-bold transition shadow-md shadow-gold/20">
-                    Seleccionar este servicio
+                    Seleccionar
+                </a>
+            </div>
+
+            <!-- Servicio 3: Domicilio -->
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group transform hover:-translate-y-1 reveal-item">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-gold transition">Corte a Domicilio</h3>
+                        <span class="text-xl font-black text-gold">$50.000</span>
+                    </div>
+                    <ul class="text-gray-400 space-y-3 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-house text-gold"></i> Vamos hasta tu casa</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Corte o Corte + Barba incluidos</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-clock text-gold"></i> Duración: 2 horas (Bloque doble)</li>
+                    </ul>
+                </div>
+                <a href="#reserva" onclick="seleccionarServicio('Corte a Domicilio')" class="block text-center bg-zinc-900 hover:bg-gold hover:text-darkBg py-3.5 rounded-xl font-bold transition shadow-sm">
+                    Seleccionar
                 </a>
             </div>
         </div>
@@ -267,16 +285,15 @@
         </div>
     </section>
 
-    <!-- Sistema de Reservas con 1 Solo Botón -->
+    <!-- Sistema de Reservas con Soporte para Domicilios -->
     <section id="reserva" class="py-24 max-w-3xl mx-auto px-4">
         <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative reveal-item">
             <div class="text-center mb-10">
                 <h2 class="text-2xl md:text-4xl font-black text-white mb-2">RESERVA TU <span class="text-gold">CITA</span></h2>
-                <p class="text-gray-400 text-sm">Horario de atención: Lunes a Sábado • 11:00 AM - 8:00 PM (Bloques de 45 min)</p>
-                <!-- Aviso visual destacado -->
+                <p class="text-gray-400 text-sm">Lunes a Sábado • 11:00 AM - 8:00 PM (Servicios presenciales: 45 min | Domicilios: 2 horas)</p>
                 <div class="mt-4 bg-gold/10 border border-gold/30 rounded-2xl p-4 text-xs text-gold flex items-center justify-center gap-2">
                     <i class="fa-solid fa-circle-info text-base"></i>
-                    <span>Al hacer clic, tu cita se guarda en el sistema y se abre WhatsApp automáticamente.</span>
+                    <span>Al hacer clic, tu cita se guarda y se abre WhatsApp automáticamente.</span>
                 </div>
             </div>
 
@@ -293,10 +310,17 @@
 
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona el Servicio</label>
-                    <select id="servicioSelect" required class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
-                        <option value="Corte de Cabello - $25.000">Corte de Cabello ($25.000)</option>
-                        <option value="Corte + Barba - $30.000">Corte + Barba ($30.000)</option>
+                    <select id="servicioSelect" required onchange="verificarDomicilio()" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
+                        <option value="Corte de Cabello - $25.000">Corte de Cabello ($25.000 - 45 min)</option>
+                        <option value="Corte + Barba - $30.000">Corte + Barba ($30.000 - 45 min)</option>
+                        <option value="Corte a Domicilio - $50.000">Corte a Domicilio ($50.000 - 2 horas)</option>
                     </select>
+                </div>
+
+                <!-- Campo dinámico para la dirección en caso de domicilio -->
+                <div id="campoDireccion" class="hidden">
+                    <label class="block text-sm font-bold text-gold mb-2"><i class="fa-solid fa-house mr-1"></i> Dirección Exacta del Domicilio</label>
+                    <input type="text" id="direccionDomicilio" placeholder="Ej: Calle 5 # 38-20, Apto 201" class="w-full bg-darkBg border border-gold/50 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
                 </div>
 
                 <div>
@@ -313,7 +337,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona la Hora (Bloques de 45 min)</label>
+                    <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona la Hora de Inicio</label>
                     <div id="contenedorHorarios" class="grid grid-cols-3 sm:grid-cols-4 gap-2.5 pt-1">
                         <p class="col-span-full text-sm text-gray-500 italic">Selecciona fecha y barbero para ver horas disponibles...</p>
                     </div>
@@ -325,7 +349,7 @@
                     <label for="cejasCheck" class="text-sm text-gray-300 cursor-pointer">Incluir diseño de cejas (Opcional - Sin costo adicional)</label>
                 </div>
 
-                <!-- ÚNICO BOTÓN INTELIGENTE -->
+                <!-- Botón de reserva -->
                 <button type="button" id="btnReservar" onclick="realizarReserva()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 rounded-xl transition shadow-xl shadow-emerald-950/50 flex items-center justify-center gap-3 text-lg transform hover:-translate-y-0.5 cursor-pointer">
                     <i class="fa-brands fa-whatsapp text-3xl"></i> Reservar Cita y Enviar a WhatsApp
                 </button>
@@ -369,7 +393,7 @@
         });
     </script>
 
-    <!-- Firebase SDKs y Lógica de Reservas -->
+    <!-- Firebase SDKs y Lógica de Reservas Inteligentes -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -410,6 +434,20 @@
                     break;
                 }
             }
+            verificarDomicilio();
+        }
+
+        window.verificarDomicilio = function() {
+            const servicio = document.getElementById('servicioSelect').value;
+            const campoDir = document.getElementById('campoDireccion');
+            if (servicio.includes("Domicilio")) {
+                campoDir.classList.remove('hidden');
+                document.getElementById('direccionDomicilio').required = true;
+            } else {
+                campoDir.classList.add('hidden');
+                document.getElementById('direccionDomicilio').required = false;
+            }
+            cargarHorariosDisponibles();
         }
 
         window.seleccionarBarbero = function(nombreBarbero) {
@@ -428,9 +466,22 @@
             window.location.href = "#reserva";
         }
 
+        // Función para convertir hora en minutos desde las 11:00 AM
+        function horaAMinutos(strHora) {
+            let [tiempo, periodo] = strHora.split(" ");
+            let [h, m] = tiempo.split(":");
+            h = parseInt(h);
+            m = parseInt(m);
+            if (periodo === "PM" && h < 12) h += 12;
+            if (periodo === "AM" && h === 12) h = 0;
+            return (h * 60) + m;
+        }
+
         window.cargarHorariosDisponibles = async function() {
             const fecha = document.getElementById('fechaCita').value;
             const barbero = document.getElementById('barberoSelect').value;
+            const servicio = document.getElementById('servicioSelect').value;
+            const esDomicilio = servicio.includes("Domicilio");
             const contenedor = document.getElementById('contenedorHorarios');
             document.getElementById('contenedorCalendar').classList.add('hidden');
             horaElegida = "";
@@ -443,20 +494,45 @@
             try {
                 const q = query(collection(db, "citas"), where("barbero", "==", barbero), where("fecha", "==", fecha));
                 const querySnapshot = await getDocs(q);
-                const horasOcupadas = [];
-                querySnapshot.forEach((doc) => {
-                    horasOcupadas.push(doc.data().hora);
+                
+                // Recopilar minutos ocupados según la duración de cada cita guardada
+                const minutosOcupados = new Set();
+                querySnapshot.forEach((docSnap) => {
+                    let data = docSnap.data();
+                    let hInicio = horaAMinutos(data.hora);
+                    let duracion = (data.servicio && data.servicio.includes("Domicilio")) ? 120 : 45;
+                    for (let m = hInicio; m < hInicio + duracion; m += 15) {
+                        minutosOcupados.add(m);
+                    }
                 });
 
                 contenedor.innerHTML = '';
                 let disponiblesCount = 0;
+                const duracionRequerida = esDomicilio ? 120 : 45; // 120 min para domicilio (2 horas), 45 min normal
 
-                bloquesBase.forEach(bloque => {
+                bloquesBase.forEach((bloque, index) => {
                     const btn = document.createElement('button');
                     btn.type = 'button';
                     btn.textContent = bloque;
                     
-                    if (horasOcupadas.includes(bloque)) {
+                    let hBloqueMin = horaAMinutos(bloque);
+                    let ocupado = false;
+
+                    // Verificamos si alguno de los bloques que abarca este servicio choca con un horario ocupado
+                    for (let m = hBloqueMin; m < hBloqueMin + duracionRequerida; m += 15) {
+                        if (minutosOcupados.has(m)) {
+                            ocupado = true;
+                            break;
+                        }
+                    }
+
+                    // Si es domicilio, validamos que queden al menos 2 horas antes de las 8:00 PM (480 min desde las 11:00 AM)
+                    let horaCierreMin = horaAMinutos("08:00 PM");
+                    if (esDomicilio && (hBloqueMin + duracionRequerida > horaCierreMin)) {
+                        ocupado = true;
+                    }
+
+                    if (ocupado) {
                         btn.className = 'bg-zinc-900/50 text-zinc-600 border border-zinc-800 rounded-xl py-2.5 text-xs font-bold cursor-not-allowed line-through';
                         btn.disabled = true;
                     } else {
@@ -478,7 +554,7 @@
                 });
 
                 if (disponiblesCount === 0) {
-                    contenedor.innerHTML = '<p class="col-span-full text-sm text-red-400 font-semibold">No hay horarios disponibles para este día. ¡Intenta con otra fecha!</p>';
+                    contenedor.innerHTML = `<p class="col-span-full text-sm text-red-400 font-semibold">No hay bloques de ${esDomicilio ? '2 horas' : '45 min'} disponibles para este día.</p>`;
                 }
 
             } catch (error) {
@@ -495,9 +571,16 @@
             const fecha = document.getElementById('fechaCita').value;
             const hora = horaElegida;
             const cejas = document.getElementById('cejasCheck').checked ? "Sí" : "No";
+            const esDomicilio = servicio.includes("Domicilio");
+            const direccion = esDomicilio ? document.getElementById('direccionDomicilio').value.trim() : "";
 
             if (!nombre || !telefono || !hora) {
                 alert("Por favor completa tu nombre, tu teléfono y selecciona un horario disponible.");
+                return;
+            }
+
+            if (esDomicilio && !direccion) {
+                alert("Por favor ingresa la dirección exacta para el servicio a domicilio.");
                 return;
             }
 
@@ -506,24 +589,40 @@
             btnReservar.innerHTML = '<i class="fa-solid fa-spinner animate-spin text-xl"></i> Procesando tu reserva...';
 
             try {
-                // 1. Validamos en Firebase
+                // Validación estricta en Firebase
                 const q = query(
                     collection(db, "citas"), 
                     where("barbero", "==", barbero), 
-                    where("fecha", "==", fecha),
-                    where("hora", "==", hora)
+                    where("fecha", "==", fecha)
                 );
                 const querySnapshot = await getDocs(q);
                 
-                if (!querySnapshot.empty) {
-                    alert("¡Lo sentimos! Este horario acaba de ser reservado por otro cliente. Elige otro bloque.");
+                let hNuevoInicio = horaAMinutos(hora);
+                let duracionNuevo = esDomicilio ? 120 : 45;
+                let hNuevoFin = hNuevoInicio + duracionNuevo;
+                let hayCruce = false;
+
+                querySnapshot.forEach((docSnap) => {
+                    let data = docSnap.data();
+                    let hExistenteInicio = horaAMinutos(data.hora);
+                    let duracionExistente = (data.servicio && data.servicio.includes("Domicilio")) ? 120 : 45;
+                    let hExistenteFin = hExistenteInicio + duracionExistente;
+
+                    // Comprobación de solapamiento de horarios
+                    if (hNuevoInicio < hExistenteFin && hNuevoFin > hExistenteInicio) {
+                        hayCruce = true;
+                    }
+                });
+
+                if (hayCruce) {
+                    alert("¡Lo sentimos! Este horario se cruza con otra cita reservada. Elige otro bloque.");
                     btnReservar.disabled = false;
                     btnReservar.innerHTML = '<i class="fa-brands fa-whatsapp text-3xl"></i> Reservar Cita y Enviar a WhatsApp';
                     cargarHorariosDisponibles();
                     return;
                 }
 
-                // 2. Guardamos la cita en Firestore
+                // Guardar en Firestore
                 await addDoc(collection(db, "citas"), {
                     nombre,
                     telefono,
@@ -532,24 +631,26 @@
                     fecha,
                     hora,
                     cejas,
+                    direccion: direccion || "N/A (Local físico)",
                     timestamp: new Date()
                 });
 
                 let numeroWhatsApp = (barbero === "Juan Angarita") ? "573150536300" : "573170479271";
 
-                const mensaje = `*NUEVA RESERVA - BULLDOG BARBER*\n\n` +
-                                `- Cliente: ${nombre}\n` +
-                                `- Teléfono: ${telefono}\n` +
-                                `- Servicio: ${servicio}\n` +
-                                `- Barbero Asignado: ${barbero}\n` +
-                                `- Fecha: ${fecha}\n` +
-                                `- Hora: ${hora}\n` +
-                                `- Cejas opcionales: ${cejas}\n\n` +
-                                `Quedo atento a la confirmación de la cita.`;
+                let mensaje = `*NUEVA RESERVA - BULLDOG BARBER*\n\n` +
+                              `- Cliente: ${nombre}\n` +
+                              `- Teléfono: ${telefono}\n` +
+                              `- Servicio: ${servicio}\n` +
+                              (esDomicilio ? `- 🏠 Dirección: ${direccion}\n` : '') +
+                              `- Barbero Asignado: ${barbero}\n` +
+                              `- Fecha: ${fecha}\n` +
+                              `- Hora de Inicio: ${hora}\n` +
+                              `- Cejas opcionales: ${cejas}\n\n` +
+                              `Quedo atento a la confirmación de la cita.`;
 
                 const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
 
-                // 3. Preparamos Google Calendar por si el cliente quiere agregarlo
+                // Google Calendar (calculando 45 min o 2 horas según corresponda)
                 let fechaLimpia = fecha.replace(/-/g, '');
                 let [tiempo, periodo] = hora.split(" ");
                 let [h, m] = tiempo.split(":");
@@ -560,14 +661,14 @@
                 
                 let fechaInicio = `${fechaLimpia}T${hStr}${m}00`;
                 let fObj = new Date(`${fecha}T${hStr}:${m}:00`);
-                fObj.setMinutes(fObj.getMinutes() + 45);
+                fObj.setMinutes(fObj.getMinutes() + duracionNuevo);
                 let fFinH = String(fObj.getHours()).padStart(2, '0');
                 let fFinM = String(fObj.getMinutes()).padStart(2, '0');
                 let fechaFin = `${fechaLimpia}T${fFinH}${fFinM}00`;
 
                 const tituloCal = encodeURIComponent(`Cita ${servicio} - BullDog Barber`);
-                const descCal = encodeURIComponent(`Barbero: ${barbero}\nCliente: ${nombre}\nTel: ${telefono}`);
-                const ubicacionCal = encodeURIComponent("Carrera 13#1-04 oeste, Cali, Colombia");
+                const descCal = encodeURIComponent(`Barbero: ${barbero}\nCliente: ${nombre}\nTel: ${telefono}${esDomicilio ? '\nDirección: ' + direccion : ''}`);
+                const ubicacionCal = encodeURIComponent(esDomicilio ? direccion : "Carrera 13#1-04 oeste, Cali, Colombia");
 
                 const urlCalendar = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${tituloCal}&dates=${fechaInicio}/${fechaFin}&details=${descCal}&location=${ubicacionCal}`;
 
@@ -577,10 +678,8 @@
                 btnReservar.disabled = false;
                 btnReservar.innerHTML = '<i class="fa-solid fa-circle-check text-xl text-emerald-400"></i> ¡Cita Exitosa! Abriendo WhatsApp...';
 
-                // 4. Abrimos WhatsApp de inmediato automáticamente
                 window.open(urlWhatsApp, '_blank');
 
-                // Restauramos el botón y recargamos horarios para bloquear el turno
                 setTimeout(() => {
                     btnReservar.innerHTML = '<i class="fa-brands fa-whatsapp text-3xl"></i> Reservar Cita y Enviar a WhatsApp';
                 }, 3000);
