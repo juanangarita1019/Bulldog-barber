@@ -65,9 +65,10 @@
             opacity: 0.25;
             cursor: not-allowed;
             background-color: #121212;
+            color: #52525b;
         }
         .day-cell.other-month {
-            opacity: 0.2;
+            opacity: 0.15;
         }
     </style>
 </head>
@@ -293,7 +294,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-white mb-1">Horario de Atención</h4>
-                            <p class="text-sm text-gray-300">Lunes a Sábado • 11:00 AM - 8:00 PM (Domicilios con flexibilidad nocturna)</p>
+                            <p class="text-sm text-gray-300">Lunes a Sábado • 11:00 AM - 8:00 PM (Domingos Cerrado)</p>
                         </div>
                     </div>
 
@@ -310,12 +311,12 @@
         </div>
     </section>
 
-    <!-- Sistema de Reservas con Calendario Visual -->
+    <!-- Sistema de Reservas con Calendario Visual y Bloqueo de Domingos -->
     <section id="reserva" class="py-24 max-w-3xl mx-auto px-4">
         <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative">
             <div class="text-center mb-10">
                 <h2 class="text-2xl md:text-4xl font-black text-white mb-2">RESERVA TU <span class="text-gold">CITA</span></h2>
-                <p class="text-gray-400 text-sm">Selecciona el día y la hora directamente en el calendario</p>
+                <p class="text-gray-400 text-sm">Lunes a Sábado • Selecciona el día y la hora en el calendario</p>
                 <div class="mt-4 bg-gold/10 border border-gold/30 rounded-2xl p-4 text-xs text-gold flex items-center justify-center gap-2">
                     <i class="fa-solid fa-circle-info text-base"></i>
                     <span>Al hacer clic, tu cita se guarda y se abre WhatsApp automáticamente.</span>
@@ -356,7 +357,7 @@
                     </select>
                 </div>
 
-                <!-- CALENDARIO VISUAL INTERACTIVO -->
+                <!-- CALENDARIO VISUAL INTERACTIVO CON DOMINGOS BLOQUEADOS -->
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona la Fecha de la Cita</label>
                     <div class="bg-black/60 border border-gray-800 rounded-2xl p-4">
@@ -372,7 +373,7 @@
                         </div>
                         <!-- Días de la semana -->
                         <div class="grid grid-cols-7 gap-1 text-center text-xs font-bold text-gray-500 mb-2">
-                            <span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sá</span><span>Do</span>
+                            <span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sá</span><span class="text-red-500/70">Do</span>
                         </div>
                         <!-- Cuadrícula de días -->
                         <div id="gridCalendario" class="grid grid-cols-7 gap-1.5"></div>
@@ -384,7 +385,7 @@
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona la Hora de Inicio</label>
                     <div id="contenedorHorarios" class="grid grid-cols-3 sm:grid-cols-4 gap-2.5 pt-1">
-                        <p class="col-span-full text-sm text-gray-500 italic">Selecciona una fecha en el calendario y barbero...</p>
+                        <p class="col-span-full text-sm text-gray-500 italic">Selecciona una fecha válida en el calendario y barbero...</p>
                     </div>
                     <input type="hidden" id="horaSeleccionada" required>
                 </div>
@@ -412,11 +413,11 @@
     <!-- Footer -->
     <footer class="bg-black border-t border-gray-900 py-12 text-center text-gray-500 text-sm">
         <p class="text-white font-bold mb-2 tracking-wider text-base">BULLDOG BARBER</p>
-        <p>Atención de Lunes a Sábado • 11:00 AM - 8:00 PM (Domicilios flexibles)</p>
+        <p>Atención de Lunes a Sábado • 11:00 AM - 8:00 PM (Domingos Cerrado)</p>
         <p class="mt-4 text-xs text-gray-600">© 2026 BullDog Barber. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Firebase SDKs y Lógica del Calendario Interactivo -->
+    <!-- Firebase SDKs y Lógica del Calendario Interactivo con Domingos Bloqueados -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -447,8 +448,11 @@
         const nombresMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Inicializar con la fecha de hoy
             const hoy = new Date();
+            // Si hoy es domingo, avanzamos automáticamente al lunes para que no inicie seleccionado en un día cerrado
+            if (hoy.getDay() === 0) {
+                hoy.setDate(hoy.getDate() + 1);
+            }
             fechaSeleccionadaStr = hoy.toISOString().split('T')[0];
             document.getElementById('fechaCita').value = fechaSeleccionadaStr;
             
@@ -470,7 +474,6 @@
             const primerDiaMes = new Date(anio, mes, 1);
             const ultimoDiaMes = new Date(anio, mes + 1, 0);
             
-            // Ajustar para que la semana empiece en Lunes (0 = Lunes, 6 = Domingo)
             let diaSemanaInicio = primerDiaMes.getDay() - 1;
             if (diaSemanaInicio === -1) diaSemanaInicio = 6;
 
@@ -478,9 +481,6 @@
             const grid = document.getElementById('gridCalendario');
             grid.innerHTML = '';
 
-            const hoyStr = new Date().toISOString().split('T')[0];
-
-            // Rellenar días del mes anterior si es necesario
             const ultimoDiaMesAnterior = new Date(anio, mes, 0).getDate();
             for (let i = diaSemanaInicio - 1; i >= 0; i--) {
                 const diaCell = document.createElement('div');
@@ -489,7 +489,6 @@
                 grid.appendChild(diaCell);
             }
 
-            // Días del mes actual
             for (let dia = 1; dia <= totalDiasMes; dia++) {
                 const diaCell = document.createElement('div');
                 diaCell.className = 'day-cell';
@@ -503,8 +502,11 @@
                 const hoyObj = new Date();
                 hoyObj.setHours(0,0,0,0);
 
-                // Deshabilitar días pasados
-                if (fechaObj < hoyObj) {
+                // Obtener el día de la semana (0 = Domingo)
+                const esDomingo = fechaObj.getDay() === 0;
+
+                // Deshabilitar días pasados O si es domingo
+                if (fechaObj < hoyObj || esDomingo) {
                     diaCell.classList.add('disabled');
                 } else {
                     if (fechaStr === fechaSeleccionadaStr) {
