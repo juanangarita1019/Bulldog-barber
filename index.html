@@ -25,7 +25,7 @@
     </script>
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Estilos personalizados para el mapa y animaciones fluidas -->
+    <!-- Estilos personalizados para el mapa y el calendario interactivo -->
     <style>
         .map-responsive iframe{
             position: absolute;
@@ -35,16 +35,39 @@
             height: 100%;
             border: 0;
         }
-        /* Elementos listos para animarse al hacer scroll */
-        .reveal-item {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        .day-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: #0A0A0A;
+            border: 1px solid #27272a;
+            color: #d1d5db;
         }
-        /* Elementos cuando entran en pantalla */
-        .reveal-item.active {
-            opacity: 1;
-            transform: translateY(0);
+        .day-cell:hover:not(.disabled) {
+            border-color: #D4AF37;
+            color: #D4AF37;
+            transform: scale(1.05);
+        }
+        .day-cell.selected {
+            background-color: #D4AF37;
+            color: #0A0A0A;
+            border-color: #D4AF37;
+            font-weight: 900;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+        .day-cell.disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+            background-color: #121212;
+        }
+        .day-cell.other-month {
+            opacity: 0.2;
         }
     </style>
 </head>
@@ -81,7 +104,7 @@
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30"></div>
         </div>
         
-        <div class="relative max-w-5xl mx-auto px-4 text-center z-10 pt-16 reveal-item active">
+        <div class="relative max-w-5xl mx-auto px-4 text-center z-10 pt-16">
             <h1 class="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight mb-8 text-white uppercase leading-tight drop-shadow-lg">
                 ¡No eres feo, simplemente <br class="hidden sm:inline">tienes un <span class="text-gold">mal corte!</span>
             </h1>
@@ -99,14 +122,14 @@
 
     <!-- Servicios -->
     <section id="servicios" class="py-24 max-w-6xl mx-auto px-4">
-        <div class="text-center mb-16 reveal-item">
+        <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTROS <span class="text-gold">SERVICIOS</span></h2>
             <p class="text-gray-400">Calidad garantizada en cada detalle</p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <!-- Servicio 1 -->
-            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group transform hover:-translate-y-1 reveal-item">
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group transform hover:-translate-y-1">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold text-white group-hover:text-gold transition">Corte de Cabello</h3>
@@ -126,7 +149,7 @@
             </div>
 
             <!-- Servicio 2 -->
-            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group transform hover:-translate-y-1 reveal-item">
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group transform hover:-translate-y-1">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold text-white group-hover:text-gold transition">Corte + Barba</h3>
@@ -146,7 +169,7 @@
             </div>
 
             <!-- Servicio 3 -->
-            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group transform hover:-translate-y-1 reveal-item">
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 hover:border-gold/50 transition-all duration-300 flex flex-col justify-between shadow-xl group transform hover:-translate-y-1">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold text-white group-hover:text-gold transition">Corte a Domicilio</h3>
@@ -169,33 +192,33 @@
 
     <!-- Galería de Estilos -->
     <section id="galeria" class="py-20 bg-zinc-950 border-y border-gray-900">
-        <div class="max-w-6xl mx-auto px-4 text-center reveal-item">
+        <div class="max-w-6xl mx-auto px-4 text-center">
             <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTRO <span class="text-gold">TRABAJO</span></h2>
             <p class="text-gray-400 mb-12">Precisión y estilo en cada corte</p>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300 reveal-item">
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300">
                     <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
                         <i class="fa-solid fa-scissors text-gold text-xl"></i>
                     </div>
                     <h4 class="font-bold text-white mb-1">Desvanecidos</h4>
                     <p class="text-xs text-gray-400">Degradados limpios y definidos</p>
                 </div>
-                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300 reveal-item">
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300">
                     <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
                         <i class="fa-solid fa-spray-can-sparkles text-gold text-xl"></i>
                     </div>
                     <h4 class="font-bold text-white mb-1">Barba Clásica</h4>
                     <p class="text-xs text-gray-400">Toalla caliente y perfilado</p>
                 </div>
-                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300 reveal-item">
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300">
                     <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
                         <i class="fa-solid fa-wand-magic-sparkles text-gold text-xl"></i>
                     </div>
                     <h4 class="font-bold text-white mb-1">Diseño de Cejas</h4>
                     <p class="text-xs text-gray-400">Simetría perfecta</p>
                 </div>
-                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300 reveal-item">
+                <div class="bg-cardBg border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-gold/50 transition transform hover:scale-105 duration-300">
                     <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
                         <i class="fa-solid fa-crown text-gold text-xl"></i>
                     </div>
@@ -208,14 +231,14 @@
 
     <!-- Barberos -->
     <section id="barberos" class="py-24 max-w-6xl mx-auto px-4">
-        <div class="text-center mb-16 reveal-item">
+        <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-black text-white mb-3">NUESTRO <span class="text-gold">EQUIPO</span></h2>
             <p class="text-gray-400">Profesionales listos para transformar tu imagen</p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             <!-- Barbero 1: Juan Angarita -->
-            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition transform hover:-translate-y-1 duration-300 reveal-item">
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition transform hover:-translate-y-1 duration-300">
                 <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
                     <img src="Angaritafoto.jpeg" alt="Juan Angarita" class="w-full h-full object-cover">
                 </div>
@@ -228,7 +251,7 @@
             </div>
 
             <!-- Barbero 2: Juan Beltran -->
-            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition transform hover:-translate-y-1 duration-300 reveal-item">
+            <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 text-center shadow-xl hover:border-gold/50 transition transform hover:-translate-y-1 duration-300">
                 <div class="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gold shadow-lg bg-darkBg">
                     <img src="belltranfoto.jpeg" alt="Juan Beltran" class="w-full h-full object-cover">
                 </div>
@@ -246,7 +269,7 @@
     <section id="ubicacion" class="py-24 bg-zinc-950 border-t border-gray-900 px-4">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <!-- Detalles y Horarios -->
-            <div class="space-y-8 reveal-item">
+            <div class="space-y-8">
                 <div class="space-y-3">
                     <h2 class="text-3xl md:text-4xl font-black text-white">UBICACIÓN Y <span class="text-gold">HORARIOS</span></h2>
                     <p class="text-gray-400">Encuéntranos en el corazón de Cali. ¡Visítanos hoy!</p>
@@ -281,18 +304,18 @@
             </div>
 
             <!-- Mapa -->
-            <div class="aspect-video w-full h-full rounded-3xl overflow-hidden border-4 border-gray-800 shadow-2xl relative map-responsive reveal-item">
+            <div class="aspect-video w-full h-full rounded-3xl overflow-hidden border-4 border-gray-800 shadow-2xl relative map-responsive">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.8967038681294!2d-76.5413713!3d3.4446046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a70046996161%3A0xbbc9f48e8f0313cc!2sBullDog%20Barber%20Shop!5e0!3m2!1ses-419!2sco!4v1727910635466!5m2!1ses-419!2sco" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
 
-    <!-- Sistema de Reservas -->
+    <!-- Sistema de Reservas con Calendario Visual -->
     <section id="reserva" class="py-24 max-w-3xl mx-auto px-4">
-        <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative reveal-item">
+        <div class="bg-cardBg border border-gray-800/80 rounded-3xl p-8 md:p-12 shadow-2xl relative">
             <div class="text-center mb-10">
                 <h2 class="text-2xl md:text-4xl font-black text-white mb-2">RESERVA TU <span class="text-gold">CITA</span></h2>
-                <p class="text-gray-400 text-sm">Lunes a Sábado • 11:00 AM - 8:00 PM (Domicilios con flexibilidad de cierre extendido)</p>
+                <p class="text-gray-400 text-sm">Selecciona el día y la hora directamente en el calendario</p>
                 <div class="mt-4 bg-gold/10 border border-gold/30 rounded-2xl p-4 text-xs text-gold flex items-center justify-center gap-2">
                     <i class="fa-solid fa-circle-info text-base"></i>
                     <span>Al hacer clic, tu cita se guarda y se abre WhatsApp automáticamente.</span>
@@ -333,15 +356,35 @@
                     </select>
                 </div>
 
+                <!-- CALENDARIO VISUAL INTERACTIVO -->
                 <div>
-                    <label class="block text-sm font-bold text-gray-300 mb-2">Fecha de la Cita</label>
-                    <input type="date" id="fechaCita" required onchange="cargarHorariosDisponibles()" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-gold transition">
+                    <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona la Fecha de la Cita</label>
+                    <div class="bg-black/60 border border-gray-800 rounded-2xl p-4">
+                        <!-- Cabecera del Calendario (Mes y Botones) -->
+                        <div class="flex justify-between items-center mb-4">
+                            <button type="button" onclick="cambiarMes(-1)" class="w-9 h-9 rounded-xl bg-zinc-900 text-gold hover:bg-gold hover:text-darkBg transition flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <span id="mesAnioLabel" class="text-white font-black text-sm md:text-base uppercase tracking-wider"></span>
+                            <button type="button" onclick="cambiarMes(1)" class="w-9 h-9 rounded-xl bg-zinc-900 text-gold hover:bg-gold hover:text-darkBg transition flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <!-- Días de la semana -->
+                        <div class="grid grid-cols-7 gap-1 text-center text-xs font-bold text-gray-500 mb-2">
+                            <span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sá</span><span>Do</span>
+                        </div>
+                        <!-- Cuadrícula de días -->
+                        <div id="gridCalendario" class="grid grid-cols-7 gap-1.5"></div>
+                    </div>
+                    <!-- Input oculto para almacenar la fecha seleccionada (YYYY-MM-DD) -->
+                    <input type="hidden" id="fechaCita" required>
                 </div>
 
                 <div>
                     <label class="block text-sm font-bold text-gray-300 mb-2">Selecciona la Hora de Inicio</label>
                     <div id="contenedorHorarios" class="grid grid-cols-3 sm:grid-cols-4 gap-2.5 pt-1">
-                        <p class="col-span-full text-sm text-gray-500 italic">Selecciona fecha y barbero para ver horas disponibles...</p>
+                        <p class="col-span-full text-sm text-gray-500 italic">Selecciona una fecha en el calendario y barbero...</p>
                     </div>
                     <input type="hidden" id="horaSeleccionada" required>
                 </div>
@@ -373,29 +416,7 @@
         <p class="mt-4 text-xs text-gray-600">© 2026 BullDog Barber. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Script de Animaciones al Hacer Scroll -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const reveals = document.querySelectorAll(".reveal-item");
-
-            function checkReveal() {
-                reveals.forEach(element => {
-                    const windowHeight = window.innerHeight;
-                    const elementTop = element.getBoundingClientRect().top;
-                    const elementVisible = 100;
-
-                    if (elementTop < windowHeight - elementVisible) {
-                        element.classList.add("active");
-                    }
-                });
-            }
-
-            window.addEventListener("scroll", checkReveal);
-            checkReveal();
-        });
-    </script>
-
-    <!-- Firebase SDKs y Lógica de Reservas Inteligentes con Flexibilidad y API WhatsApp Universal -->
+    <!-- Firebase SDKs y Lógica del Calendario Interactivo -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -420,13 +441,87 @@
         ];
 
         let horaElegida = "";
+        let fechaSeleccionadaStr = "";
+        let fechaActualCalendario = new Date();
+
+        const nombresMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
         document.addEventListener('DOMContentLoaded', () => {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('fechaCita').min = today;
-            document.getElementById('fechaCita').value = today;
+            // Inicializar con la fecha de hoy
+            const hoy = new Date();
+            fechaSeleccionadaStr = hoy.toISOString().split('T')[0];
+            document.getElementById('fechaCita').value = fechaSeleccionadaStr;
+            
+            renderizarCalendario();
             cargarHorariosDisponibles();
         });
+
+        window.cambiarMes = function(direccion) {
+            fechaActualCalendario.setMonth(fechaActualCalendario.getMonth() + direccion);
+            renderizarCalendario();
+        }
+
+        function renderizarCalendario() {
+            const anio = fechaActualCalendario.getFullYear();
+            const mes = fechaActualCalendario.getMonth();
+
+            document.getElementById('mesAnioLabel').textContent = `${nombresMeses[mes]} ${anio}`;
+
+            const primerDiaMes = new Date(anio, mes, 1);
+            const ultimoDiaMes = new Date(anio, mes + 1, 0);
+            
+            // Ajustar para que la semana empiece en Lunes (0 = Lunes, 6 = Domingo)
+            let diaSemanaInicio = primerDiaMes.getDay() - 1;
+            if (diaSemanaInicio === -1) diaSemanaInicio = 6;
+
+            const totalDiasMes = ultimoDiaMes.getDate();
+            const grid = document.getElementById('gridCalendario');
+            grid.innerHTML = '';
+
+            const hoyStr = new Date().toISOString().split('T')[0];
+
+            // Rellenar días del mes anterior si es necesario
+            const ultimoDiaMesAnterior = new Date(anio, mes, 0).getDate();
+            for (let i = diaSemanaInicio - 1; i >= 0; i--) {
+                const diaCell = document.createElement('div');
+                diaCell.className = 'day-cell other-month disabled';
+                diaCell.textContent = ultimoDiaMesAnterior - i;
+                grid.appendChild(diaCell);
+            }
+
+            // Días del mes actual
+            for (let dia = 1; dia <= totalDiasMes; dia++) {
+                const diaCell = document.createElement('div');
+                diaCell.className = 'day-cell';
+                diaCell.textContent = dia;
+
+                const mesStr = String(mes + 1).padStart(2, '0');
+                const diaStr = String(dia).padStart(2, '0');
+                const fechaStr = `${anio}-${mesStr}-${diaStr}`;
+
+                const fechaObj = new Date(anio, mes, dia);
+                const hoyObj = new Date();
+                hoyObj.setHours(0,0,0,0);
+
+                // Deshabilitar días pasados
+                if (fechaObj < hoyObj) {
+                    diaCell.classList.add('disabled');
+                } else {
+                    if (fechaStr === fechaSeleccionadaStr) {
+                        diaCell.classList.add('selected');
+                    }
+
+                    diaCell.onclick = () => {
+                        document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('selected'));
+                        diaCell.classList.add('selected');
+                        fechaSeleccionadaStr = fechaStr;
+                        document.getElementById('fechaCita').value = fechaStr;
+                        cargarHorariosDisponibles();
+                    };
+                }
+                grid.appendChild(diaCell);
+            }
+        }
 
         window.seleccionarServicio = function(nombreServicio) {
             const select = document.getElementById('servicioSelect');
@@ -479,7 +574,7 @@
         }
 
         window.cargarHorariosDisponibles = async function() {
-            const fecha = document.getElementById('fechaCita').value;
+            const fecha = fechaSeleccionadaStr;
             const barbero = document.getElementById('barberoSelect').value;
             const servicio = document.getElementById('servicioSelect').value;
             const esDomicilio = servicio.includes("Domicilio");
@@ -525,7 +620,6 @@
                         }
                     }
 
-                    // Límite de cierre flexible: 8:00 PM para presenciales, extendido hasta las 9:30 PM si es domicilio
                     let horaCierreLimite = esDomicilio ? horaAMinutos("09:30 PM") : horaAMinutos("08:00 PM");
                     if (hBloqueMin + duracionRequerida > horaCierreLimite) {
                         ocupado = true;
@@ -567,7 +661,7 @@
             const telefono = document.getElementById('telefonoCliente').value.trim();
             const servicio = document.getElementById('servicioSelect').value;
             const barbero = document.getElementById('barberoSelect').value;
-            const fecha = document.getElementById('fechaCita').value;
+            const fecha = fechaSeleccionadaStr;
             const hora = horaElegida;
             const cejas = document.getElementById('cejasCheck').checked ? "Sí" : "No";
             const esDomicilio = servicio.includes("Domicilio");
@@ -644,7 +738,6 @@
                               `- Cejas opcionales: ${cejas}\n\n` +
                               `Quedo atento a la confirmación de la cita.`;
 
-                // Usamos la API universal compatible con app nativa en celulares (Android/iOS) y computadores
                 const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensaje)}`;
 
                 let fechaLimpia = fecha.replace(/-/g, '');
