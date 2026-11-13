@@ -82,13 +82,29 @@
                 </div>
 
                 <div id="listaAgenda" class="divide-y divide-gray-900">
-                    <!-- Los bloques se cargarán aquí automáticamente -->
                     <div class="p-8 text-center text-gray-500 text-sm italic">Selecciona barbero y fecha para ver la agenda...</div>
                 </div>
             </div>
         </div>
 
-        <!-- SECCIÓN 2: GESTIÓN DE EQUIPO (BARBEROS) -->
+        <!-- SECCIÓN 2: GESTIÓN DE SERVICIOS -->
+        <div class="pt-8 border-t border-gray-800">
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-black text-white mb-1">GESTIÓN DE <span class="text-gold">SERVICIOS</span></h2>
+                    <p class="text-gray-400 text-sm">Agrega, edita o elimina los servicios y precios de la barbería</p>
+                </div>
+                <button onclick="abrirModalServicio()" class="bg-gold hover:bg-gold-light text-darkBg font-black px-5 py-3 rounded-xl transition shadow-lg shadow-gold/20 flex items-center gap-2 text-xs uppercase tracking-wider">
+                    <i class="fa-solid fa-plus text-base"></i> Nuevo Servicio
+                </button>
+            </div>
+
+            <div id="listaServiciosAdmin" class="grid md:grid-cols-3 gap-6">
+                <p class="text-xs text-gray-500 italic col-span-full text-center">Cargando servicios...</p>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: GESTIÓN DE EQUIPO (BARBEROS) -->
         <div class="pt-8 border-t border-gray-800">
             <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
                 <div>
@@ -100,19 +116,64 @@
                 </button>
             </div>
 
-            <!-- Lista de Barberos Existentes -->
             <div id="listaBarberosAdmin" class="grid md:grid-cols-2 gap-6">
-                <!-- Se llena dinámicamente desde Firestore -->
-                <div class="p-6 text-center text-gray-500 text-sm italic col-span-full">Cargando equipo de barberos...</div>
+                <p class="text-xs text-gray-500 italic col-span-full text-center">Cargando equipo de barberos...</p>
             </div>
         </div>
     </main>
+
+    <!-- MODAL PARA AGREGAR / EDITAR SERVICIO -->
+    <div id="modalServicio" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center px-4 hidden">
+        <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 max-w-lg w-full shadow-2xl relative space-y-6">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-4">
+                <h3 id="modalTituloServicio" class="text-xl font-black text-white">Agregar Nuevo Servicio</h3>
+                <button onclick="cerrarModalServicio()" class="text-gray-400 hover:text-white transition text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="formServicio" onsubmit="guardarServicio(event)" class="space-y-4">
+                <input type="hidden" id="servicioIdEdit">
+                
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Nombre del Servicio</label>
+                    <input type="text" id="nombreServicioInput" required placeholder="Ej: Corte + Barba" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Precio ($)</label>
+                        <input type="text" id="precioServicioInput" required placeholder="Ej: 30.000" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Duración</label>
+                        <input type="text" id="duracionServicioInput" required placeholder="Ej: 45 minutos o 2 horas" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Características (Separadas por comas)</label>
+                    <textarea id="detallesServicioInput" rows="3" required placeholder="Ej: Corte completo con lavado, Perfilado de barba, Toalla caliente" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition"></textarea>
+                    <p class="text-[10px] text-gray-500 mt-1">Cada elemento separado por una coma se mostrará con un icono de verificación en la web.</p>
+                </div>
+
+                <div class="flex gap-4 pt-2">
+                    <button type="button" onclick="cerrarModalServicio()" class="w-1/2 bg-zinc-900 hover:bg-zinc-800 text-gray-300 font-bold py-3 rounded-xl transition text-xs uppercase tracking-wider border border-gray-800">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="w-1/2 bg-gold hover:bg-gold-light text-darkBg font-black py-3 rounded-xl transition text-xs uppercase tracking-wider shadow-lg shadow-gold/20">
+                        Guardar Servicio
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- MODAL PARA AGREGAR / EDITAR BARBERO -->
     <div id="modalBarbero" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center px-4 hidden">
         <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 max-w-lg w-full shadow-2xl relative space-y-6">
             <div class="flex justify-between items-center border-b border-gray-800 pb-4">
-                <h3 id="modalTitulo" class="text-xl font-black text-white">Agregar Nuevo Barbero</h3>
+                <h3 id="modalTituloBarbero" class="text-xl font-black text-white">Agregar Nuevo Barbero</h3>
                 <button onclick="cerrarModalBarbero()" class="text-gray-400 hover:text-white transition text-lg">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
@@ -133,12 +194,12 @@
 
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">URL de la Foto / Imagen</label>
-                    <input type="text" id="fotoBarberoInput" required placeholder="Ej: Angaritafoto.jpeg o link de imagen" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                    <input type="text" id="fotoBarberoInput" required placeholder="Ej: Angaritafoto.jpeg" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Descripción / Especialidad</label>
-                    <textarea id="descBarberoInput" rows="2" required placeholder="Ej: Especialista en cortes modernos y clásicos." class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition"></textarea>
+                    <textarea id="descBarberoInput" rows="2" required placeholder="Ej: Especialista en cortes modernos, flow urbano y perfiles de barba impecables." class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition"></textarea>
                 </div>
 
                 <div class="flex gap-4 pt-2">
@@ -203,7 +264,6 @@
             "05:00 PM", "05:45 PM", "06:30 PM", "07:15 PM"
         ];
 
-        // CONTRASEÑA DE ACCESO
         const PASSWORD_ADMIN = "bulldog420";
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -233,12 +293,120 @@
             document.getElementById('adminFecha').value = today;
 
             await cargarBarberosAdmin();
+            await cargarServiciosAdmin();
             cargarCitasAdmin();
         }
 
         window.cerrarSesion = function() {
             sessionStorage.removeItem("adminLogueado");
             location.reload();
+        }
+
+        // --- GESTIÓN DE SERVICIOS ---
+        window.cargarServiciosAdmin = async function() {
+            const listaDiv = document.getElementById('listaServiciosAdmin');
+            listaDiv.innerHTML = '<p class="text-xs text-gold animate-pulse col-span-full text-center">Cargando servicios...</p>';
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "servicios"));
+                listaDiv.innerHTML = '';
+
+                if (querySnapshot.empty) {
+                    listaDiv.innerHTML = '<p class="text-xs text-gray-500 italic col-span-full text-center">No hay servicios registrados.</p>';
+                    return;
+                }
+
+                querySnapshot.forEach((docSnap) => {
+                    const s = docSnap.data();
+                    const id = docSnap.id;
+                    const detallesStr = Array.isArray(s.detalles) ? s.detalles.join(', ') : s.detalles;
+
+                    const card = document.createElement('div');
+                    card.className = "bg-cardBg border border-gray-800 rounded-2xl p-6 flex flex-col justify-between shadow-xl hover:border-gold/50 transition";
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <h4 class="font-bold text-white text-base">${s.nombre}</h4>
+                                <span class="font-black text-gold text-base">$${s.precio}</span>
+                            </div>
+                            <p class="text-xs text-gray-400 mb-4"><i class="fa-solid fa-clock text-gold mr-1"></i> Duración: ${s.duracion}</p>
+                            <p class="text-xs text-gray-500 mb-6 italic">${detallesStr}</p>
+                        </div>
+                        <div class="flex gap-2 pt-4 border-t border-gray-900">
+                            <button onclick="editarServicio('${id}', '${s.nombre}', '${s.precio}', '${s.duracion}', ${JSON.stringify(detallesStr)})" class="w-1/2 bg-zinc-900 hover:bg-gold hover:text-darkBg text-gray-300 py-2 rounded-xl text-xs font-bold transition border border-gray-800 flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-pen-to-square"></i> Editar
+                            </button>
+                            <button onclick="eliminarServicio('${id}', '${s.nombre}')" class="w-1/2 bg-red-500/10 hover:bg-red-600 text-red-400 hover:text-white py-2 rounded-xl text-xs font-bold transition border border-red-500/30 flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-trash-can"></i> Eliminar
+                            </button>
+                        </div>
+                    `;
+                    listaDiv.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error("Error al cargar servicios admin:", error);
+                listaDiv.innerHTML = '<p class="text-xs text-red-400 col-span-full text-center">Error al cargar servicios.</p>';
+            }
+        }
+
+        window.abrirModalServicio = function() {
+            document.getElementById('modalTituloServicio').textContent = "Agregar Nuevo Servicio";
+            document.getElementById('servicioIdEdit').value = "";
+            document.getElementById('formServicio').reset();
+            document.getElementById('modalServicio').classList.remove('hidden');
+        }
+
+        window.cerrarModalServicio = function() {
+            document.getElementById('modalServicio').classList.add('hidden');
+        }
+
+        window.editarServicio = function(id, nombre, precio, duracion, detalles) {
+            document.getElementById('modalTituloServicio').textContent = "Editar Servicio";
+            document.getElementById('servicioIdEdit').value = id;
+            document.getElementById('nombreServicioInput').value = nombre;
+            document.getElementById('precioServicioInput').value = precio;
+            document.getElementById('duracionServicioInput').value = duracion;
+            document.getElementById('detallesServicioInput').value = detalles;
+            document.getElementById('modalServicio').classList.remove('hidden');
+        }
+
+        window.guardarServicio = async function(event) {
+            event.preventDefault();
+            const id = document.getElementById('servicioIdEdit').value;
+            const nombre = document.getElementById('nombreServicioInput').value.trim();
+            const precio = document.getElementById('precioServicioInput').value.trim();
+            const duracion = document.getElementById('duracionServicioInput').value.trim();
+            const detallesRaw = document.getElementById('detallesServicioInput').value.trim();
+            const detalles = detallesRaw.split(',').map(item => item.trim()).filter(item => item.length > 0);
+
+            try {
+                if (id) {
+                    await updateDoc(doc(db, "servicios", id), { nombre, precio, duracion, detalles });
+                    alert("¡Servicio actualizado con éxito!");
+                } else {
+                    await addDoc(collection(db, "servicios"), { nombre, precio, duracion, detalles });
+                    alert("¡Servicio agregado con éxito!");
+                }
+                cerrarModalServicio();
+                cargarServiciosAdmin();
+            } catch (error) {
+                console.error("Error al guardar servicio:", error);
+                alert("Hubo un error al guardar el servicio.");
+            }
+        }
+
+        window.eliminarServicio = async function(id, nombre) {
+            if (confirm(`¿Estás seguro de eliminar el servicio "${nombre}"?`)) {
+                try {
+                    await deleteDoc(doc(db, "servicios", id));
+                    alert("¡Servicio eliminado con éxito!");
+                    cargarServiciosAdmin();
+                } catch (error) {
+                    console.error("Error al eliminar servicio:", error);
+                    alert("Hubo un error al eliminar el servicio.");
+                }
+            }
         }
 
         // --- GESTIÓN DE BARBEROS ---
@@ -254,8 +422,7 @@
                 listaDiv.innerHTML = '';
 
                 if (querySnapshot.empty) {
-                    // Si la colección está vacía, creamos los dos iniciales por defecto para facilitar
-                    listaDiv.innerHTML = '<p class="text-xs text-gray-500 italic col-span-full text-center">No hay barberos registrados. Agrega uno nuevo.</p>';
+                    listaDiv.innerHTML = '<p class="text-xs text-gray-500 italic col-span-full text-center">No hay barberos registrados.</p>';
                     return;
                 }
 
@@ -263,13 +430,11 @@
                     const b = docSnap.data();
                     const id = docSnap.id;
 
-                    // Llenar el select del filtro de agenda
                     const opt = document.createElement('option');
                     opt.value = b.nombre;
                     opt.textContent = b.nombre;
                     selectBarbero.appendChild(opt);
 
-                    // Renderizar tarjeta en la sección de gestión
                     const card = document.createElement('div');
                     card.className = "bg-cardBg border border-gray-800 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-6 shadow-xl hover:border-gold/50 transition";
                     card.innerHTML = `
@@ -302,7 +467,7 @@
         }
 
         window.abrirModalBarbero = function() {
-            document.getElementById('modalTitulo').textContent = "Agregar Nuevo Barbero";
+            document.getElementById('modalTituloBarbero').textContent = "Agregar Nuevo Barbero";
             document.getElementById('barberoIdEdit').value = "";
             document.getElementById('formBarbero').reset();
             document.getElementById('modalBarbero').classList.remove('hidden');
@@ -313,7 +478,7 @@
         }
 
         window.editarBarbero = function(id, nombre, whatsapp, foto, descripcion) {
-            document.getElementById('modalTitulo').textContent = "Editar Barbero";
+            document.getElementById('modalTituloBarbero').textContent = "Editar Barbero";
             document.getElementById('barberoIdEdit').value = id;
             document.getElementById('nombreBarberoInput').value = nombre;
             document.getElementById('whatsappBarberoInput').value = whatsapp;
@@ -332,11 +497,9 @@
 
             try {
                 if (id) {
-                    // Actualizar
                     await updateDoc(doc(db, "barberos", id), { nombre, whatsapp, foto, descripcion });
                     alert("¡Barbero actualizado con éxito!");
                 } else {
-                    // Crear nuevo
                     await addDoc(collection(db, "barberos"), { nombre, whatsapp, foto, descripcion });
                     alert("¡Barbero agregado con éxito!");
                 }
@@ -349,7 +512,7 @@
         }
 
         window.eliminarBarbero = async function(id, nombre) {
-            if (confirm(`¿Estás seguro de eliminar a ${nombre}? Esta acción no se puede deshacer.`)) {
+            if (confirm(`¿Estás seguro de eliminar a ${nombre}?`)) {
                 try {
                     await deleteDoc(doc(db, "barberos", id));
                     alert("¡Barbero eliminado con éxito!");
@@ -369,84 +532,4 @@
             const contador = document.getElementById('contadorCitas');
 
             if (!fecha || !barbero) {
-                contenedor.innerHTML = '<div class="p-8 text-center text-gray-500 text-sm italic">Selecciona barbero y fecha para ver la agenda...</div>';
-                if(contador) contador.textContent = "0 turnos";
-                return;
-            }
-
-            contenedor.innerHTML = '<div class="p-8 text-center text-gold text-sm animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Sincronizando agenda con Firebase...</div>';
-
-            try {
-                const q = query(collection(db, "citas"), where("barbero", "==", barbero), where("fecha", "==", fecha));
-                const querySnapshot = await getDocs(q);
-                
-                const citasMap = {};
-                querySnapshot.forEach((documento) => {
-                    citasMap[documento.data().hora] = {
-                        id: documento.id,
-                        ...documento.data()
-                    };
-                });
-
-                contenedor.innerHTML = '';
-                let totalReservadas = 0;
-
-                bloquesBase.forEach(bloque => {
-                    const cita = citasMap[bloque];
-                    const fila = document.createElement('div');
-                    fila.className = "p-4 md:px-6 md:py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 hover:bg-zinc-900/40 transition";
-
-                    if (cita) {
-                        totalReservadas++;
-                        fila.innerHTML = `
-                            <div class="flex items-center gap-4">
-                                <span class="bg-gold/10 text-gold font-black px-3 py-1.5 rounded-xl text-xs border border-gold/30 shrink-0">${bloque}</span>
-                                <div>
-                                    <h4 class="font-bold text-white text-sm md:text-base">${cita.nombre}</h4>
-                                    <p class="text-xs text-gray-400">
-                                        <i class="fa-solid fa-scissors text-gold mr-1"></i> ${cita.servicio} 
-                                        ${cita.cejas === 'Sí' ? '• <span class="text-emerald-400">Con Cejas</span>' : ''}
-                                    </p>
-                                    <p class="text-xs text-gray-400 mt-0.5">
-                                        <i class="fa-solid fa-phone text-gold mr-1"></i> <a href="tel:${cita.telefono}" class="underline hover:text-white">${cita.telefono}</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <button onclick="eliminarCita('${cita.id}')" class="bg-red-500/10 hover:bg-red-600 text-red-400 hover:text-white px-3.5 py-2 rounded-xl text-xs font-bold transition border border-red-500/30 flex items-center gap-1.5 shrink-0">
-                                <i class="fa-solid fa-trash-can"></i> Liberar Horario
-                            </button>
-                        `;
-                    } else {
-                        fila.innerHTML = `
-                            <div class="flex items-center gap-4 opacity-50">
-                                <span class="bg-zinc-800 text-zinc-400 font-bold px-3 py-1.5 rounded-xl text-xs shrink-0">${bloque}</span>
-                                <span class="text-xs text-zinc-500 italic">-- Horario Disponible --</span>
-                            </div>
-                        `;
-                    }
-                    contenedor.appendChild(fila);
-                });
-
-                if(contador) contador.textContent = `${totalReservadas} de ${bloquesBase.length} turnos ocupados`;
-
-            } catch (error) {
-                console.error("Error al cargar citas de admin:", error);
-                contenedor.innerHTML = '<div class="p-8 text-center text-red-400 text-sm">Error al conectar con la base de datos.</div>';
-            }
-        }
-
-        window.eliminarCita = async function(idCita) {
-            if (confirm("¿Estás seguro de liberar este horario? Esta acción eliminará la reserva de la base de datos.")) {
-                try {
-                    await deleteDoc(doc(db, "citas", idCita));
-                    alert("¡Horario liberado con éxito!");
-                    cargarCitasAdmin();
-                } catch (error) {
-                    console.error("Error al eliminar:", error);
-                    alert("Hubo un error al liberar el horario.");
-                }
-            }
-        }
-    </script>
-</body>
-</html>
+                contenedor.innerHTML = '<div class="p-8 text-center text-gray-500 text-sm italic">Selecciona barbero
