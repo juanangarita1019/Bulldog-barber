@@ -51,40 +51,107 @@
     </header>
 
     <!-- Contenido Principal del Panel (Oculto hasta autenticarse) -->
-    <main id="panelContenido" class="max-w-5xl mx-auto px-4 py-12 w-full flex-grow hidden">
-        <div class="text-center mb-10">
-            <h1 class="text-3xl md:text-4xl font-black text-white mb-2">AGENDA DE <span class="text-gold">CITAS</span></h1>
-            <p class="text-gray-400 text-sm">Consulta y administra los turnos reservados en tiempo real</p>
+    <main id="panelContenido" class="max-w-5xl mx-auto px-4 py-12 w-full flex-grow hidden space-y-12">
+        
+        <!-- SECCIÓN 1: AGENDA DE CITAS -->
+        <div>
+            <div class="text-center mb-10">
+                <h1 class="text-3xl md:text-4xl font-black text-white mb-2">AGENDA DE <span class="text-gold">CITAS</span></h1>
+                <p class="text-gray-400 text-sm">Consulta y administra los turnos reservados en tiempo real</p>
+            </div>
+
+            <!-- Filtros de Búsqueda -->
+            <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 mb-8 shadow-xl grid md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Seleccionar Barbero</label>
+                    <select id="adminBarbero" onchange="cargarCitasAdmin()" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition font-medium">
+                        <!-- Se llena dinámicamente -->
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Fecha</label>
+                    <input type="date" id="adminFecha" onchange="cargarCitasAdmin()" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition font-medium">
+                </div>
+            </div>
+
+            <!-- Tabla / Lista de Horarios del Día -->
+            <div class="bg-cardBg border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+                <div class="px-6 py-4 bg-zinc-900/80 border-b border-gray-800 flex justify-between items-center">
+                    <h3 class="font-bold text-white text-sm md:text-base"><i class="fa-solid fa-calendar-day text-gold mr-2"></i> Bloques de Atención (45 min)</h3>
+                    <span id="contadorCitas" class="text-xs font-semibold bg-gold/10 text-gold px-3 py-1 rounded-full border border-gold/30">Cargando...</span>
+                </div>
+
+                <div id="listaAgenda" class="divide-y divide-gray-900">
+                    <!-- Los bloques se cargarán aquí automáticamente -->
+                    <div class="p-8 text-center text-gray-500 text-sm italic">Selecciona barbero y fecha para ver la agenda...</div>
+                </div>
+            </div>
         </div>
 
-        <!-- Filtros de Búsqueda -->
-        <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 mb-8 shadow-xl grid md:grid-cols-2 gap-4">
-            <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Seleccionar Barbero</label>
-                <select id="adminBarbero" onchange="cargarCitasAdmin()" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition font-medium">
-                    <option value="Juan Angarita">Juan Angarita</option>
-                    <option value="Juan Beltran">Juan Beltran</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Fecha</label>
-                <input type="date" id="adminFecha" onchange="cargarCitasAdmin()" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition font-medium">
-            </div>
-        </div>
-
-        <!-- Tabla / Lista de Horarios del Día -->
-        <div class="bg-cardBg border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
-            <div class="px-6 py-4 bg-zinc-900/80 border-b border-gray-800 flex justify-between items-center">
-                <h3 class="font-bold text-white text-sm md:text-base"><i class="fa-solid fa-calendar-day text-gold mr-2"></i> Bloques de Atención (45 min)</h3>
-                <span id="contadorCitas" class="text-xs font-semibold bg-gold/10 text-gold px-3 py-1 rounded-full border border-gold/30">Cargando...</span>
+        <!-- SECCIÓN 2: GESTIÓN DE EQUIPO (BARBEROS) -->
+        <div class="pt-8 border-t border-gray-800">
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-black text-white mb-1">GESTIÓN DE <span class="text-gold">BARBEROS</span></h2>
+                    <p class="text-gray-400 text-sm">Agrega, edita o elimina profesionales del equipo</p>
+                </div>
+                <button onclick="abrirModalBarbero()" class="bg-gold hover:bg-gold-light text-darkBg font-black px-5 py-3 rounded-xl transition shadow-lg shadow-gold/20 flex items-center gap-2 text-xs uppercase tracking-wider">
+                    <i class="fa-solid fa-user-plus text-base"></i> Nuevo Barbero
+                </button>
             </div>
 
-            <div id="listaAgenda" class="divide-y divide-gray-900">
-                <!-- Los bloques se cargarán aquí automáticamente -->
-                <div class="p-8 text-center text-gray-500 text-sm italic">Selecciona barbero y fecha para ver la agenda...</div>
+            <!-- Lista de Barberos Existentes -->
+            <div id="listaBarberosAdmin" class="grid md:grid-cols-2 gap-6">
+                <!-- Se llena dinámicamente desde Firestore -->
+                <div class="p-6 text-center text-gray-500 text-sm italic col-span-full">Cargando equipo de barberos...</div>
             </div>
         </div>
     </main>
+
+    <!-- MODAL PARA AGREGAR / EDITAR BARBERO -->
+    <div id="modalBarbero" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center px-4 hidden">
+        <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 max-w-lg w-full shadow-2xl relative space-y-6">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-4">
+                <h3 id="modalTitulo" class="text-xl font-black text-white">Agregar Nuevo Barbero</h3>
+                <button onclick="cerrarModalBarbero()" class="text-gray-400 hover:text-white transition text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="formBarbero" onsubmit="guardarBarbero(event)" class="space-y-4">
+                <input type="hidden" id="barberoIdEdit">
+                
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Nombre Completo</label>
+                    <input type="text" id="nombreBarberoInput" required placeholder="Ej: Juan Angarita" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Número de WhatsApp (con código de país)</label>
+                    <input type="text" id="whatsappBarberoInput" required placeholder="Ej: 573150536300" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">URL de la Foto / Imagen</label>
+                    <input type="text" id="fotoBarberoInput" required placeholder="Ej: Angaritafoto.jpeg o link de imagen" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Descripción / Especialidad</label>
+                    <textarea id="descBarberoInput" rows="2" required placeholder="Ej: Especialista en cortes modernos y clásicos." class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition"></textarea>
+                </div>
+
+                <div class="flex gap-4 pt-2">
+                    <button type="button" onclick="cerrarModalBarbero()" class="w-1/2 bg-zinc-900 hover:bg-zinc-800 text-gray-300 font-bold py-3 rounded-xl transition text-xs uppercase tracking-wider border border-gray-800">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="w-1/2 bg-gold hover:bg-gold-light text-darkBg font-black py-3 rounded-xl transition text-xs uppercase tracking-wider shadow-lg shadow-gold/20">
+                        Guardar Barbero
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Pantalla de Bloqueo / Autenticación -->
     <div id="pantallaLogin" class="max-w-md mx-auto px-4 py-24 w-full flex-grow flex items-center justify-center">
@@ -115,7 +182,7 @@
     <!-- Lógica de Autenticación y Firebase -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, getDocs, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, query, where, deleteDoc, doc, addDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAytWqDohqWPu5tQA4JpA7A-ZvADfbKLd8",
@@ -136,11 +203,10 @@
             "05:00 PM", "05:45 PM", "06:30 PM", "07:15 PM"
         ];
 
-        // CONTRASEÑA DE ACCESO (Puedes cambiar "bulldog420" por la que tú quieras)
+        // CONTRASEÑA DE ACCESO
         const PASSWORD_ADMIN = "bulldog420";
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Verificamos si ya inició sesión antes en esta pestaña
             if (sessionStorage.getItem("adminLogueado") === "true") {
                 mostrarPanel();
             }
@@ -159,12 +225,14 @@
             }
         }
 
-        window.mostrarPanel = function() {
+        window.mostrarPanel = async function() {
             document.getElementById('pantallaLogin').classList.add('hidden');
             document.getElementById('panelContenido').classList.remove('hidden');
             
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('adminFecha').value = today;
+
+            await cargarBarberosAdmin();
             cargarCitasAdmin();
         }
 
@@ -173,13 +241,138 @@
             location.reload();
         }
 
+        // --- GESTIÓN DE BARBEROS ---
+        window.cargarBarberosAdmin = async function() {
+            const selectBarbero = document.getElementById('adminBarbero');
+            const listaDiv = document.getElementById('listaBarberosAdmin');
+            
+            selectBarbero.innerHTML = '';
+            listaDiv.innerHTML = '<p class="text-xs text-gold animate-pulse col-span-full text-center">Cargando barberos...</p>';
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "barberos"));
+                listaDiv.innerHTML = '';
+
+                if (querySnapshot.empty) {
+                    // Si la colección está vacía, creamos los dos iniciales por defecto para facilitar
+                    listaDiv.innerHTML = '<p class="text-xs text-gray-500 italic col-span-full text-center">No hay barberos registrados. Agrega uno nuevo.</p>';
+                    return;
+                }
+
+                querySnapshot.forEach((docSnap) => {
+                    const b = docSnap.data();
+                    const id = docSnap.id;
+
+                    // Llenar el select del filtro de agenda
+                    const opt = document.createElement('option');
+                    opt.value = b.nombre;
+                    opt.textContent = b.nombre;
+                    selectBarbero.appendChild(opt);
+
+                    // Renderizar tarjeta en la sección de gestión
+                    const card = document.createElement('div');
+                    card.className = "bg-cardBg border border-gray-800 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-6 shadow-xl hover:border-gold/50 transition";
+                    card.innerHTML = `
+                        <div class="w-24 h-24 rounded-full overflow-hidden border-2 border-gold shrink-0 bg-darkBg">
+                            <img src="${b.foto}" alt="${b.nombre}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-grow text-center sm:text-left">
+                            <h4 class="font-bold text-white text-lg mb-0.5">${b.nombre}</h4>
+                            <p class="text-gold text-xs font-semibold mb-2"><i class="fa-solid fa-phone mr-1"></i> +${b.whatsapp}</p>
+                            <p class="text-xs text-gray-400 mb-4">${b.descripcion}</p>
+                            <div class="flex justify-center sm:justify-start gap-3">
+                                <button onclick="editarBarbero('${id}', '${b.nombre}', '${b.whatsapp}', '${b.foto}', ${JSON.stringify(b.descripcion)})" class="bg-zinc-900 hover:bg-gold hover:text-darkBg text-gray-300 px-3.5 py-2 rounded-xl text-xs font-bold transition border border-gray-800 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-pen-to-square"></i> Editar
+                                </button>
+                                <button onclick="eliminarBarbero('${id}', '${b.nombre}')" class="bg-red-500/10 hover:bg-red-600 text-red-400 hover:text-white px-3.5 py-2 rounded-xl text-xs font-bold transition border border-red-500/30 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-trash-can"></i> Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    listaDiv.appendChild(card);
+                });
+
+                cargarCitasAdmin();
+
+            } catch (error) {
+                console.error("Error al cargar barberos:", error);
+                listaDiv.innerHTML = '<p class="text-xs text-red-400 col-span-full text-center">Error al cargar la lista de barberos.</p>';
+            }
+        }
+
+        window.abrirModalBarbero = function() {
+            document.getElementById('modalTitulo').textContent = "Agregar Nuevo Barbero";
+            document.getElementById('barberoIdEdit').value = "";
+            document.getElementById('formBarbero').reset();
+            document.getElementById('modalBarbero').classList.remove('hidden');
+        }
+
+        window.cerrarModalBarbero = function() {
+            document.getElementById('modalBarbero').classList.add('hidden');
+        }
+
+        window.editarBarbero = function(id, nombre, whatsapp, foto, descripcion) {
+            document.getElementById('modalTitulo').textContent = "Editar Barbero";
+            document.getElementById('barberoIdEdit').value = id;
+            document.getElementById('nombreBarberoInput').value = nombre;
+            document.getElementById('whatsappBarberoInput').value = whatsapp;
+            document.getElementById('fotoBarberoInput').value = foto;
+            document.getElementById('descBarberoInput').value = descripcion;
+            document.getElementById('modalBarbero').classList.remove('hidden');
+        }
+
+        window.guardarBarbero = async function(event) {
+            event.preventDefault();
+            const id = document.getElementById('barberoIdEdit').value;
+            const nombre = document.getElementById('nombreBarberoInput').value.trim();
+            const whatsapp = document.getElementById('whatsappBarberoInput').value.trim();
+            const foto = document.getElementById('fotoBarberoInput').value.trim();
+            const descripcion = document.getElementById('descBarberoInput').value.trim();
+
+            try {
+                if (id) {
+                    // Actualizar
+                    await updateDoc(doc(db, "barberos", id), { nombre, whatsapp, foto, descripcion });
+                    alert("¡Barbero actualizado con éxito!");
+                } else {
+                    // Crear nuevo
+                    await addDoc(collection(db, "barberos"), { nombre, whatsapp, foto, descripcion });
+                    alert("¡Barbero agregado con éxito!");
+                }
+                cerrarModalBarbero();
+                cargarBarberosAdmin();
+            } catch (error) {
+                console.error("Error al guardar barbero:", error);
+                alert("Hubo un error al guardar el barbero.");
+            }
+        }
+
+        window.eliminarBarbero = async function(id, nombre) {
+            if (confirm(`¿Estás seguro de eliminar a ${nombre}? Esta acción no se puede deshacer.`)) {
+                try {
+                    await deleteDoc(doc(db, "barberos", id));
+                    alert("¡Barbero eliminado con éxito!");
+                    cargarBarberosAdmin();
+                } catch (error) {
+                    console.error("Error al eliminar barbero:", error);
+                    alert("Hubo un error al eliminar el barbero.");
+                }
+            }
+        }
+
+        // --- GESTIÓN DE CITAS ---
         window.cargarCitasAdmin = async function() {
             const fecha = document.getElementById('adminFecha').value;
             const barbero = document.getElementById('adminBarbero').value;
             const contenedor = document.getElementById('listaAgenda');
             const contador = document.getElementById('contadorCitas');
 
-            if (!fecha || !barbero) return;
+            if (!fecha || !barbero) {
+                contenedor.innerHTML = '<div class="p-8 text-center text-gray-500 text-sm italic">Selecciona barbero y fecha para ver la agenda...</div>';
+                if(contador) contador.textContent = "0 turnos";
+                return;
+            }
 
             contenedor.innerHTML = '<div class="p-8 text-center text-gold text-sm animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Sincronizando agenda con Firebase...</div>';
 
@@ -234,7 +427,7 @@
                     contenedor.appendChild(fila);
                 });
 
-                contador.textContent = `${totalReservadas} de ${bloquesBase.length} turnos ocupados`;
+                if(contador) contador.textContent = `${totalReservadas} de ${bloquesBase.length} turnos ocupados`;
 
             } catch (error) {
                 console.error("Error al cargar citas de admin:", error);
