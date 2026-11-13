@@ -94,7 +94,7 @@
                     <h2 class="text-2xl md:text-3xl font-black text-white mb-1">GESTIÓN DE <span class="text-gold">SERVICIOS</span></h2>
                     <p class="text-gray-400 text-sm">Agrega, edita o elimina los servicios y precios de la barbería</p>
                 </div>
-                <button onclick="abrirModalServicio()" class="bg-gold hover:bg-gold-light text-darkBg font-black px-5 py-3 rounded-xl transition shadow-lg shadow-gold/20 flex items-center gap-2 text-xs uppercase tracking-wider">
+                <button onclick="abrirModalServicio()" class="bg-gold hover:bg-gold-light text-darkBg font-black px-5 py-3 rounded-xl transition shadow-lg shadow-gold/20 flex items-center gap-2 text-xs uppercase tracking-wider cursor-pointer">
                     <i class="fa-solid fa-plus text-base"></i> Nuevo Servicio
                 </button>
             </div>
@@ -111,7 +111,7 @@
                     <h2 class="text-2xl md:text-3xl font-black text-white mb-1">GESTIÓN DE <span class="text-gold">BARBEROS</span></h2>
                     <p class="text-gray-400 text-sm">Agrega, edita o elimina profesionales del equipo</p>
                 </div>
-                <button onclick="abrirModalBarbero()" class="bg-gold hover:bg-gold-light text-darkBg font-black px-5 py-3 rounded-xl transition shadow-lg shadow-gold/20 flex items-center gap-2 text-xs uppercase tracking-wider">
+                <button onclick="abrirModalBarbero()" class="bg-gold hover:bg-gold-light text-darkBg font-black px-5 py-3 rounded-xl transition shadow-lg shadow-gold/20 flex items-center gap-2 text-xs uppercase tracking-wider cursor-pointer">
                     <i class="fa-solid fa-user-plus text-base"></i> Nuevo Barbero
                 </button>
             </div>
@@ -127,7 +127,7 @@
         <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 max-w-lg w-full shadow-2xl relative space-y-6">
             <div class="flex justify-between items-center border-b border-gray-800 pb-4">
                 <h3 id="modalTituloServicio" class="text-xl font-black text-white">Agregar Nuevo Servicio</h3>
-                <button onclick="cerrarModalServicio()" class="text-gray-400 hover:text-white transition text-lg">
+                <button onclick="cerrarModalServicio()" class="text-gray-400 hover:text-white transition text-lg cursor-pointer">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -147,7 +147,7 @@
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Duración</label>
-                        <input type="text" id="duracionServicioInput" required placeholder="Ej: 45 minutos o 2 horas" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                        <input type="text" id="duracionServicioInput" required placeholder="Ej: 45 minutos" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
                     </div>
                 </div>
 
@@ -158,10 +158,10 @@
                 </div>
 
                 <div class="flex gap-4 pt-2">
-                    <button type="button" onclick="cerrarModalServicio()" class="w-1/2 bg-zinc-900 hover:bg-zinc-800 text-gray-300 font-bold py-3 rounded-xl transition text-xs uppercase tracking-wider border border-gray-800">
+                    <button type="button" onclick="cerrarModalServicio()" class="w-1/2 bg-zinc-900 hover:bg-zinc-800 text-gray-300 font-bold py-3 rounded-xl transition text-xs uppercase tracking-wider border border-gray-800 cursor-pointer">
                         Cancelar
                     </button>
-                    <button type="submit" class="w-1/2 bg-gold hover:bg-gold-light text-darkBg font-black py-3 rounded-xl transition text-xs uppercase tracking-wider shadow-lg shadow-gold/20">
+                    <button type="submit" class="w-1/2 bg-gold hover:bg-gold-light text-darkBg font-black py-3 rounded-xl transition text-xs uppercase tracking-wider shadow-lg shadow-gold/20 cursor-pointer">
                         Guardar Servicio
                     </button>
                 </div>
@@ -174,7 +174,7 @@
         <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 max-w-lg w-full shadow-2xl relative space-y-6">
             <div class="flex justify-between items-center border-b border-gray-800 pb-4">
                 <h3 id="modalTituloBarbero" class="text-xl font-black text-white">Agregar Nuevo Barbero</h3>
-                <button onclick="cerrarModalBarbero()" class="text-gray-400 hover:text-white transition text-lg">
+                <button onclick="cerrarModalBarbero()" class="text-gray-400 hover:text-white transition text-lg cursor-pointer">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -203,10 +203,10 @@
                 </div>
 
                 <div class="flex gap-4 pt-2">
-                    <button type="button" onclick="cerrarModalBarbero()" class="w-1/2 bg-zinc-900 hover:bg-zinc-800 text-gray-300 font-bold py-3 rounded-xl transition text-xs uppercase tracking-wider border border-gray-800">
+                    <button type="button" onclick="cerrarModalBarbero()" class="w-1/2 bg-zinc-900 hover:bg-zinc-800 text-gray-300 font-bold py-3 rounded-xl transition text-xs uppercase tracking-wider border border-gray-800 cursor-pointer">
                         Cancelar
                     </button>
-                    <button type="submit" class="w-1/2 bg-gold hover:bg-gold-light text-darkBg font-black py-3 rounded-xl transition text-xs uppercase tracking-wider shadow-lg shadow-gold/20">
+                    <button type="submit" class="w-1/2 bg-gold hover:bg-gold-light text-darkBg font-black py-3 rounded-xl transition text-xs uppercase tracking-wider shadow-lg shadow-gold/20 cursor-pointer">
                         Guardar Barbero
                     </button>
                 </div>
@@ -227,7 +227,7 @@
             
             <form onsubmit="verificarPassword(event)" class="space-y-4">
                 <input type="password" id="inputPassword" required placeholder="Contraseña secreta" class="w-full bg-darkBg border border-gray-800 rounded-xl px-4 py-3.5 text-center text-white tracking-widest focus:outline-none focus:border-gold transition text-lg">
-                <button type="submit" class="w-full bg-gold hover:bg-gold-light text-darkBg font-black py-3.5 rounded-xl transition shadow-lg shadow-gold/20 uppercase tracking-wider text-xs">
+                <button type="submit" class="w-full bg-gold hover:bg-gold-light text-darkBg font-black py-3.5 rounded-xl transition shadow-lg shadow-gold/20 uppercase tracking-wider text-xs cursor-pointer">
                     Entrar al Panel
                 </button>
             </form>
@@ -240,7 +240,7 @@
         <p>© 2026 Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Lógica de Autenticación y Firebase -->
+    <!-- Lógica de Autenticación y Firebase (Módulo) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, getDocs, query, where, deleteDoc, doc, addDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -266,45 +266,52 @@
 
         const PASSWORD_ADMIN = "bulldog420";
 
-        document.addEventListener('DOMContentLoaded', () => {
-            if (sessionStorage.getItem("adminLogueado") === "true") {
-                mostrarPanel();
-            }
-        });
-
+        // Exponer funciones globales para que funcionen con los atributos onclick del HTML
         window.verificarPassword = function(event) {
             event.preventDefault();
-            const passIngresada = document.getElementById('inputPassword').value;
+            const passInput = document.getElementById('inputPassword');
+            const passIngresada = passInput ? passInput.value.trim() : "";
 
             if (passIngresada === PASSWORD_ADMIN) {
                 sessionStorage.setItem("adminLogueado", "true");
                 mostrarPanel();
             } else {
                 alert("❌ Contraseña incorrecta. Inténtalo de nuevo.");
-                document.getElementById('inputPassword').value = "";
+                if(passInput) passInput.value = "";
             }
-        }
+        };
 
         window.mostrarPanel = async function() {
-            document.getElementById('pantallaLogin').classList.add('hidden');
-            document.getElementById('panelContenido').classList.remove('hidden');
+            const loginScreen = document.getElementById('pantallaLogin');
+            const panelContent = document.getElementById('panelContenido');
+            
+            if(loginScreen) loginScreen.classList.add('hidden');
+            if(panelContent) panelContent.classList.remove('hidden');
             
             const today = new Date().toISOString().split('T')[0];
-            document.getElementById('adminFecha').value = today;
+            const adminFecha = document.getElementById('adminFecha');
+            if(adminFecha) adminFecha.value = today;
 
             await cargarBarberosAdmin();
             await cargarServiciosAdmin();
             cargarCitasAdmin();
-        }
+        };
 
         window.cerrarSesion = function() {
             sessionStorage.removeItem("adminLogueado");
             location.reload();
-        }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem("adminLogueado") === "true") {
+                mostrarPanel();
+            }
+        });
 
         // --- GESTIÓN DE SERVICIOS ---
         window.cargarServiciosAdmin = async function() {
             const listaDiv = document.getElementById('listaServiciosAdmin');
+            if(!listaDiv) return;
             listaDiv.innerHTML = '<p class="text-xs text-gold animate-pulse col-span-full text-center">Cargando servicios...</p>';
 
             try {
@@ -333,10 +340,10 @@
                             <p class="text-xs text-gray-500 mb-6 italic">${detallesStr}</p>
                         </div>
                         <div class="flex gap-2 pt-4 border-t border-gray-900">
-                            <button onclick="editarServicio('${id}', '${s.nombre}', '${s.precio}', '${s.duracion}', ${JSON.stringify(detallesStr)})" class="w-1/2 bg-zinc-900 hover:bg-gold hover:text-darkBg text-gray-300 py-2 rounded-xl text-xs font-bold transition border border-gray-800 flex items-center justify-center gap-1">
+                            <button onclick="editarServicio('${id}', '${s.nombre}', '${s.precio}', '${s.duracion}', ${JSON.stringify(detallesStr)})" class="w-1/2 bg-zinc-900 hover:bg-gold hover:text-darkBg text-gray-300 py-2 rounded-xl text-xs font-bold transition border border-gray-800 flex items-center justify-center gap-1 cursor-pointer">
                                 <i class="fa-solid fa-pen-to-square"></i> Editar
                             </button>
-                            <button onclick="eliminarServicio('${id}', '${s.nombre}')" class="w-1/2 bg-red-500/10 hover:bg-red-600 text-red-400 hover:text-white py-2 rounded-xl text-xs font-bold transition border border-red-500/30 flex items-center justify-center gap-1">
+                            <button onclick="eliminarServicio('${id}', '${s.nombre}')" class="w-1/2 bg-red-500/10 hover:bg-red-600 text-red-400 hover:text-white py-2 rounded-xl text-xs font-bold transition border border-red-500/30 flex items-center justify-center gap-1 cursor-pointer">
                                 <i class="fa-solid fa-trash-can"></i> Eliminar
                             </button>
                         </div>
@@ -348,18 +355,18 @@
                 console.error("Error al cargar servicios admin:", error);
                 listaDiv.innerHTML = '<p class="text-xs text-red-400 col-span-full text-center">Error al cargar servicios.</p>';
             }
-        }
+        };
 
         window.abrirModalServicio = function() {
             document.getElementById('modalTituloServicio').textContent = "Agregar Nuevo Servicio";
             document.getElementById('servicioIdEdit').value = "";
             document.getElementById('formServicio').reset();
             document.getElementById('modalServicio').classList.remove('hidden');
-        }
+        };
 
         window.cerrarModalServicio = function() {
             document.getElementById('modalServicio').classList.add('hidden');
-        }
+        };
 
         window.editarServicio = function(id, nombre, precio, duracion, detalles) {
             document.getElementById('modalTituloServicio').textContent = "Editar Servicio";
@@ -369,7 +376,7 @@
             document.getElementById('duracionServicioInput').value = duracion;
             document.getElementById('detallesServicioInput').value = detalles;
             document.getElementById('modalServicio').classList.remove('hidden');
-        }
+        };
 
         window.guardarServicio = async function(event) {
             event.preventDefault();
@@ -394,7 +401,7 @@
                 console.error("Error al guardar servicio:", error);
                 alert("Hubo un error al guardar el servicio.");
             }
-        }
+        };
 
         window.eliminarServicio = async function(id, nombre) {
             if (confirm(`¿Estás seguro de eliminar el servicio "${nombre}"?`)) {
@@ -407,13 +414,14 @@
                     alert("Hubo un error al eliminar el servicio.");
                 }
             }
-        }
+        };
 
         // --- GESTIÓN DE BARBEROS ---
         window.cargarBarberosAdmin = async function() {
             const selectBarbero = document.getElementById('adminBarbero');
             const listaDiv = document.getElementById('listaBarberosAdmin');
             
+            if(!selectBarbero || !listaDiv) return;
             selectBarbero.innerHTML = '';
             listaDiv.innerHTML = '<p class="text-xs text-gold animate-pulse col-span-full text-center">Cargando barberos...</p>';
 
@@ -446,10 +454,10 @@
                             <p class="text-gold text-xs font-semibold mb-2"><i class="fa-solid fa-phone mr-1"></i> +${b.whatsapp}</p>
                             <p class="text-xs text-gray-400 mb-4">${b.descripcion}</p>
                             <div class="flex justify-center sm:justify-start gap-3">
-                                <button onclick="editarBarbero('${id}', '${b.nombre}', '${b.whatsapp}', '${b.foto}', ${JSON.stringify(b.descripcion)})" class="bg-zinc-900 hover:bg-gold hover:text-darkBg text-gray-300 px-3.5 py-2 rounded-xl text-xs font-bold transition border border-gray-800 flex items-center gap-1.5">
+                                <button onclick="editarBarbero('${id}', '${b.nombre}', '${b.whatsapp}', '${b.foto}', ${JSON.stringify(b.descripcion)})" class="bg-zinc-900 hover:bg-gold hover:text-darkBg text-gray-300 px-3.5 py-2 rounded-xl text-xs font-bold transition border border-gray-800 flex items-center gap-1.5 cursor-pointer">
                                     <i class="fa-solid fa-pen-to-square"></i> Editar
                                 </button>
-                                <button onclick="eliminarBarbero('${id}', '${b.nombre}')" class="bg-red-500/10 hover:bg-red-600 text-red-400 hover:text-white px-3.5 py-2 rounded-xl text-xs font-bold transition border border-red-500/30 flex items-center gap-1.5">
+                                <button onclick="eliminarBarbero('${id}', '${b.nombre}')" class="bg-red-500/10 hover:bg-red-600 text-red-400 hover:text-white px-3.5 py-2 rounded-xl text-xs font-bold transition border border-red-500/30 flex items-center gap-1.5 cursor-pointer">
                                     <i class="fa-solid fa-trash-can"></i> Eliminar
                                 </button>
                             </div>
@@ -464,18 +472,18 @@
                 console.error("Error al cargar barberos:", error);
                 listaDiv.innerHTML = '<p class="text-xs text-red-400 col-span-full text-center">Error al cargar la lista de barberos.</p>';
             }
-        }
+        };
 
         window.abrirModalBarbero = function() {
             document.getElementById('modalTituloBarbero').textContent = "Agregar Nuevo Barbero";
             document.getElementById('barberoIdEdit').value = "";
             document.getElementById('formBarbero').reset();
             document.getElementById('modalBarbero').classList.remove('hidden');
-        }
+        };
 
         window.cerrarModalBarbero = function() {
             document.getElementById('modalBarbero').classList.add('hidden');
-        }
+        };
 
         window.editarBarbero = function(id, nombre, whatsapp, foto, descripcion) {
             document.getElementById('modalTituloBarbero').textContent = "Editar Barbero";
@@ -485,7 +493,7 @@
             document.getElementById('fotoBarberoInput').value = foto;
             document.getElementById('descBarberoInput').value = descripcion;
             document.getElementById('modalBarbero').classList.remove('hidden');
-        }
+        };
 
         window.guardarBarbero = async function(event) {
             event.preventDefault();
@@ -509,7 +517,7 @@
                 console.error("Error al guardar barbero:", error);
                 alert("Hubo un error al guardar el barbero.");
             }
-        }
+        };
 
         window.eliminarBarbero = async function(id, nombre) {
             if (confirm(`¿Estás seguro de eliminar a ${nombre}?`)) {
@@ -522,14 +530,99 @@
                     alert("Hubo un error al eliminar el barbero.");
                 }
             }
-        }
+        };
 
         // --- GESTIÓN DE CITAS ---
         window.cargarCitasAdmin = async function() {
-            const fecha = document.getElementById('adminFecha').value;
-            const barbero = document.getElementById('adminBarbero').value;
+            const fechaInput = document.getElementById('adminFecha');
+            const barberoSelect = document.getElementById('adminBarbero');
             const contenedor = document.getElementById('listaAgenda');
             const contador = document.getElementById('contadorCitas');
 
+            if(!fechaInput || !barberoSelect || !contenedor) return;
+
+            const fecha = fechaInput.value;
+            const barbero = barberoSelect.value;
+
             if (!fecha || !barbero) {
-                contenedor.innerHTML = '<div class="p-8 text-center text-gray-500 text-sm italic">Selecciona barbero
+                contenedor.innerHTML = '<div class="p-8 text-center text-gray-500 text-sm italic">Selecciona barbero y fecha para ver la agenda...</div>';
+                if(contador) contador.textContent = "0 turnos";
+                return;
+            }
+
+            contenedor.innerHTML = '<div class="p-8 text-center text-gold text-sm animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Sincronizando agenda con Firebase...</div>';
+
+            try {
+                const q = query(collection(db, "citas"), where("barbero", "==", barbero), where("fecha", "==", fecha));
+                const querySnapshot = await getDocs(q);
+                
+                const citasMap = {};
+                querySnapshot.forEach((documento) => {
+                    citasMap[documento.data().hora] = {
+                        id: documento.id,
+                        ...documento.data()
+                    };
+                });
+
+                contenedor.innerHTML = '';
+                let totalReservadas = 0;
+
+                bloquesBase.forEach(bloque => {
+                    const cita = citasMap[bloque];
+                    const fila = document.createElement('div');
+                    fila.className = "p-4 md:px-6 md:py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 hover:bg-zinc-900/40 transition";
+
+                    if (cita) {
+                        totalReservadas++;
+                        fila.innerHTML = `
+                            <div class="flex items-center gap-4">
+                                <span class="bg-gold/10 text-gold font-black px-3 py-1.5 rounded-xl text-xs border border-gold/30 shrink-0">${bloque}</span>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm md:text-base">${cita.nombre}</h4>
+                                    <p class="text-xs text-gray-400">
+                                        <i class="fa-solid fa-scissors text-gold mr-1"></i> ${cita.servicio} 
+                                        ${cita.cejas === 'Sí' ? '• <span class="text-emerald-400">Con Cejas</span>' : ''}
+                                    </p>
+                                    <p class="text-xs text-gray-400 mt-0.5">
+                                        <i class="fa-solid fa-phone text-gold mr-1"></i> <a href="tel:${cita.telefono}" class="underline hover:text-white">${cita.telefono}</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <button onclick="eliminarCita('${cita.id}')" class="bg-red-500/10 hover:bg-red-600 text-red-400 hover:text-white px-3.5 py-2 rounded-xl text-xs font-bold transition border border-red-500/30 flex items-center gap-1.5 shrink-0 cursor-pointer">
+                                <i class="fa-solid fa-trash-can"></i> Liberar Horario
+                            </button>
+                        `;
+                    } else {
+                        fila.innerHTML = `
+                            <div class="flex items-center gap-4 opacity-50">
+                                <span class="bg-zinc-800 text-zinc-400 font-bold px-3 py-1.5 rounded-xl text-xs shrink-0">${bloque}</span>
+                                <span class="text-xs text-zinc-500 italic">-- Horario Disponible --</span>
+                            </div>
+                        `;
+                    }
+                    contenedor.appendChild(fila);
+                });
+
+                if(contador) contador.textContent = `${totalReservadas} de ${bloquesBase.length} turnos ocupados`;
+
+            } catch (error) {
+                console.error("Error al cargar citas de admin:", error);
+                contenedor.innerHTML = '<div class="p-8 text-center text-red-400 text-sm">Error al conectar con la base de datos.</div>';
+            }
+        };
+
+        window.eliminarCita = async function(idCita) {
+            if (confirm("¿Estás seguro de liberar este horario?")) {
+                try {
+                    await deleteDoc(doc(db, "citas", idCita));
+                    alert("¡Horario liberado con éxito!");
+                    cargarCitasAdmin();
+                } catch (error) {
+                    console.error("Error al eliminar:", error);
+                    alert("Hubo un error al liberar el horario.");
+                }
+            }
+        };
+    </script>
+</body>
+</html>
